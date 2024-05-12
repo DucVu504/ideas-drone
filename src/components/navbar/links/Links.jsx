@@ -1,38 +1,46 @@
+"use client"
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import styles from "./Link.module.css"
 
 const Links = () => {
+    const generalStyle = "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+    const generalStyleActive = "block py-2 px-3 text-green-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-green-500 dark:hover:bg-gray-700 dark:hover:text-green-500 md:dark:hover:bg-transparent dark:border-gray-700"
+
+    const currentPath = usePathname();
+    console.log("path name is" +currentPath)
+
 
     const links = [
         {
-            title: "Homepage",
+            title: "Trang chủ",
             path: "/",
-            className: "block py-2 px-3 text-white bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 md:dark:text-green-500",
+            className: currentPath === "/" ? generalStyleActive : generalStyle,
         },
         {
-            title: "Services",
+            title: "Dịch vụ",
             path: "/services",
-            className: "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700",
+            className: currentPath === "/services" ? generalStyleActive : generalStyle,
         },
         {
-            title: "Projects",
+            title: "Dự án",
             path: "/projects",
-            className: "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700",
+            className: currentPath === "/projects" ? generalStyleActive : generalStyle,
         },
         {
-            title: "Equipments",
+            title: "Trang bị",
             path: "/equipments",
-            className: "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700",
+            className: currentPath === "/equipments" ? generalStyleActive : generalStyle,
         },
         {
-            title: "Contact",
+            title: "Về chúng tôi",
+            path: "/aboutus",
+            className: currentPath === "/aboutus" ? generalStyleActive : generalStyle,
+        },
+        {
+            title: "Liên hệ",
             path: "/contact",
-            className: "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700",
-        },
-        {
-            title: "Login",
-            path: "/login",
-            className: "block box-border w-20 p-4 border-2 text-center text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-green-700",
+            className: currentPath === "/contact" ? generalStyleActive : generalStyle,
         },
     ];
 

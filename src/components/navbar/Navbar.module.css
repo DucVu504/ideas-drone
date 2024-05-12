@@ -1,12 +1,12 @@
 /* styles/navbar.css */
 .nav-container {
     position: sticky;
-    top: 0; /* Thanhh điều hướng sẽ dính ở phía trên cùng của trang */
-    z-index: 1000; /* Đảm bảo thanh điều hướng hiển thị trên các phần khác của trang */
-    border-bottom: 1px solid #3dc88e; /* Đường viền dưới cùng của thanh điều hướng */
+    top: 0; 
+    z-index: 1000; 
+    border-bottom: 1px solid #3dc88e; 
   }
-  
+
   .navbar {
-    max-width: 100%; /* Đảm bảo thanh điều hướng chiếm toàn bộ chiều rộng của trang */
-    padding: 1rem; /* Khoảng cách giữa nội dung trong thanh điều hướng */
+    max-width: 100%;
+    padding: 1rem; 
   }

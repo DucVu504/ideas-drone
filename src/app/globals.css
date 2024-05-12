@@ -3,29 +3,3 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root{
-    --bg: #0d0c22;
-    --bgSoft:#2d2b42;
-    --text: white;
-    --textSoft: #e5e5e5
-    --btn:#3673fd;
-}
-
-body{
-    background-color: var(--bg);
-    color: var(--text);
-} */
-
-.embla {
-  overflow: hidden;
-}
-.embla__container {
-  display: flex;
-}
-.embla__slide {
-  flex: 0 0 100%;
-  min-width: 0;
-}
-
-  
-  
