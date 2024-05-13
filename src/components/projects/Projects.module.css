@@ -146,8 +146,8 @@
   }
   
   .custom__bg__image {
-    background-image: url("/sight/contruction_field_2.jpeg");
+    background-image: url("/sight/green_field_2.jpeg");
     background-size: cover; /* Stretch image to cover the container */
     background-blend-mode: multiply;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.5);
   }
