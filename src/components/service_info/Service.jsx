@@ -4,47 +4,30 @@ import Container from "./container";
 
 
 const Testimonials  = () => {
+  const testimonials = [
+    "to keep it short and simple.",
+    "would use this for anything.",
+    "would use this for anything.",
+    "would use this for anything.",
+    "would use this for anything.",
+    "would use this for anything."
+  ];
+  
   return (
     <Container>
-        <div className="text-left text-5xl p-4 text-green-500">
-        DỊCH VỤ CỦA CHÚNG TÔI
-        </div>
-      <div className="grid gap-10 lg:grid-cols-2 xl:grid-cols-3">
-        <div className="lg:col-span-2 xl:col-auto">
-          <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
-            <p className="text-2xl leading-normal ">
-              "that hits some of your benefits from one of your popular customer"
-            </p>
+      <p className="text-2xl leading-normal ">
+        Header Text
+      </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {testimonials.map((testimonial, index) => (
+          <div key={index}>
+            <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
+              <p className="text-2xl leading-normal ">
+                {testimonial}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="">
-          <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
-            <p className="text-2xl leading-normal ">
-              to keep it short and simple.
-            </p>
-          </div>
-        </div>
-        <div className="">
-          <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
-            <p className="text-2xl leading-normal ">
-              would use this for anything.
-            </p>
-          </div>
-        </div>
-        <div className="">
-          <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
-            <p className="text-2xl leading-normal ">
-              would use this for anything.
-            </p>
-          </div>
-        </div>
-        <div className="">
-          <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
-            <p className="text-2xl leading-normal ">
-              would use this for anything.
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     </Container>
   );
