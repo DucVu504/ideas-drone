@@ -5,6 +5,7 @@ import Project from "../components/projects/Projects";
 import Service from "../components/service_info/Service";
 import Equipment from "../components/equipment/Equipment";
 import Contact from "../components/contact/Contact";
+import SocialMediaIcons from "../components/quickcontact/SocialMediaIcons";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Service/>
       <Equipment/>
       <Contact/>
+      <SocialMediaIcons/>
     </div>
   );
 }
