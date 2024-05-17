@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import Links from "./links/Links"
+import Link from "next/link"
 import Image from "next/image"
 import styles from "./Navbar.module.css"
 
@@ -27,7 +28,9 @@ const Navbar = () => {
               <Image src="/Logo_main.png" className="h-16 w-auto p-1" alt="DroneGIS Logo" width={100} height={200} />
             </a>
             <div className="flex md:order-2 space-x-3 md:space-x-3 rtl:space-x-reverse">
-              <button type="button" className="text-black dark:text-white border border-green-700 hover:border-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center border dark:border-green-600 dark:hover:border-green-700 dark:hover:text-green-600 dark:focus:ring-green-800">Đăng nhập</button>
+              <button type="button" className="text-black dark:text-white border border-green-700 hover:border-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center border dark:border-green-600 dark:hover:border-green-700 dark:hover:text-green-600 dark:focus:ring-green-800">
+              <Link href="/login">Đăng nhập</Link>
+              </button>
               <button type="button" className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Nhận báo giá</button>
               <button data-collapse-toggle="navbar-sticky" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
                 <span className="sr-only">Open main menu</span>

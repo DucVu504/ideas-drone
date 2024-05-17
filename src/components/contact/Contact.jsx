@@ -2,7 +2,7 @@ const Contact = () => {
     return (
       <section id="contact" className="relative py-20 md:py-[120px]">
         <div className="absolute left-0 top-0 -z-[1] h-full w-full dark:bg-dark"></div>
-        <div className="absolute left-0 top-0 -z-[1] h-1/2 w-full bg-[#E9F9FF] dark:bg-dark-700 lg:h-[45%] xl:h-1/2"></div>
+        <div className="absolute left-0 top-0 -z-[1] h-1/2 w-full bg-[#68b786] dark:bg-dark-700 lg:h-[45%] xl:h-1/2"></div>
         <div className="container px-4">
           <div className="-mx-4 flex flex-wrap items-center">
             <div className="w-full px-4 lg:w-7/12 xl:w-8/12">
@@ -49,7 +49,7 @@ const Contact = () => {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">
+                      <h3 className="mb-[18px] text-lg font-semibold text-dark">
                         How Can We Help?
                       </h3>
                       <p className="text-base text-body-color dark:text-dark-6">
@@ -69,7 +69,7 @@ const Contact = () => {
                 data-wow-delay=".2s
                 "
               >
-                <h3 className="mb-8 text-2xl font-semibold text-dark dark:text-white md:text-[28px] md:leading-[1.42]">
+                <h3 className="mb-8 text-2xl font-semibold text-dark md:text-[28px] md:leading-[1.42]">
                   Send us a Message
                 </h3>
                 <form>
