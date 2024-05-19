@@ -19,28 +19,28 @@ const Links = () => {
         },
         {
             title: "Dịch vụ",
-            path: "/services",
-            className: currentPath === "/services" ? generalStyleActive : generalStyle,
+            path: "/our-services",
+            className: currentPath === "/our-services" ? generalStyleActive : generalStyle,
         },
         {
             title: "Dự án",
-            path: "/projects",
-            className: currentPath === "/projects" ? generalStyleActive : generalStyle,
+            path: "/our-projects",
+            className: currentPath === "/our-projects" ? generalStyleActive : generalStyle,
         },
         {
             title: "Trang bị",
-            path: "/equipments",
-            className: currentPath === "/equipments" ? generalStyleActive : generalStyle,
+            path: "/our-equipments",
+            className: currentPath === "/our-equipments" ? generalStyleActive : generalStyle,
         },
         {
             title: "Về chúng tôi",
-            path: "/aboutus",
-            className: currentPath === "/aboutus" ? generalStyleActive : generalStyle,
+            path: "/about-us",
+            className: currentPath === "/about-us" ? generalStyleActive : generalStyle,
         },
         {
             title: "Liên hệ",
-            path: "/contact",
-            className: currentPath === "/contact" ? generalStyleActive : generalStyle,
+            path: "/contact-us",
+            className: currentPath === "/contact-us" ? generalStyleActive : generalStyle,
         },
     ];
 

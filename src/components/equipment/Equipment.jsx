@@ -5,17 +5,18 @@ function Equipment() {
         {
             title: "Phantom 4 RTK",
             image: "/equipments/Phantom4RPK_1.jpg",
-            description: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+            description: "Phantom 4 RTK là drone tiên tiến cho khảo sát và lập bản đồ, tích hợp RTK chính xác đến từng centimet. \
+            Với camera 20MP và thời gian bay 30 phút, nó cung cấp dữ liệu chất lượng cao cho các dự án kỹ thuật và xây dựng."
         },
         {
             title: "Phantom 4 Pro",
             image: "/equipments/PhantomPro4_1.jpg",
-            description: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+            description: "Phantom 4 Pro là drone cao cấp với camera 20MP, cảm biến CMOS 1 inch và thời gian bay lên đến 30 phút. Nó cung cấp chất lượng hình ảnh và video vượt trội, lý tưởng cho nhiếp ảnh và quay phim chuyên nghiệp."
         },
         {
             title: "Mavic 3 Thermal",
             image: "/equipments/Mavic3.jpg",
-            description: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+            description: "Mavic 3 Thermal là drone đa năng với camera nhiệt và cảm biến CMOS 4/3. Nó cung cấp hình ảnh nhiệt độ chính xác và thời gian bay lên đến 46 phút, lý tưởng cho các ứng dụng cứu hộ, giám sát và kiểm tra cơ sở hạ tầng."
         },
         // Add more card objects here...
     ];
@@ -23,7 +24,7 @@ function Equipment() {
     return(
         <div>
             <div className="text-center text-5xl py-8 px-10  mb-4 mx-40">
-                <span className="text-black ">THIẾT BỊ CỦA </span>
+                <span className="text-black ">TRANG THIẾT BỊ CỦA </span>
             <span className="text-green-500">CHÚNG TÔI</span>
             </div>
             <div className="py-8 px-10">
@@ -31,7 +32,7 @@ function Equipment() {
                     <div className="flex flex-wrap">
                         {cards.map((card, index) => (
                             <div key={index} className="w-full md:w-1/3 px-2 mb-4">
-                                <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                                <div className="bg-white border border-gray-200 rounded-lg overflow-hidden transform hover:scale-105 transition-transform">
                                     <div className="relative w-full h-64">
                                         <Image alt="Card image cap" src={card.image} layout="fill" objectFit="cover" />
                                     </div>

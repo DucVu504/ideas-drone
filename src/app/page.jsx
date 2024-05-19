@@ -6,10 +6,13 @@ import Service from "../components/service_info/Service";
 import Equipment from "../components/equipment/Equipment";
 import Contact from "../components/contact/Contact";
 import SocialMediaIcons from "../components/quickcontact/SocialMediaIcons";
+import Navbar from "../components/navbar/Navbar";
+import Footer from "../components/footer/Footer";
 
 export default function Home() {
   return (
     <div>
+      <Navbar/>
       <Hero/>
       <ShortInfo/>
       <Project />
@@ -17,6 +20,7 @@ export default function Home() {
       <Equipment/>
       <Contact/>
       <SocialMediaIcons/>
+      <Footer/>
     </div>
   );
 }

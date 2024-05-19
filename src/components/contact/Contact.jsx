@@ -1,12 +1,18 @@
-import { FaFacebookF, FaYoutube, FaZalo } from 'react-icons/fa';
-
 
 
 const Contact = () => {
     return (
       <section id="contact" className="relative py-20 md:py-[120px]">
         <div className="absolute left-0 top-0 -z-[1] h-full w-full dark:bg-dark"></div>
-        <div className="absolute left-0 top-0 -z-[1] h-1/2 w-full bg-[#68b786] dark:bg-dark-700 lg:h-[45%] xl:h-1/2"></div>
+        <div className="absolute left-0 top-0 -z-[1] h-1/2 w-full bg-[#68b786] dark:bg-dark-700 lg:h-[45%] xl:h-1/2"
+        style={{ backgroundImage: "url('/contact_bg.jpeg')",
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          transform: 'scaleX(-1)'
+        
+         }}
+        ></div>
         <div className="container px-4">
           <div className="-mx-4 flex flex-wrap items-center">
             <div className="w-full px-4 lg:w-7/12 xl:w-8/12">
@@ -33,11 +39,11 @@ const Contact = () => {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">
+                      <h3 className="mb-[18px] text-lg font-semibold text-dark dark:text-black">
                         Địa chỉ
                       </h3>
                       <p className="text-base text-body-color dark:text-dark-6">
-                        401 Broadway, 24th Floor, Orchard Cloud View, London
+                      383/11/4 Ba Hat Str, Ward 04, District 10, Ho Chi Minh City, Vietnam
                       </p>
                     </div>
                   </div>
@@ -53,14 +59,11 @@ const Contact = () => {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="mb-[18px] text-lg font-semibold text-dark dark:text-white">
+                      <h3 className="mb-[18px] text-lg font-semibold text-dark dark:text-black">
                         Gửi mail cho chúng tôi để được hỗ trợ ?
                       </h3>
                       <p className="text-base text-body-color dark:text-dark-6">
-                        info@yourdomain.com
-                      </p>
-                      <p className="mt-1 text-base text-body-color dark:text-dark-6">
-                        contact@yourdomain.com
+                      phungngocanhbk@gmail.com
                       </p>
                     </div>
                   </div>
@@ -73,7 +76,7 @@ const Contact = () => {
                 data-wow-delay=".2s
                 "
               >
-                <h3 className="mb-8 text-2xl font-semibold text-dark dark:text-white md:text-[28px] md:leading-[1.42]">
+                <h3 className="mb-8 text-2xl font-semibold text-dark dark:text-black md:text-[28px] md:leading-[1.42]">
                   Thông tin của bạn
                 </h3>
                 <form>
@@ -134,12 +137,12 @@ const Contact = () => {
                     ></textarea>
                   </div>
                   <div className="mb-0">
-                    <button
-                      type="submit"
-                      className="inline-flex items-center justify-center rounded-md bg-primary px-10 py-3 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-primary/90"
-                    >
-                      Gửi
-                    </button>
+                  <button
+                    type="submit"
+                    className="inline-flex items-center justify-center rounded-md text-white px-10 py-3 text-base font-medium transition duration-300 ease-in-out bg-green-500 hover:scale-105 transform"
+                  >
+                    Gửi
+                  </button>
                   </div>
                 </form>
               </div>
