@@ -1,8 +1,7 @@
 import Head from 'next/head';
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
-import Navbar from "../components/navbar/Navbar";
-import Footer from "../components/footer/Footer";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,8 +15,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <Head>
         <link rel="icon" href="/Logo_main.png" type="image/png"/>
-        <script src="https://cesium.com/downloads/cesiumjs/releases/1.91/Build/Cesium/Cesium.js"></script>
-        <link href="https://cesium.com/downloads/cesiumjs/releases/1.91/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
+        <script src="Cesium/Cesium.js" defer></script>
       </Head>
         <body className={inter.className}>
           {children}

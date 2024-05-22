@@ -1,44 +1,31 @@
-
 import path from 'path';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import webpack from 'webpack';
 
+const cesiumSource = 'node_modules/cesium/Source';
+const cesiumWorkers = 'node_modules/cesium/Build/Cesium';
 
 const nextConfig = {
-  images: {
-    domains: ['images.unsplash.com'],
-  },
-
   webpack: (config, { isServer }) => {
-    const projectRoot = process.cwd();
-
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      cesium: path.resolve(projectRoot, 'node_modules/cesium/Source/Cesium.js'),
-
-    };
-    
-    config.plugins.push(
-      new CopyWebpackPlugin({
-        patterns: [
-          {
-            from: path.join('node_modules', 'cesium', 'Build', 'Cesium'),
-            to: 'public/cesium',
-          },
-        ],
-      })
-    );
-
     if (!isServer) {
-      config.resolve.fallback = {
-        fs: false,
-        path: false,
-        http: false,
-        https: false,
-        zlib: false,
-        stream: false,
-        crypto: false,
-        buffer: false,
-      };
+      config.plugins.push(
+        new CopyWebpackPlugin({
+          patterns: [
+            { from: path.join(cesiumWorkers, "Workers"), to: './public/Cesium/Workers' },
+            { from: path.join(cesiumSource, 'Assets'), to: './public/Cesium/Assets' },
+            { from: path.join(cesiumSource, 'Widgets'), to: './public/Cesium/Widgets' },
+            { from: path.join(cesiumSource, 'ThirdParty'), to: './public/Cesium/ThirdParty' },
+          ],
+        }),
+        new webpack.DefinePlugin({
+          CESIUM_BASE_URL: JSON.stringify('/Cesium')
+        })
+      );
+
+      config.module.rules.push({
+        test: /\.(png|gif|jpg|jpeg|svg|xml|json)$/,
+        use: ['file-loader'],
+      });
     }
 
     return config;
