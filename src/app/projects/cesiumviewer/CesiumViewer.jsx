@@ -1,29 +1,31 @@
 "use client"
-
-
 import { useEffect } from 'react';
-import { Viewer, Ion, IonResource, createWorldTerrain, Cesium3DTileset } from 'cesium';
+import { Viewer, Ion, IonResource, createWorldTerrainAsync, Cesium3DTileset } from 'cesium';
 import 'cesium/Build/Cesium/Widgets/widgets.css';
 
-const ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNzg4NmU4MC05NzU0LTQ0YWMtOTViOC1lOWY1OWQzOGIxZTkiLCJpZCI6MjA0MjgyLCJpYXQiOjE3MTEzNTk0NDJ9.sKyAJZcvRFs19Z5MFzxAPpwO8TzK6voLbkIZ0Odj6Bk"
+const ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNzg4NmU4MC05NzU0LTQ0YWMtOTViOC1lOWY1OWQzOGIxZTkiLCJpZCI6MjA0MjgyLCJpYXQiOjE3MTEzNTk0NDJ9.sKyAJZcvRFs19Z5MFzxAPpwO8TzK6voLbkIZ0Odj6Bk";
 const CesiumViewer = () => {
-  useEffect(() => {
-    // Cấu hình API Key cho Cesium Ion
+  useEffect( () => {
+
     Ion.defaultAccessToken = ACCESS_TOKEN;
+    const viewer = new Viewer('cesiumContainer');
 
-    const viewer = new Viewer('cesiumContainer', {
-      terrainProvider: createWorldTerrain()
-    });
 
-    // Tải dữ liệu từ Cesium Ion, ví dụ một asset với ID cụ thể
-    const assetId = 2584679; // Thay bằng ID thực của bạn
+    const assetId = 75343; 
     IonResource.fromAssetId(assetId)
-      .then(resource => {
-        viewer.scene.primitives.add(new Cesium3DTileset({ url: resource }));
-      })
-      .catch(error => {
-        console.error('Lỗi khi tải asset từ Cesium Ion:', error);
+    .then(resource => {
+  
+      const tileset = viewer.scene.primitives.add(new Cesium3DTileset({ url: resource }));
+  
+      // Chờ cho đến khi tileset đã sẵn sàng để lấy bounding sphere
+      return tileset.readyPromise.then(() => {
+        const boundingSphere = tileset.boundingSphere;
+        viewer.camera.flyToBoundingSphere(boundingSphere);
       });
+    })
+    .catch(error => {
+      console.error('Lỗi khi tải asset từ Cesium Ion:', error);
+    });
 
     return () => {
       viewer.destroy();
@@ -31,7 +33,11 @@ const CesiumViewer = () => {
   }, []);
 
   return (
+    <div>
     <div id="cesiumContainer" style={{ width: '100%', height: '100vh' }}></div>
+    <div>HSHSH</div>
+    </div>
+
   );
 };
 

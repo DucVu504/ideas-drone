@@ -7,10 +7,12 @@ import React from "react";
 const User = () => {
 
   return (
-    <div>
-        <Navbar/>
+    <div className="grid grid-cols-[192px,1fr]">
         <Sidebar/>
-        <Mainboard/>
+        <div>
+          <Navbar/>
+          <Mainboard/>
+        </div>
     </div>
   );
 };
