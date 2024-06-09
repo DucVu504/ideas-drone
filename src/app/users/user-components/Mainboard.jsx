@@ -28,11 +28,21 @@ const Mainboard = () => {
             title: "DỰ ÁN 1",
             description: "Miêu tả sơ bộ dự án"
         },
+        {
+            image: "/drone_pics/mavic_pro_1.jpeg",
+            title: "DỰ ÁN 1",
+            description: "Miêu tả sơ bộ dự án"
+        },
+        {
+            image: "/drone_pics/mavic_pro_1.jpeg",
+            title: "DỰ ÁN 1",
+            description: "Miêu tả sơ bộ dự án"
+        },
 
     ];
 
     return (
-            <div class="flex justify-center  py-8 px-52 rounded-md bg-green-50">
+            <div class="flex justify-center  py-8 px-52 rounded-md">
                 <div class="grid grid-cols-5 gap-6 mb-4">
                     {items.map((item, index) => (
                         <div key={index} class="bg-white border-2 hover:border-red-600  rounded-lg shadow grid grid-rows-3">

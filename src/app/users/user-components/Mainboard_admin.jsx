@@ -2,84 +2,41 @@ import Image from 'next/image';
 
 
 const Projects =() => {
+    const projects = [
+        { name: 'Dự án 1', location: 'Địa điểm 1', status: 'Trạng thái 1', access: 'Số người được truy cập 1' },
+        { name: 'Dự án 2', location: 'Địa điểm 2', status: 'Trạng thái 2', access: 'Số người được truy cập 2' },
+        { name: 'Dự án 2', location: 'Địa điểm 2', status: 'Trạng thái 2', access: 'Số người được truy cập 2' },
+        { name: 'Dự án 2', location: 'Địa điểm 2', status: 'Trạng thái 2', access: 'Số người được truy cập 2' },
+
+    ];
     return(
         <div>
-            <div class="mx-52 my-8 py-2 border-b-2 border-green-700 text-xl">
-            HỒ SƠ DỰ ÁN
+            <div className="mx-52 my-8 py-2 pr-10 text-xl rounded-t-md border-b-2 border-gray-300 border-t-2 border-t-green-400">
+                <span className=" p-2 rounded-t-md font-medium text-stone-950 ">HỒ SƠ DỰ ÁN</span>
             </div>
             <div className="mx-52 my-8 overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
                     <thead className="text-xs text-gray-700 uppercase bg-green-200 ">
                         <tr>
-                            <th scope="col" className="px-6 py-3">
-                                Tên dự án
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Địa điểm
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Trạng thái
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Số người được truy cập
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                <span className="sr-only">Edit</span>
-                            </th>
+                            <th scope="col" className="px-6 py-3">Tên dự án</th>
+                            <th scope="col" className="px-6 py-3">Địa điểm</th>
+                            <th scope="col" className="px-6 py-3">Trạng thái</th>
+                            <th scope="col" className="px-6 py-3">Số người được truy cập</th>
+                            <th scope="col" className="px-6 py-3"><span className="sr-only">Edit</span></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className="bg-white border-b  hover:bg-gray-50">
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                Apple MacBook Pro 17"
-                            </th>
-                            <td className="px-6 py-4">
-                                Silver
-                            </td>
-                            <td className="px-6 py-4">
-                                Laptop
-                            </td>
-                            <td className="px-6 py-4">
-                                $2999
-                            </td>
-                            <td className="px-6 py-4 text-right">
-                                <a href="#" className="font-medium text-blue-600  hover:underline">Edit</a>
-                            </td>
-                        </tr>
-                        <tr className="bg-white border-b  hover:bg-gray-50 ">
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                                Microsoft Surface Pro
-                            </th>
-                            <td className="px-6 py-4">
-                                White
-                            </td>
-                            <td className="px-6 py-4">
-                                Laptop PC
-                            </td>
-                            <td className="px-6 py-4">
-                                $1999
-                            </td>
-                            <td className="px-6 py-4 text-right">
-                                <a href="#" className="font-medium text-blue-600  hover:underline">Edit</a>
-                            </td>
-                        </tr>
-                        <tr className="bg-white  hover:bg-gray-50 ">
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                                Magic Mouse 2
-                            </th>
-                            <td className="px-6 py-4">
-                                Black
-                            </td>
-                            <td className="px-6 py-4">
-                                Accessories
-                            </td>
-                            <td className="px-6 py-4">
-                                $99
-                            </td>
-                            <td className="px-6 py-4 text-right">
-                                <a href="#" className="font-medium text-blue-600  hover:underline">Edit</a>
-                            </td>
-                        </tr>
+                        {projects.map((project, index) => (
+                            <tr key={index} className="bg-white border-b hover:bg-gray-50">
+                                <td className="px-6 py-4">{project.name}</td>
+                                <td className="px-6 py-4">{project.location}</td>
+                                <td className="px-6 py-4">{project.status}</td>
+                                <td className="px-6 py-4">{project.access}</td>
+                                <td className="px-6 py-4 text-right">
+                                    <a href="#" className="font-medium text-blue-600 hover:underline">Edit</a>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
@@ -88,121 +45,51 @@ const Projects =() => {
 }
 
 const Users = () => {
+    const users = [
+        { name: 'Người dùng 1', unit: 'Đơn vị 1', phone: 'Số điện thoại 1' },
+        { name: 'Người dùng 2', unit: 'Đơn vị 2', phone: 'Số điện thoại 2' },
+        { name: 'Người dùng 1', unit: 'Đơn vị 1', phone: 'Số điện thoại 1' },
+        { name: 'Người dùng 2', unit: 'Đơn vị 2', phone: 'Số điện thoại 2' },
+        { name: 'Người dùng 1', unit: 'Đơn vị 1', phone: 'Số điện thoại 1' },
+        { name: 'Người dùng 2', unit: 'Đơn vị 2', phone: 'Số điện thoại 2' },
+        { name: 'Người dùng 1', unit: 'Đơn vị 1', phone: 'Số điện thoại 1' },
+        { name: 'Người dùng 2', unit: 'Đơn vị 2', phone: 'Số điện thoại 2' },
+        { name: 'Người dùng 1', unit: 'Đơn vị 1', phone: 'Số điện thoại 1' },
+        { name: 'Người dùng 2', unit: 'Đơn vị 2', phone: 'Số điện thoại 2' },
+        { name: 'Người dùng 1', unit: 'Đơn vị 1', phone: 'Số điện thoại 1' },
+        { name: 'Người dùng 2', unit: 'Đơn vị 2', phone: 'Số điện thoại 2' },
+        // Thêm nhiều người dùng khác tại đây
+    ];
     return (
         <div>
-        <div class="mx-52 my-8 py-2 border-b-2 border-green-700 text-xl">
-        HỒ SƠ NGƯỜI DÙNG
-        </div>
-        <div class="mx-52 my-8 relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
-                <thead class="text-xs text-gray-700 uppercase bg-green-200 ">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Tên người dùng
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Đơn vị
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Số điện thoại
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Dự án sở hữu
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-right">
-                            Chi tiết
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="odd:bg-white  even:bg-gray-50 even:dark:bg-gray-800 border-b ">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                            Apple MacBook Pro 17"
-                        </th>
-                        <td class="px-6 py-4">
-                            Silver
-                        </td>
-                        <td class="px-6 py-4">
-                            Laptop
-                        </td>
-                        <td class="px-6 py-4">
-                            $2999
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600  hover:underline">Edit</a>
-                        </td>
-                    </tr>
-                    <tr class="odd:bg-white odd even:bg-gray-50  border-b ">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            Microsoft Surface Pro
-                        </th>
-                        <td class="px-6 py-4">
-                            White
-                        </td>
-                        <td class="px-6 py-4">
-                            Laptop PC
-                        </td>
-                        <td class="px-6 py-4">
-                            $1999
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600  hover:underline">Edit</a>
-                        </td>
-                    </tr>
-                    <tr class="odd:bg-white  even:bg-gray-50  border-b ">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                            Magic Mouse 2
-                        </th>
-                        <td class="px-6 py-4">
-                            Black
-                        </td>
-                        <td class="px-6 py-4">
-                            Accessories
-                        </td>
-                        <td class="px-6 py-4">
-                            $99
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600  hover:underline">Edit</a>
-                        </td>
-                    </tr>
-                    <tr class="odd:bg-white  even:bg-gray-50  border-b ">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                            Google Pixel Phone
-                        </th>
-                        <td class="px-6 py-4">
-                            Gray
-                        </td>
-                        <td class="px-6 py-4">
-                            Phone
-                        </td>
-                        <td class="px-6 py-4">
-                            $799
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600  hover:underline">Edit</a>
-                        </td>
-                    </tr>
-                    <tr class="odd:bg-white  even:bg-gray-50  border-b ">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            Apple Watch 5
-                        </th>
-                        <td class="px-6 py-4">
-                            Red
-                        </td>
-                        <td class="px-6 py-4">
-                            Wearables
-                        </td>
-                        <td class="px-6 py-4">
-                            $999
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            <div className="mx-52 my-8 py-2 pr-10 text-xl rounded-t-md border-b-2 border-gray-300 border-t-2 border-t-green-400">
+                <span className=" p-2 rounded-t-md font-medium text-stone-950 ">HỒ SƠ DỰ ÁN</span>
+            </div>
+        <div className="mx-52 my-8 relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                    <thead className="text-xs text-gray-700 uppercase bg-green-200 ">
+                        <tr>
+                            <th scope="col" className="px-6 py-3">Tên người dùng</th>
+                            <th scope="col" className="px-6 py-3">Đơn vị</th>
+                            <th scope="col" className="px-6 py-3">Số điện thoại</th>
+                            {/* <th scope="col" className="px-6 py-3">Số dự án sở hữu</th> */}
+                            <th scope="col" className="px-6 py-3"><span className="sr-only">Edit</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {users.map((user, index) => (
+                            <tr key={index} className={index % 2 === 0 ? "border-b bg-gray-50 hover:bg-gray-100" : "border-b bg-white hover:bg-gray-100"}>
+                                <td className="px-6 py-4">{user.name}</td>
+                                <td className="px-6 py-4">{user.unit}</td>
+                                <td className="px-6 py-4">{user.phone}</td>
+                                <td className="px-6 py-4 text-right">
+                                    <a href="#" className="font-medium text-blue-600 hover:underline">Edit</a>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }

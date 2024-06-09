@@ -4,7 +4,7 @@ const Navbar = () => {
 
   return (
   
-  <nav class="content-center z-50 h-14 w-full bg-green-400 border-b border-gray-200 ">
+  <nav class="content-center z-50 h-14 w-full bg-green-400 border-b border-gray-200 className='fixed'">
     <div class=" lg:px-5 lg:pl-3">
       <div class="flex items-center justify-end">
         <div class="flex items-center">
