@@ -17,7 +17,7 @@ const User = () => {
       </div>
       <div>
         <Navbar/>
-        <ContactForm/>
+        <Mainboard_ad/>
       </div>
     </div>
     </div>
