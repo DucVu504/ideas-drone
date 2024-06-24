@@ -33,8 +33,8 @@ const Profile = () => {
             <p className="text-gray-600 p-2">23/05/2024</p>
           </div>
           <div className="mb-4">
-            <label class="block text-lg font-semibold m-2 " for="file_input">Cập nhật dữ liệu</label>
-            <input class="block w-full m-2 p-2 rounded-md text-gray-900 border border-gray-300  cursor-pointer bg-gray-50 focus:outline-none " id="file_input" type="file"/>
+            <label className="block text-lg font-semibold m-2 " for="file_input">Cập nhật dữ liệu</label>
+            <input className="block w-full m-2 p-2 rounded-md text-gray-900 border border-gray-300  cursor-pointer bg-gray-50 focus:outline-none " id="file_input" type="file"/>
           </div>
           <div className="text-right">
             <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Cập nhật</button>

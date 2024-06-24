@@ -16,7 +16,6 @@ export default function RootLayout({ children }) {
       <Head>
         <link rel="icon" href="/Logo_main.png" type="image/png"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-        <script src="Cesium/Cesium.js" defer></script>
       </Head>
         <body className={inter.className}>
           {children}

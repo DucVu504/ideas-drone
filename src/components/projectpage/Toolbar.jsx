@@ -36,7 +36,7 @@ const SearchBar = () => {
     <header className="fixed top-0 left-0 mx-3 my-5 bg-white bg-opacity-60 hover:bg-opacity-100 rounded-md z-50 shadow-md">
       <div className="container mx-auto px-2 py-1 flex items-center justify-between">
         <div className="flex items-center">
-          <Image src="/Logo_2.jpg" alt="Logo" width="150" height="50" class="border border-gray-300 rounded-lg"/>
+          <Image src="/Logo_2.jpg" alt="Logo" width="150" height="50" className="border border-gray-300 rounded-lg"/>
           <span className="text-gray-500 mx-4 px-4 border-x ">Tên dự án</span>
         </div>
         {/* <div className="flex items-center">
