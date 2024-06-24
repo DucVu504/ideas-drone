@@ -8,6 +8,7 @@ const cesiumWorkers = 'node_modules/cesium/Build/Cesium';
 const nextConfig = {
   webpack: (config, { isServer }) => {
     if (!isServer) {
+      config.cache = false;
       config.plugins.push(
         new CopyWebpackPlugin({
           patterns: [

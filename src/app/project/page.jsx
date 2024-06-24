@@ -1,10 +1,10 @@
-import CesiumViewer from '../../components/projectpage/CesiumViewer';
+import CesiumMap from '../../components/projectpage/CesiumViewer';
 import ToolBox from '../../components/projectpage/Toolbar';
 
 const Project = () => {
   return (
     <div>
-      <CesiumViewer/>
+      <CesiumMap/>
       <ToolBox/>
     </div>
 
