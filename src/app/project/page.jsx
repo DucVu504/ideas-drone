@@ -1,5 +1,5 @@
-import CesiumViewer from './project_compoents/CesiumViewer';
-import ToolBox from './project_compoents/Toolbar';
+import CesiumViewer from '../../components/projectpage/CesiumViewer';
+import ToolBox from '../../components/projectpage/Toolbar';
 
 const Project = () => {
   return (

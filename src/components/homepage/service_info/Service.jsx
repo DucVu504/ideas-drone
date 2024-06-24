@@ -43,12 +43,12 @@ const Testimonials  = () => {
         <span className="text-black ">CÁC DỊCH VỤ CỦA </span>
       <span className="text-green-500">IDEAS-DRONE</span>
     </div>
-      <div className="">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 m-2">
         {testimonials.map((testimonial, index) => (
-          <div key={index} className="transform hover:border-2 hover:border-green-500 hover:rounded-2xl hover:scale-110 transition-transform duration-200 ">
-            <div className="flex flex-col justify-between items-center w-full h-full bg-gray-100 px-2 rounded-2xl py-8 dark:bg-trueGray-800">
-            <Image src={testimonial.image} alt={testimonial.title} width={80} height={80} className="object-cover rounded-t-2xl py-4 filter hue-rotate hover:grayscale-0" />
+          <div key={index} className="overflow-hidden transform hover:border-2 hover:border-green-500 hover:rounded-2xl">
+            <div className="flex flex-col justify-between items-center w-full h-full bg-gray-100 px-4 rounded-2xl py-8">
+            <Image src={testimonial.image} alt={testimonial.title} width={80} height={80} className="object-cover rounded-t-2xl py-4 filter hue-rotate transform transition-transform duration-500 hover:scale-105" />
               <p className="text-2xl leading-normal ">
                 {testimonial.title}
               </p>
@@ -59,7 +59,7 @@ const Testimonials  = () => {
           </div>
         ))}
       </div>
-      </div>
+
     </Container>
   );
 }

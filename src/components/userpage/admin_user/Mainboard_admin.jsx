@@ -22,7 +22,7 @@ const Projects =() => {
                             <th scope="col" className="px-6 py-3">Địa điểm</th>
                             <th scope="col" className="px-6 py-3">Trạng thái</th>
                             <th scope="col" className="px-6 py-3">Số người được truy cập</th>
-                            <th scope="col" className="px-6 py-3"><span className="sr-only">Edit</span></th>
+                            <th scope="col" className="px-6 py-3"><span className="sr-only">Chi tiết</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,7 +33,7 @@ const Projects =() => {
                                 <td className="px-6 py-4">{project.status}</td>
                                 <td className="px-6 py-4">{project.access}</td>
                                 <td className="px-6 py-4 text-right">
-                                    <a href="#" className="font-medium text-blue-600 hover:underline">Edit</a>
+                                    <a href="/user-admin/dashboard/project-detail" className="font-medium text-blue-600 hover:underline">Chi tiết</a>
                                 </td>
                             </tr>
                         ))}
@@ -63,7 +63,7 @@ const Users = () => {
     return (
         <div>
             <div className="mx-52 my-8 py-2 pr-10 text-xl rounded-t-md border-b-2 border-gray-300 border-t-2 border-t-green-400">
-                <span className=" p-2 rounded-t-md font-medium text-stone-950 ">HỒ SƠ DỰ ÁN</span>
+                <span className=" p-2 rounded-t-md font-medium text-stone-950 ">HỒ SƠ NGƯỜI DÙNG</span>
             </div>
         <div className="mx-52 my-8 relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
@@ -73,7 +73,7 @@ const Users = () => {
                             <th scope="col" className="px-6 py-3">Đơn vị</th>
                             <th scope="col" className="px-6 py-3">Số điện thoại</th>
                             {/* <th scope="col" className="px-6 py-3">Số dự án sở hữu</th> */}
-                            <th scope="col" className="px-6 py-3"><span className="sr-only">Edit</span></th>
+                            <th scope="col" className="px-6 py-3"><span className="sr-only">Chi tiết</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -83,7 +83,7 @@ const Users = () => {
                                 <td className="px-6 py-4">{user.unit}</td>
                                 <td className="px-6 py-4">{user.phone}</td>
                                 <td className="px-6 py-4 text-right">
-                                    <a href="#" className="font-medium text-blue-600 hover:underline">Edit</a>
+                                    <a href="/user-admin/dashboard/user-detail" className="font-medium text-blue-600 hover:underline">Chi tiết</a>
                                 </td>
                             </tr>
                         ))}

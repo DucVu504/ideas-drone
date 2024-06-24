@@ -24,16 +24,16 @@ function Equipment() {
     return(
         <div>
             <div className="text-center text-5xl py-8 px-10  mb-4 mx-40">
-                <span className="text-black ">TRANG THIẾT BỊ CỦA </span>
+                <span className="text-black ">THIẾT BỊ CỦA </span>
             <span className="text-green-500">CHÚNG TÔI</span>
             </div>
             <div className="py-8 px-10">
                 <div className="flex flex-col">
                     <div className="flex flex-wrap">
                         {cards.map((card, index) => (
-                            <div key={index} className="w-full md:w-1/3 px-2 mb-4">
-                                <div className="bg-white border border-gray-200 rounded-lg overflow-hidden transform hover:scale-105 transition-transform">
-                                    <div className="relative w-full h-64">
+                            <div key={index} className="w-full md:w-1/3 px-6 mb-4">
+                                <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-2xl duration-500">
+                                    <div className="relative w-full h-64 transform hover:scale-110 transition-transform duration-300">
                                         <Image alt="Card image cap" src={card.image} layout="fill" objectFit="cover" />
                                     </div>
                                     <div className="p-4">
