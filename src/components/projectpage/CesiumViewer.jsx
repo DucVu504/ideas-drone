@@ -1,17 +1,46 @@
-"use client"
-import React, { useEffect, useRef, useState } from 'react';
-import * as Cesium from 'cesium';
-import 'cesium/Build/Cesium/Widgets/widgets.css';
+"use client";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  IoIosArrowRoundBack,
+  IoIosArrowRoundForward,
+  IoIosText,
+  IoIosSquareOutline,
+  IoIosRadioButtonOff,
+  IoIosRefresh,
+  IoIosUndo,
+  IoIosAddCircleOutline,
+  IoIosCloudUpload,
+  IoIosCrop,
+  IoIosChatbubbles,
+  IoIosCreate,
+} from "react-icons/io";
+import * as Cesium from "cesium";
+import "cesium/Build/Cesium/Widgets/widgets.css";
 
-const CESIUM_ION_ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNzg4NmU4MC05NzU0LTQ0YWMtOTViOC1lOWY1OWQzOGIxZTkiLCJpZCI6MjA0MjgyLCJpYXQiOjE3MTEzNTk0NDJ9.sKyAJZcvRFs19Z5MFzxAPpwO8TzK6voLbkIZ0Odj6Bk";
+const CESIUM_ION_ACCESS_TOKEN =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNzg4NmU4MC05NzU0LTQ0YWMtOTViOC1lOWY1OWQzOGIxZTkiLCJpZCI6MjA0MjgyLCJpYXQiOjE3MTEzNTk0NDJ9.sKyAJZcvRFs19Z5MFzxAPpwO8TzK6voLbkIZ0Odj6Bk";
 
 const Toolbar = ({ setMode }) => {
   return (
-    <div style={{ position: 'absolute', top: '100px', left: '10px', zIndex: 1 }}>
-      <button onClick={() => setMode('distance')}>Measure Distance</button>
-      <button onClick={() => setMode('area')}>Measure Area</button>
-      <button onClick={() => setMode('annotation')}>Add Annotation</button>
-      <button onClick={() => setMode(null)}>Clear</button>
+    <div className="fixed z-1 top-0 left-0 my-32 mx-3 flex flex-col bg-white bg-opacity-60 hover:bg-opacity-100  rounded-md shadow-lg p-1 space-y-3">
+      <button className="p-2 hover:bg-green-200 rounded" onClick={() => setMode("distance")}>
+        <IoIosRadioButtonOff size={24} />
+      </button>
+      <button className="p-2 hover:bg-green-200 rounded" onClick={() => setMode("area")}>
+        <IoIosSquareOutline size={24} />
+      </button>
+      <button className="p-2 hover:bg-green-200 rounded" onClick={() => setMode("annotation")}>
+        <IoIosText size={24} />
+      </button>
+      <button className="p-2 hover:bg-green-200 rounded">
+        <IoIosCreate size={24} />
+      </button>
+      <button className="p-2 hover:bg-green-200 rounded">
+        <IoIosRefresh size={24} />
+      </button>
+      <button className="p-2 hover:bg-green-200 rounded">
+        <IoIosUndo size={24} />
+      </button>
     </div>
   );
 };
@@ -23,13 +52,23 @@ const CesiumMap = () => {
   const [positions, setPositions] = useState([]);
   const [mode, setMode] = useState(null);
   const [polygonEntity, setPolygonEntity] = useState(null);
+  const [mousePosition, setMousePosition] = useState(null);
+  const [dynamicPoint, setDynamicPoint] = useState(null);
+
+const modeRef = useRef(mode);
+const mousePositionRef = useRef(mousePosition);
+
+  useEffect(() => {
+    modeRef.current = mode;
+    mousePositionRef.current = mousePosition;
+  }, [mode, mousePosition]);
 
   useEffect(() => {
     Cesium.Ion.defaultAccessToken = CESIUM_ION_ACCESS_TOKEN;
 
     if (!viewerRef.current) {
-      const creditContainer = document.createElement('div');
-      creditContainer.style.display = 'none';
+      const creditContainer = document.createElement("div");
+      creditContainer.style.display = "none";
       const viewer = new Cesium.Viewer(cesiumContainerRef.current, {
         animation: false,
         navigationHelpButton: false,
@@ -54,8 +93,8 @@ const CesiumMap = () => {
           viewer.entities.add({
             position: Cesium.Cartesian3.fromDegrees(longitude, latitude),
             label: {
-              text: 'Dự án đây nè',
-              font: 'Arial',
+              text: "Dự án đây nè",
+              font: "Arial",
               fillColor: Cesium.Color.RED,
             },
             point: {
@@ -69,7 +108,7 @@ const CesiumMap = () => {
             tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
           }
         } catch (error) {
-          console.error('Error initializing Cesium map:', error);
+          console.error("Error initializing Cesium map:", error);
         }
       };
 
@@ -110,7 +149,7 @@ const CesiumMap = () => {
           ),
           label: {
             text: `Area: ${area.toFixed(2)} sq meters`,
-            font: '20px sans-serif',
+            font: "20px sans-serif",
             fillColor: Cesium.Color.WHITE,
             outlineColor: Cesium.Color.BLACK,
             outlineWidth: 2,
@@ -121,23 +160,29 @@ const CesiumMap = () => {
       };
 
       handler.setInputAction((click) => {
-        if (!mode) return;
+        if (!modeRef.current) return;
 
         const cartesian = viewer.scene.pickPosition(click.position);
         if (cartesian) {
-          if (mode === 'annotation') {
-            const annotation = prompt('Enter annotation:');
+          if (modeRef.current === "annotation") {
+            const annotation = prompt("Enter annotation:");
             if (annotation) {
               viewer.entities.add({
                 position: cartesian,
-                point: {
-                  pixelSize: 5,
-                  color: Cesium.Color.BLUE,
-                  heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+                // point: {
+                //   pixelSize: 10,
+                //   color: Cesium.Color.RED,
+                //   heightReference: Cesium.HeightReference.CLAMP_TO_3D_TILE,
+                // },
+                billboard: {
+                  image: '/Note.png', // URL đến hình ảnh
+                  width: 50, // chiều rộng của billboard
+                  height: 50, // chiều cao của billboard
+                  pixelOffset: new Cesium.Cartesian2(0, -50)
                 },
                 label: {
                   text: annotation,
-                  font: '14pt sans-serif',
+                  font: "14pt sans-serif",
                   style: Cesium.LabelStyle.FILL_AND_OUTLINE,
                   outlineWidth: 2,
                   verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
@@ -150,7 +195,7 @@ const CesiumMap = () => {
 
           setPositions((prevPositions) => {
             const newPositions = [...prevPositions, cartesian];
-            if (mode === 'distance' && newPositions.length === 2) {
+            if (modeRef.current === "distance" && newPositions.length === 2) {
               const distance = Cesium.Cartesian3.distance(newPositions[0], newPositions[1]);
               const midpoint = Cesium.Cartesian3.midpoint(newPositions[0], newPositions[1], new Cesium.Cartesian3());
               viewer.entities.add({
@@ -165,7 +210,7 @@ const CesiumMap = () => {
                 position: midpoint,
                 label: {
                   text: `Distance: ${distance.toFixed(2)} meters`,
-                  font: '20px sans-serif',
+                  font: "20px sans-serif",
                   fillColor: Cesium.Color.WHITE,
                   outlineColor: Cesium.Color.BLACK,
                   outlineWidth: 2,
@@ -174,13 +219,18 @@ const CesiumMap = () => {
                 },
               });
               return [];
-            } else if (mode === 'area') {
+            } else if (modeRef.current === "area") {
               updatePolygon(newPositions);
             }
             return newPositions;
           });
         }
       }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+      handler.setInputAction((movement) => {
+        const cartesian = viewer.scene.pickPosition(movement.endPosition);
+        setMousePosition(cartesian);
+      }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 
       const calculatePolygonArea = (positions) => {
         let area = 0;
@@ -207,12 +257,27 @@ const CesiumMap = () => {
         }
       };
     }
-  }, [mode]);
+
+    if (mousePositionRef.current) {
+      if (!dynamicPoint) {
+        const point = viewer.entities.add({
+          position: mousePositionRef.current,
+          point: {
+            pixelSize: 10,
+            color: Cesium.Color.RED,
+          },
+        });
+        setDynamicPoint(point);
+      } else {
+        dynamicPoint.position = mousePositionRef.current;
+      }
+    }
+  }, []);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
+    <div className="relative w-full h-screen">
+      <div ref={cesiumContainerRef} className="w-full h-full" />
       <Toolbar setMode={setMode} />
-      <div ref={cesiumContainerRef} style={{ width: '100%', height: '100%' }} />
     </div>
   );
 };

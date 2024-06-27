@@ -55,7 +55,7 @@ const SearchBar = () => {
 const ToolBox = () => {
   return (
     <div>
-      <Toolbar/>
+      {/* <Toolbar/> */}
       <SearchBar/>
     </div>
 
