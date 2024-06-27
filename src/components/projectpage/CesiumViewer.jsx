@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import Draggable from 'react-draggable';
 import {
   IoIosArrowRoundBack,
   IoIosArrowRoundForward,
@@ -42,6 +43,27 @@ const Toolbar = ({ setMode }) => {
         <IoIosUndo size={24} />
       </button>
     </div>
+  );
+};
+
+const StyledForm = () => {
+  return (
+    <Draggable>
+    <div className="fixed w-100 top-16 right-8 bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
+      <h2 className="text-xl font-bold mb-2">Thêm chú thích</h2>
+      <form>
+        <div className="mb-4 text-left">
+          <label htmlFor="name" className="block text-red-600 font-bold mb-2">Tiêu đề</label>
+          <input type="text" id="name" name="name" className="w-full px-1 py-2 border border-gray-300 rounded" placeholder="Enter your name" />
+        </div>
+        <div className="mb-4 text-left">
+          <label htmlFor="message" className="block text-red-600 font-bold mb-2">Nội dung</label>
+          <textarea id="message" name="message" className="w-full px-1 py-2 border border-gray-300 rounded" placeholder="Enter your message" rows="4"></textarea>
+        </div>
+        <button type="submit" className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600 transition duration-200">SUBMIT</button>
+      </form>
+    </div>
+    </Draggable>
   );
 };
 
@@ -278,6 +300,7 @@ const mousePositionRef = useRef(mousePosition);
     <div className="relative w-full h-screen">
       <div ref={cesiumContainerRef} className="w-full h-full" />
       <Toolbar setMode={setMode} />
+      <StyledForm/>
     </div>
   );
 };
