@@ -2,7 +2,7 @@
 import Navbar from "../../../../components/userpage/users/Navbar";
 import Sidebar_root from "../../../../components/userpage/root/Sidebar_root";
 import Mainboard_root from "../../../../components/userpage/root/Mainboard_root";
-import DataTable from "../../../../components/userpage/root/DataTable";
+// import DataTable from "../../../../components/userpage/root/DataTable";
 import Developing from "../../../../components/shared/developing/Developing";
 import React from "react";
 
