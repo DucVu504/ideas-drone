@@ -72,15 +72,15 @@ function Hero() {
   const models = [
     { id: 1,
       content: ['Khảo sát và lập bản đồ thông minh, Xây dựng mô hình 3D', 'Kiểm tra cấu trúc'],
-      path: "/drone_pics/mavic_pro_1.jpeg"
+      path: "/HomePage/Background/mavic_pro_1.jpeg"
     },
     { id: 2,
       content: ['Phân tích môi trường', 'Đào tạo và Tư vấn Doanh nghiệp'],
-      path: "/drone_pics/phantom4_RTK_3.jpeg"
+      path: "/HomePage/Background/phantom4_RTK_3.jpeg"
     },
     { id: 3,
       content: ['Các sản phẩm Chuyên dụng'],
-      path: "/drone_pics/phantom4_RTK_2.jpeg"
+      path: "/HomePage/Background/phantom4_RTK_2.jpeg"
     },
 
   ];

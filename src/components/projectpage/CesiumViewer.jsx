@@ -189,7 +189,7 @@ const mousePositionRef = useRef(mousePosition);
                 //   heightReference: Cesium.HeightReference.CLAMP_TO_3D_TILE,
                 // },
                 billboard: {
-                  image: '/Note.png', // URL đến hình ảnh
+                  image: 'UserPages/ProjectPictures/Note.png', // URL đến hình ảnh
                   width: 50, // chiều rộng của billboard
                   height: 50, // chiều cao của billboard
                   pixelOffset: new Cesium.Cartesian2(0, -50)

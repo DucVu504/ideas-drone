@@ -4,18 +4,18 @@ function Equipment() {
     const cards = [
         {
             title: "Phantom 4 RTK",
-            image: "/equipments/Phantom4RPK_1.jpg",
+            image: "/HomePage/Equipments/phantom4RPK_1.jpg",
             description: "Phantom 4 RTK là drone tiên tiến cho khảo sát và lập bản đồ, tích hợp RTK chính xác đến từng centimet. \
             Với camera 20MP và thời gian bay 30 phút, nó cung cấp dữ liệu chất lượng cao cho các dự án kỹ thuật và xây dựng."
         },
         {
             title: "Phantom 4 Pro",
-            image: "/equipments/PhantomPro4_1.jpg",
+            image: "/HomePage/Equipments/phantomPro4_1.jpg",
             description: "Phantom 4 Pro là drone cao cấp với camera 20MP, cảm biến CMOS 1 inch và thời gian bay lên đến 30 phút. Nó cung cấp chất lượng hình ảnh và video vượt trội, lý tưởng cho nhiếp ảnh và quay phim chuyên nghiệp."
         },
         {
             title: "Mavic 3 Thermal",
-            image: "/equipments/Mavic3.jpg",
+            image: "/HomePage/Equipments/mavic3.jpg",
             description: "Mavic 3 Thermal là drone đa năng với camera nhiệt và cảm biến CMOS 4/3. Nó cung cấp hình ảnh nhiệt độ chính xác và thời gian bay lên đến 46 phút, lý tưởng cho các ứng dụng cứu hộ, giám sát và kiểm tra cơ sở hạ tầng."
         },
         // Add more card objects here...
@@ -27,7 +27,7 @@ function Equipment() {
                 <span className="text-black ">THIẾT BỊ CỦA </span>
             <span className="text-green-500">CHÚNG TÔI</span>
             </div>
-            <div className="py-8 px-10">
+            <div className="py-8 px-44">
                 <div className="flex flex-col">
                     <div className="flex flex-wrap">
                         {cards.map((card, index) => (

@@ -9,7 +9,7 @@ const UserProfile = () => {
         <div className="flex flex-col items-center">
           <img
             className="w-24 h-24 rounded-full"
-            src="/icon/Icon_4.png"
+            src="HomePage/Icon/Icon_4.png"
             alt="User Avatar"
           />
           <h2 className="mt-4 text-xl font-bold">Đức Vũ</h2>

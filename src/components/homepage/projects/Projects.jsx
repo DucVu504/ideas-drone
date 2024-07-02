@@ -29,32 +29,32 @@ const Projects = () => {
   const projects = [
     {
       title: "Ghi hiện trạng môi trường sông Cái Lớn và Cái Bé",
-      image: "/project_pics/picture1.jpg",
+      image: "/HomePage/ProjectPictures/picture1.jpg",
       description: "Xem thêm >>"
     },
     {
       title: "Khảo sát hiện trạng mỏ X, tỉnh Bình Dương",
-      image: "/project_pics/picture2.png",
+      image: "/HomePage/ProjectPictures/picture2.png",
       description: "Xem thêm >>"
     },
     {
       title: "Khảo sát tấm năng lượng mặt trời",
-      image: "/project_pics/picture3.jpg",
+      image: "/HomePage/ProjectPictures/picture3.jpg",
       description: "Xem thêm >>"
     },
     {
       title: "Khảo sát hiện trạng chung cư cao tầng",
-      image: "/project_pics/picture4.png",
+      image: "/HomePage/ProjectPictures/picture4.png",
       description: "Xem thêm >>"
     },
     {
       title: "Khảo sát địa hình và dựng mô hình 3D Lâm Đồng",
-      image: "/project_pics/picture5.jpg",
+      image: "/HomePage/ProjectPictures/picture5.jpg",
       description: "Xem thêm >>"
     },
     {
       title: "Khảo sát tuyến tính địa hình (1:1000) tại TP.HCM",
-      image: "/project_pics/picture6.jpg",
+      image: "/HomePage/ProjectPictures/picture6.jpg",
       description: "Xem thêm >>"
     },
     // Add more projects as needed
