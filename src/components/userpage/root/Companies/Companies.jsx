@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
-const Mainboard = () => {
+const Companies = () => {
     const [sortConfig, setSortConfig] = useState({ key: 'productName', direction: 'ascending' });
 
     const products = [
@@ -122,7 +122,7 @@ const Mainboard = () => {
                                         </td>
                                         <td className="px-6 py-3">
                                             <button
-                                            className="bg-blue-500 text-white px-2 py-1 rounded mr-2"
+                                            className="border text-black hover:text-blue-700 px-2 py-1 rounded mr-2"
                                             onClick={() => handleEditClick(product.id)}
                                             >
                                             Xem
@@ -130,7 +130,7 @@ const Mainboard = () => {
                                         </td>
                                         <td className="px-6 py-3">
                                             <button
-                                            className="bg-green-500 text-white px-2 py-1 rounded"
+                                            className="border text-black hover:text-blue-700  px-2 py-1 rounded"
                                             onClick={() => handleViewClick(product.id)}
                                             >
                                             Xem
@@ -149,4 +149,4 @@ const Mainboard = () => {
     );
 };
 
-export default Mainboard;
+export default Companies;
