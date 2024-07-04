@@ -1,9 +1,71 @@
 "use client"
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaUserTie, FaUserEdit, FaUser } from 'react-icons/fa';
 
 import Image from 'next/image';
+
+const ActionButton = ({ rowIndex, totalRows }) => {
+    const [showOptions, setShowOptions] = useState(false);
+    const menuRef = useRef(null);
+  
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setShowOptions(false);
+      }
+    };
+  
+    useEffect(() => {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, []);
+  
+    // Determine if the menu should be displayed above the button
+    const shouldShowAbove = rowIndex >= totalRows - 2;
+  
+    return (
+      <div className="relative" ref={menuRef}>
+        <button
+          onClick={() => setShowOptions(!showOptions)}
+          className="focus:outline-none"
+        >
+          <svg
+            className="w-6 h-6 text-gray-600"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 16c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-10c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
+          </svg>
+        </button>
+        {showOptions && (
+          <div
+            className={`absolute z-50 ${shouldShowAbove ? 'bottom-full mb-2' : 'mt-2'} right-0 w-48 bg-white border border-gray-200 rounded-md shadow-lg`}
+          >
+            <a
+              href="#"
+              className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+            >
+              View
+            </a>
+            <a
+              href="#"
+              className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+            >
+              Edit
+            </a>
+            <a
+              href="#"
+              className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+            >
+              Delete
+            </a>
+          </div>
+        )}
+      </div>
+    );
+  };
 
 const Users = () => {
     const [sortConfig, setSortConfig] = useState({ key: 'productName', direction: 'ascending' });
@@ -12,7 +74,12 @@ const Users = () => {
         { name: 'NGUYỄN VĂN A', role: 'Quản trị viên', email: 'nguyenA@gmail.com', modified_time: '02/07/2024', status: true },
         { name: 'NGUYỄN VĂN B', role: 'Người xem', email: 'nguyenB@gmail.com', modified_time: '200', status: false },
         { name: 'NGUYỄN VĂN C', role: 'Người chỉnh sửa', email: 'nguyenC@gmail.com', modified_time: '200', status: false },
+        { name: 'NGUYỄN VĂN C', role: 'Người chỉnh sửa', email: 'nguyenC@gmail.com', modified_time: '200', status: false },
+        { name: 'NGUYỄN VĂN C', role: 'Người chỉnh sửa', email: 'nguyenC@gmail.com', modified_time: '200', status: false },
+        { name: 'NGUYỄN VĂN C', role: 'Người chỉnh sửa', email: 'nguyenC@gmail.com', modified_time: '200', status: false },
     ];
+
+    const totalRows = products.length;
 
     const sortedProducts = [...products].sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -134,6 +201,9 @@ const Users = () => {
                                         <td className="px-4 py-3">{product.modified_time}</td>
                                         <td className="px-4 py-3">
                                             <div className={`h-4 w-4 rounded-md ${product.status ? 'bg-red-500' : 'bg-green-500'}`}></div>
+                                        </td>
+                                        <td className="py-2 px-4 border-b relative">
+                                            <ActionButton rowIndex={index} totalRows={totalRows} />
                                         </td>
 
 
