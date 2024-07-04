@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaUserTie, FaUserEdit, FaUser } from 'react-icons/fa';
+import { PencilAltIcon, EyeIcon, TrashIcon } from '@heroicons/react/outline';
 
 import Image from 'next/image';
 
@@ -41,24 +42,27 @@ const ActionButton = ({ rowIndex, totalRows }) => {
         </button>
         {showOptions && (
           <div
-            className={`absolute z-50 ${shouldShowAbove ? 'bottom-full mb-2' : 'mt-2'} right-0 w-48 bg-white border border-gray-200 rounded-md shadow-lg`}
+            className={`absolute z-50 ${shouldShowAbove ? 'bottom-full mb-2' : 'mt-2'} right-0 w-32 bg-white border border-gray-200 rounded-md shadow-lg`}
           >
             <a
               href="#"
-              className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+              className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-100"
             >
-              View
-            </a>
-            <a
-              href="#"
-              className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-            >
+              <PencilAltIcon className="w-5 h-5 mr-2" />
               Edit
             </a>
             <a
               href="#"
-              className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+              className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-100"
             >
+              <EyeIcon className="w-5 h-5 mr-2" />
+              Preview
+            </a>
+            <a
+              href="#"
+              className="flex items-center px-4 py-2 text-red-600 hover:bg-gray-100"
+            >
+              <TrashIcon className="w-5 h-5 mr-2" />
               Delete
             </a>
           </div>
@@ -66,7 +70,6 @@ const ActionButton = ({ rowIndex, totalRows }) => {
       </div>
     );
   };
-
 const Users = () => {
     const [sortConfig, setSortConfig] = useState({ key: 'productName', direction: 'ascending' });
 
