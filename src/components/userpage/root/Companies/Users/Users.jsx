@@ -1,80 +1,19 @@
 "use client"
-import { useState, useEffect, useRef } from 'react';
+import { useState} from 'react';
 import { useRouter } from 'next/navigation';
 import { FaUserTie, FaUserEdit, FaUser } from 'react-icons/fa';
-import { PencilAltIcon, EyeIcon, TrashIcon } from '@heroicons/react/outline';
+import ActionButton from './ActionButton';
+import AddUser from './AddUser';
+import EditUser from './EditUser';
 
-import Image from 'next/image';
 
-const ActionButton = ({ rowIndex, totalRows }) => {
-    const [showOptions, setShowOptions] = useState(false);
-    const menuRef = useRef(null);
-  
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setShowOptions(false);
-      }
-    };
-  
-    useEffect(() => {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-      };
-    }, []);
-  
-    // Determine if the menu should be displayed above the button
-    const shouldShowAbove = rowIndex >= totalRows - 2;
-  
-    return (
-      <div className="relative" ref={menuRef}>
-        <button
-          onClick={() => setShowOptions(!showOptions)}
-          className="focus:outline-none"
-        >
-          <svg
-            className="w-6 h-6 text-gray-600"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 16c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-10c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
-          </svg>
-        </button>
-        {showOptions && (
-          <div
-            className={`absolute z-50 ${shouldShowAbove ? 'bottom-full mb-2' : 'mt-2'} right-0 w-32 bg-white border border-gray-200 rounded-md shadow-lg`}
-          >
-            <a
-              href="#"
-              className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-100"
-            >
-              <PencilAltIcon className="w-5 h-5 mr-2" />
-              Edit
-            </a>
-            <a
-              href="#"
-              className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-100"
-            >
-              <EyeIcon className="w-5 h-5 mr-2" />
-              Preview
-            </a>
-            <a
-              href="#"
-              className="flex items-center px-4 py-2 text-red-600 hover:bg-gray-100"
-            >
-              <TrashIcon className="w-5 h-5 mr-2" />
-              Delete
-            </a>
-          </div>
-        )}
-      </div>
-    );
-  };
 const Users = () => {
     const [sortConfig, setSortConfig] = useState({ key: 'productName', direction: 'ascending' });
 
     const products = [
         { name: 'NGUYỄN VĂN A', role: 'Quản trị viên', email: 'nguyenA@gmail.com', modified_time: '02/07/2024', status: true },
+        { name: 'NGUYỄN VĂN B', role: 'Người xem', email: 'nguyenB@gmail.com', modified_time: '200', status: false },
+        { name: 'NGUYỄN VĂN B', role: 'Người xem', email: 'nguyenB@gmail.com', modified_time: '200', status: false },
         { name: 'NGUYỄN VĂN B', role: 'Người xem', email: 'nguyenB@gmail.com', modified_time: '200', status: false },
         { name: 'NGUYỄN VĂN C', role: 'Người chỉnh sửa', email: 'nguyenC@gmail.com', modified_time: '200', status: false },
         { name: 'NGUYỄN VĂN C', role: 'Người chỉnh sửa', email: 'nguyenC@gmail.com', modified_time: '200', status: false },
@@ -112,6 +51,20 @@ const Users = () => {
       router.push(`/view/${id}`);
     };
 
+    // Control Add User Modal
+    const [isOpen, setIsOpen] = useState(false);
+    const toggleModal = () => {
+      setIsOpen(!isOpen);
+    };
+
+    const [isEditing, setIsEditing] = useState(false);
+    const [currentUser, setCurrentUser] = useState(null);
+  
+    const handleEditUserClick = (user) => {
+      setCurrentUser(user);
+      setIsEditing(true);
+    };
+
     return (
         <section className="bg-gray-50  p-3 sm:p-5">
             <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
@@ -129,7 +82,7 @@ const Users = () => {
                             </li>
                         </div>
                         <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                            <button type="button" className="flex items-center justify-center text-black bg-lime-300 hover:bg-lime-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2">
+                            <button type="button" onClick={toggleModal} className="flex items-center justify-center text-black bg-lime-300 hover:bg-lime-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2">
                                 <svg className="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path clipRule="evenodd" fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                                 </svg>
@@ -178,35 +131,35 @@ const Users = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {sortedProducts.map((product, index) => (
+                                {sortedProducts.map((users, index) => (
                                     <tr key={index} className="border-b hover:bg-slate-50">
                                         <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
-                                            {product.name}
+                                            {users.name}
                                         </th>
                                         <td className="px-4 py-3">
-                                            {product.role === 'Quản trị viên' && (
+                                            {users.role === 'Quản trị viên' && (
                                             <div className="bg-blue-100 text-blue-800 px-1 rounded flex items-center">
                                                 <FaUserTie className="mr-2" />Quản trị viên
                                             </div>
                                             )}
-                                            {product.role === 'Người chỉnh sửa' && (
+                                            {users.role === 'Người chỉnh sửa' && (
                                             <div className="bg-violet-200 text-violet-800 px-1 rounded flex items-center">
                                                 <FaUserEdit className="mr-2" />Người chỉnh sửa
                                             </div>
                                             )}
-                                            {product.role === 'Người xem' && (
+                                            {users.role === 'Người xem' && (
                                             <div className="bg-gray-200 text-black px-1 rounded flex items-center">
                                                 <FaUser className="mr-2" />Người xem
                                             </div>
                                             )}
                                         </td>
-                                        <td className="px-4 py-3">{product.email}</td>
-                                        <td className="px-4 py-3">{product.modified_time}</td>
+                                        <td className="px-4 py-3">{users.email}</td>
+                                        <td className="px-4 py-3">{users.modified_time}</td>
                                         <td className="px-4 py-3">
-                                            <div className={`h-4 w-4 rounded-md ${product.status ? 'bg-red-500' : 'bg-green-500'}`}></div>
+                                            <div className={`h-4 w-4 rounded-md ${users.status ? 'bg-red-500' : 'bg-green-500'}`}></div>
                                         </td>
                                         <td className="py-2 px-4 border-b relative">
-                                            <ActionButton rowIndex={index} totalRows={totalRows} />
+                                            <ActionButton rowIndex={index} totalRows={totalRows} onEdit={() => handleEditUserClick(users)}/>
                                         </td>
 
 
@@ -218,6 +171,8 @@ const Users = () => {
                     
                 </div>
             </div>
+            {isEditing && <EditUser user={currentUser} onClose={() => setIsEditing(false)} />}
+            <AddUser isOpen={isOpen} onClose={toggleModal} />
         </section>
     );
 };
