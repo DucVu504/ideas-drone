@@ -1,6 +1,6 @@
 
-import Navbar from "../../../../components/userpage/users/Navbar";
-import Sidebar_root from "../../../../components/userpage/root/Sidebar_root";
+import NavbarRoot from "../../../../components/userpage/root/NavbarRoot";
+import SidebarRoot from "../../../../components/userpage/root/SidebarRoot";
 import Companies from "../../../../components/userpage/root/Companies/Companies";
 
 import React from "react";
@@ -9,14 +9,12 @@ const CompaniesDashboard = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-    <div className="grid grid-cols-[192px,1fr] ">
-      <div>
-        <Sidebar_root/>
-      </div>
-      <div>
+
+
+        <SidebarRoot/>
+        <NavbarRoot/>
         <Companies/>
-      </div>
-    </div>
+
     </div>
   );
 };

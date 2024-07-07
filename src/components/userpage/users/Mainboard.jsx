@@ -8,7 +8,7 @@ const Mainboard = () => {
             image: "/UserPages/ProjectPictures/picturedemo.png",
             title: "DỰ ÁN DEMO",
             description: "Mặt bằng khu dân cư Phan Thiết",
-            link: "/project"
+            link: "/user/projects/project_test"
         },
         {
             image: "/UserPages/ProjectPictures/default.jpeg",

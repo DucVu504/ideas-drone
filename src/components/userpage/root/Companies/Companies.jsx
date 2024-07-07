@@ -74,7 +74,7 @@ const Companies = () => {
                         <table className="w-full text-sm text-left text-gray-500">
                             <thead className="text-sm text-gray-700 uppercase bg-gradient-to-r from-lime-200 to-lime-100 ">
                                 <tr>
-                                    <th scope="col" className="px-4 py-3 ">
+                                    <th scope="col" className="px-4 py-3">
                                         <button type="button" onClick={() => requestSort('name')}>
                                             TÊN CÔNG TY {sortConfig.key === 'name' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>

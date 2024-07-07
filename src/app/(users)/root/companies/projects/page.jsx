@@ -1,11 +1,11 @@
 
-import NavbarRoot from "../../../../../components/userpage/root/Navbar";
+import Navbar from "../../../../../components/userpage/users/Navbar";
 import Sidebar_root from "../../../../../components/userpage/root/SidebarRoot";
-import Users from "../../../../../components/userpage/root/Companies/Users/Users";
+import Projects from "../../../../../components/userpage/root/Companies/Projects/Projects";
 
 import React from "react";
 
-const UsersDashboard = () => {
+const ProjectsDashboard = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -14,11 +14,11 @@ const UsersDashboard = () => {
         <Sidebar_root/>
       </div>
       <div>
-        <Users/>
+        <Projects/>
       </div>
     </div>
     </div>
   );
 };
 
-export default UsersDashboard;
+export default ProjectsDashboard;

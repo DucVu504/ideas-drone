@@ -162,7 +162,6 @@ const Users = () => {
                                             <ActionButton rowIndex={index} totalRows={totalRows} onEdit={() => handleEditUserClick(users)}/>
                                         </td>
 
-
                                     </tr>
                                 ))}
                             </tbody>
