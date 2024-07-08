@@ -1,6 +1,6 @@
 import React from 'react';
-import NavbarRoot from "../../../../components/userpage/root/NavbarRoot";
-import SidebarRoot from "../../../../components/userpage/root/SidebarRoot";
+import NavbarRoot from "../NavbarRoot";
+import SidebarRoot from "../SidebarRoot";
 
 const CompaniesLayout = ({ children }) => {
   return (

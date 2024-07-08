@@ -1,5 +1,5 @@
 
-import CompaniesLayout from "./companiesLayout"
+import CompaniesLayout from "../../../../components/userpage/root/Companies/CompaniesLayout"
 import Companies from "../../../../components/userpage/root/Companies/Companies";
 
 import React from "react";
