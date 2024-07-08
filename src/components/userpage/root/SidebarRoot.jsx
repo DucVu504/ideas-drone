@@ -12,19 +12,19 @@ const Sidebar = () => {
                   <ul className="space-y-2 font-medium">
                      <li>
                         <a href="/user/projects" className={`flex flex-col items-center justify-center ${currentPath === '/user/projects' ? 'bg-green-100' : ''} border-b border-gray-300 p-2 text-gray-900 rounded-lg hover:bg-gray-200 group`}>
-                           <Image src="../UserPages/Icons/project.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg" />
+                           <Image src="/UserPages/Icons/project.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg" />
                            <span className="mt-2 whitespace-nowrap text-sm">Dự án</span>
                         </a>
                      </li>
                      <li>
                         <a href="/user/contact" className={`flex flex-col items-center justify-center ${currentPath === '/user/contact' ? 'bg-green-100' : ''} border-b border-gray-300 p-2 text-gray-900 rounded-lg hover:bg-gray-200 group`}>
-                           <Image src="../UserPages/Icons/contact.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg"/>
+                           <Image src="/UserPages/Icons/contact.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg"/>
                            <span className="mt-2 whitespace-nowrap text-sm">Liên hệ</span>
                         </a>
                         </li>
                         <li>
                         <a href="/user/account" className={`flex flex-col items-center justify-center ${currentPath === '/user/account' ? 'bg-green-100' : ''} border-b border-gray-300 p-2 text-gray-900 rounded-lg hover:bg-gray-200 group`}>
-                           <Image src="../UserPages/Icons/user.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg" />
+                           <Image src="/UserPages/Icons/user.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg" />
                            <span className="mt-2 whitespace-nowrap text-sm">Tài khoản</span>
                         </a>
                      </li>
