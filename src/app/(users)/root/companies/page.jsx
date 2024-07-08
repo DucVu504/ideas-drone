@@ -1,6 +1,5 @@
 
-import NavbarRoot from "../../../../components/userpage/root/NavbarRoot";
-import SidebarRoot from "../../../../components/userpage/root/SidebarRoot";
+import CompaniesLayout from "./companiesLayout"
 import Companies from "../../../../components/userpage/root/Companies/Companies";
 
 import React from "react";
@@ -8,14 +7,9 @@ import React from "react";
 const CompaniesDashboard = () => {
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-
-
-        <SidebarRoot/>
-        <NavbarRoot/>
-        <Companies/>
-
-    </div>
+    <CompaniesLayout>
+      <Companies/>
+    </CompaniesLayout>
   );
 };
 
