@@ -1,8 +1,8 @@
 import React from 'react';
-import NavbarRoot from "../NavbarRoot";
-import SidebarRoot from "../SidebarRoot";
+import NavbarRoot from "./NavbarRoot";
+import SidebarRoot from "./SidebarRoot";
 
-const CompaniesLayout = ({ children }) => {
+const DashboardLayout = ({ children }) => {
   return (
     <div className="bg-gray-50 min-h-screen">
       <SidebarRoot />
@@ -12,4 +12,4 @@ const CompaniesLayout = ({ children }) => {
   );
 };
 
-export default CompaniesLayout;
+export default DashboardLayout;

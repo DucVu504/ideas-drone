@@ -25,7 +25,7 @@ const Navbar = () => {
         <nav className={`bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600 relative z-10 px-8`}>
           <div className="max-w-screen-xxl flex flex-wrap items-center justify-between mx-auto p-1">
             <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse ">
-              <Image src="/Logos/Logo_2.jpg" className="h-14 w-auto p-1" alt="DroneGIS Logo" width={200} height={50} />
+              <Image src="/Logos/Logo_main.png" className="h-14 w-auto p-1" alt="DroneGIS Logo" width={200} height={50} />
             </a>
             <div className="flex md:order-2 space-x-3 md:space-x-3 rtl:space-x-reverse">
               <button type="button" className="text-black dark:text-white border border-green-700 hover:border-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center border dark:border-green-600 dark:hover:border-green-700 dark:hover:text-green-600 dark:focus:ring-green-800">

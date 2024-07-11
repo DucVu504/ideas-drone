@@ -19,7 +19,7 @@ const Sidebar = () => {
                   <ul className="space-y-2 font-medium">
                      <li className="flex justify-center border-b border-gray-300 pb-2 ">
                         <a href="/" >
-                        <Image src="/Logos/Logo_2.jpg" alt="Home" width={200} height={50} className="items-center" />
+                        <Image src="/Logos/Logo_main.png" alt="Home" width={200} height={50} className="items-center" />
                         </a>
                      </li>
                      <li>

@@ -1,6 +1,7 @@
 import path from 'path';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import webpack from 'webpack';
+import { i18n } from './next-i18next.config.mjs';
 
 const cesiumSource = 'node_modules/cesium/Source';
 const cesiumWorkers = 'node_modules/cesium/Build/Cesium';
@@ -31,6 +32,7 @@ const nextConfig = {
 
     return config;
   },
+  i18n,
 };
 
 export default nextConfig;

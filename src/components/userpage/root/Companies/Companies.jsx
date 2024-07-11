@@ -1,20 +1,19 @@
 "use client"
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import AddCompany from './AddCompany';
 
 const Companies = () => {
-    const [sortConfig, setSortConfig] = useState({ key: 'productName', direction: 'ascending' });
-
-    const products = [
+    
+    // Call API to get companies
+    const companies = [
         { name: 'CÔNG TY CỔ PHẦN BÁCH VIỆT', country: '🇻🇳', address: '153 Ung văn Khiêm phương 25 quận Bình Thạnh, TPHCM', modified_time: '02/07/2024', is_disable: true },
         { name: 'CÔNG TY TNHH 1 THÀNH VIÊN IDEASDRONE', country: '🇻🇳', address: '380 Nguyễn Thị Tú phương Bình Hưng Hoà B quận Bình Tân', modified_time: '200', is_disable: false },
-        { name: 'Apple iMac 20"', country: '🇻🇳', address: 'Apple', modified_time: '200', is_disable: false },
-        { name: 'Apple iMac 20"', country: '🇧🇪', address: 'Apple', modified_time: '200', is_disable: true },
-        { name: 'Apple iMac 20"', country: '🇹🇹', address: 'Apple', modified_time: '200', is_disable: false },
-    ];
-
-    const sortedProducts = [...products].sort((a, b) => {
+        ];
+        
+    // Handle sorting
+    const [sortConfig, setSortConfig] = useState({ key: 'companyName', direction: 'ascending' });
+    const sortedCompanies = [...companies].sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
             return sortConfig.direction === 'ascending' ? -1 : 1;
         }
@@ -23,7 +22,6 @@ const Companies = () => {
         }
         return 0;
     });
-
     const requestSort = (key) => {
         let direction = 'ascending';
         if (sortConfig.key === key && sortConfig.direction === 'ascending') {
@@ -32,15 +30,21 @@ const Companies = () => {
         setSortConfig({ key, direction });
     };
 
+    // Handle View User and Project
     const router = useRouter();
-
-    const handleEditClick = (id) => {
+    const handleViewUsers = (id) => {
       router.push(`/edit/${id}`);
     };
-  
-    const handleViewClick = (id) => {
+    const handleViewProjects = (id) => {
       router.push(`/view/${id}`);
     };
+
+    // Control Add User Modal
+    const [isOpen, setIsOpen] = useState(false);
+    const toggleModal = () => {
+        setIsOpen(!isOpen);
+    };
+
 
     return (
         <section className="bg-gray-50  p-3 sm:p-5">
@@ -61,7 +65,7 @@ const Companies = () => {
                             </form>
                         </div>
                         <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                            <button type="button" className="flex items-center justify-center text-black bg-lime-300 hover:bg-lime-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2">
+                            <button type="button" onClick={toggleModal}  className="flex items-center justify-center text-black bg-lime-300 hover:bg-lime-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2">
                                 <svg className="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path clipRule="evenodd" fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                                 </svg>
@@ -109,21 +113,21 @@ const Companies = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {sortedProducts.map((product, index) => (
+                                {sortedCompanies.map((company, index) => (
                                     <tr key={index} className="border-b hover:bg-slate-50">
                                         <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
-                                            {product.name}
+                                            {company.name}
                                         </th>
-                                        <td className="px-4 py-3">{product.country}</td>
-                                        <td className="px-4 py-3">{product.address}</td>
-                                        <td className="px-4 py-3">{product.modified_time}</td>
+                                        <td className="px-4 py-3">{company.country}</td>
+                                        <td className="px-4 py-3">{company.address}</td>
+                                        <td className="px-4 py-3">{company.modified_time}</td>
                                         <td className="px-4 py-3">
-                                        <div className={`h-4 w-4 rounded-md ${product.is_disable ? 'bg-red-500' : 'bg-green-500'}`}></div>
+                                        <div className={`h-4 w-4 rounded-md ${company.is_disable ? 'bg-red-500' : 'bg-green-500'}`}></div>
                                         </td>
                                         <td className="px-6 py-3">
                                             <button
                                             className="border text-black hover:text-blue-700 px-2 py-1 rounded mr-2"
-                                            onClick={() => handleEditClick(product.id)}
+                                            onClick={() => handleViewUsers(company.id)}
                                             >
                                             Xem
                                             </button>
@@ -131,7 +135,7 @@ const Companies = () => {
                                         <td className="px-6 py-3">
                                             <button
                                             className="border text-black hover:text-blue-700  px-2 py-1 rounded"
-                                            onClick={() => handleViewClick(product.id)}
+                                            onClick={() => handleViewProjects(company.id)}
                                             >
                                             Xem
                                             </button>
@@ -145,6 +149,7 @@ const Companies = () => {
                     
                 </div>
             </div>
+            <AddCompany isOpen={isOpen} onClose={toggleModal} />
         </section>
     );
 };

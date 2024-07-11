@@ -1,5 +1,5 @@
 
-import CompaniesLayout from "../../../../components/userpage/root/Companies/CompaniesLayout"
+import DashboardLayout from "../../../../components/userpage/root/DashboardLayout"
 import Companies from "../../../../components/userpage/root/Companies/Companies";
 
 import React from "react";
@@ -7,9 +7,9 @@ import React from "react";
 const CompaniesDashboard = () => {
 
   return (
-    <CompaniesLayout>
+    <DashboardLayout>
       <Companies/>
-    </CompaniesLayout>
+    </DashboardLayout>
   );
 };
 
