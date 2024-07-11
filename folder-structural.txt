@@ -1,0 +1,55 @@
+IdeasDrone/
+
+├── public/
+│   ├── images/
+│   │   ├── avatars/
+│   │   │   ├── user1.jpg
+│   │   │   ├── user2.jpg
+│   │   ├── products/
+│   │   │   ├── product1.png
+│   │   │   ├── product2.png
+│   ├── icons/
+│   │   ├── favicon.ico
+│   │   ├── logo.svg
+│   ├── fonts/
+│   │   ├── custom-font.ttf
+│   ├── robots.txt
+│   ├── sitemap.xml
+
+
+/app
+  ├──/(auth)
+  |
+  ├──/(introduction)
+  |
+  ├──/(users)
+
+/src
+  /components
+    /common
+      ├── Button.js
+      ├── Input.js
+      ├── Modal.js
+      ├── Navbar.js
+    /layout
+      ├── Header.js
+      ├── Footer.js
+      ├── Sidebar.js
+      ├── MainLayout.js
+    /pages
+      /Home
+        ├── HeroSection.js
+        ├── FeaturedProducts.js
+      /About
+        ├── Team.js
+        ├── History.js
+      /Product
+        ├── ProductDetails.js
+        ├── ProductReviews.js
+    /utils
+      ├── fetchData.js
+      ├── formatDate.js
+    /hooks
+      ├── useAuth.js
+      ├── useFetch.js
+
