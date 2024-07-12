@@ -1,7 +1,7 @@
 IdeasDrone/
 
 📂public/
-├── images/
+├── 📘images/
 │   ├── homepage/
 │   │   ├── image.jpg
 │   │   ├── image.jpg
@@ -14,7 +14,7 @@ IdeasDrone/
 │   ├── common/
 │   │   ├── image.png
 │   │   ├── image.png
-├── icons/
+├── 📘icons/
 │   ├── homepage/
 │   │   ├── favicon.ico
 │   │   ├── favicon.ico
@@ -27,89 +27,88 @@ IdeasDrone/
 │   ├── common/
 │   │   ├── favicon.ico
 │   │   ├── favicon.ico
-├── fonts/
+├── 📘fonts/
 │   ├── custom-font.ttf
 ├── robots.txt
 ├── sitemap.xml
 
 
 📂app/
-  ├──/(auth)
-  │   ├── login/
-  │   │   ├── page.jsx
-  |
-  ├──/(introduction)
-  │   ├── about/
-  │   │   ├── page.jsx
-  │   ├── contact/
-  │   │   ├── page.jsx
-  │   ├── equipments/
-  │   │   ├── page.jsx
-  │   ├── projects/
-  │   │   ├── page.jsx
-  │   ├── services/
-  │   │   ├── page.jsx
-  │   ├── quote/
-  │   │   ├── page.jsx
-  |
-  ├──/(users)
-  │   ├── root/
-  │   │   ├── companies/
-  │   │   │   ├── projects/
-  │   │   │   │   ├── [projects_xxx/]
-  │   │   │   │   │   ├── page.jsx
-  │   │   │   │   ├── page.jsx
-  │   │   │   ├── users/
-  │   │   │   │   ├── page.jsx
-  │   │   │   ├── page.jsx
-  │   │   ├── requests/
-  │   │   │   ├── page.jsx
-  │   │   ├── others(not yet develop)/
-  │   ├── admin/
-  │   │   ├── dashboard/
-  │   │   │   ├── page.jsx
-  │   │   │   ├── [projects_xxx/]
-  │   │   │   │   ├── page.jsx
-  │   │   ├── requests/
-  │   │   │   ├── page.jsx
-  │   │   ├── profile/
-  │   │   │   ├── page.jsx
-  │   ├── user/
-  │   │   ├── dashboard/
-  │   │   │   ├── page.jsx
-  │   │   │   ├── [projects_xxx/]
-  │   │   │   │   ├── page.jsx
-  │   │   ├── requests/
-  │   │   │   ├── page.jsx
-  │   │   ├── profile/
-  │   │   │   ├── page.jsx
+├──📘(auth)/
+│   ├── login/
+│   │   ├── page.jsx
+|
+├──📘(introduction)/
+│   ├── about/
+│   │   ├── page.jsx
+│   ├── contact/
+│   │   ├── page.jsx
+│   ├── equipments/
+│   │   ├── page.jsx
+│   ├── projects/
+│   │   ├── page.jsx
+│   ├── services/
+│   │   ├── page.jsx
+│   ├── quote/
+│   │   ├── page.jsx
+|
+├──📘(users)/
+│   ├── root/
+│   │   ├── companies/
+│   │   │   ├── projects/
+│   │   │   │   ├── [projects_xxx/]
+│   │   │   │   │   ├── page.jsx
+│   │   │   │   ├── page.jsx
+│   │   │   ├── users/
+│   │   │   │   ├── page.jsx
+│   │   │   ├── page.jsx
+│   │   ├── requests/
+│   │   │   ├── page.jsx
+│   │   ├── others(not yet develop)/
+│   ├── admin/
+│   │   ├── dashboard/
+│   │   │   ├── page.jsx
+│   │   │   ├── [projects_xxx/]
+│   │   │   │   ├── page.jsx
+│   │   ├── requests/
+│   │   │   ├── page.jsx
+│   │   ├── profile/
+│   │   │   ├── page.jsx
+│   ├── user/
+│   │   ├── dashboard/
+│   │   │   ├── page.jsx
+│   │   │   ├── [projects_xxx/]
+│   │   │   │   ├── page.jsx
+│   │   ├── requests/
+│   │   │   ├── page.jsx
+│   │   ├── profile/
+│   │   │   ├── page.jsx
 
 📂src/
-  /components
-    /common
-      ├── Button.js
-      ├── Input.js
-      ├── Modal.js
-      ├── Navbar.js
-    /layout
-      ├── Header.js
-      ├── Footer.js
-      ├── Sidebar.js
-      ├── MainLayout.js
-    /pages
-      /Home
-        ├── HeroSection.js
-        ├── FeaturedProducts.js
-      /Login
-        ├── Team.js
-        ├── History.js
-      /Users
-        ├── ProductDetails.js
-        ├── ProductReviews.js
-    /utils
-      ├── fetchData.js
-      ├── formatDate.js
-    /hooks
-      ├── useAuth.js
-      ├── useFetch.js
-
+├──📘components/
+│  ├── /common
+│  │   ├── Button.js
+│  │   ├── Input.js
+│  │   ├── Modal.js
+│  │   ├── Navbar.js
+│  ├── /layout
+│  │   ├── Header.js
+│  │   ├── Footer.js
+│  │   ├── Sidebar.js
+│  │   ├── MainLayout.js
+│  ├── /pages
+│  │   ├── /Home
+│  │   │   ├── HeroSection.js
+│  │   │   ├── FeaturedProducts.js
+│  │   ├── /Login
+│  │   │   ├── Team.js
+│  │   │   ├── History.js
+│  │   ├── /Users
+│  │   │   ├── ProductDetails.js
+│  │   │   ├── ProductReviews.js
+│  ├── /utils
+│  │   ├── fetchData.js
+│  │   ├── formatDate.js
+│  ├── /hooks
+│      ├── useAuth.js
+│      ├── useFetch.js
