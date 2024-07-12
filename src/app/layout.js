@@ -1,24 +1,26 @@
 import Head from 'next/head';
-import { Inter } from "next/font/google";
-import "../styles/globals.css";
+import { appWithTranslation } from 'next-i18next';
+import { Inter } from 'next/font/google';
+import '../styles/globals.css';
 
+const inter = Inter({ subsets: ['latin'] });
 
-const inter = Inter({ subsets: ["latin"] });
-
-
-export default function RootLayout({ children }) {
+function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <>
       <Head>
-        <link rel="icon" href="/Logos/Logo_main.png" type="image/png"/>
+        <link rel="icon" href="/Logos/Logo_main.png" type="image/png" />
         <title>Ideas-Drone</title>
-        <meta name="A webSGIS application for drone management and monitoring" content="Web site created..." />
-        <link rel="stylesheet" href="https://fonts.googleapis.comHomePage/Icon?family=Material+Icons" />
+        <meta name="description" content="A webSGIS application for drone management and monitoring" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
       </Head>
+      <html lang="en">
         <body className={inter.className}>
           {children}
         </body>
-    </html>
+      </html>
+    </>
   );
 }
 
+export default appWithTranslation(RootLayout);

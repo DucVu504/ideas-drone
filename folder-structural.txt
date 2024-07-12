@@ -1,30 +1,90 @@
 IdeasDrone/
 
-├── public/
-│   ├── images/
-│   │   ├── avatars/
-│   │   │   ├── user1.jpg
-│   │   │   ├── user2.jpg
-│   │   ├── products/
-│   │   │   ├── product1.png
-│   │   │   ├── product2.png
-│   ├── icons/
+📂public/
+├── images/
+│   ├── homepage/
+│   │   ├── image.jpg
+│   │   ├── image.jpg
+│   ├── login/
+│   │   ├── image.png
+│   │   ├── image.png
+│   ├── users/
+│   │   ├── image.png
+│   │   ├── image.png
+│   ├── common/
+│   │   ├── image.png
+│   │   ├── image.png
+├── icons/
+│   ├── homepage/
 │   │   ├── favicon.ico
-│   │   ├── logo.svg
-│   ├── fonts/
-│   │   ├── custom-font.ttf
-│   ├── robots.txt
-│   ├── sitemap.xml
+│   │   ├── favicon.ico
+│   ├── login/
+│   │   ├── favicon.ico
+│   │   ├── favicon.ico
+│   ├── users/
+│   │   ├── favicon.ico
+│   │   ├── favicon.ico
+│   ├── common/
+│   │   ├── favicon.ico
+│   │   ├── favicon.ico
+├── fonts/
+│   ├── custom-font.ttf
+├── robots.txt
+├── sitemap.xml
 
 
-/app
+📂app/
   ├──/(auth)
+  │   ├── login/
+  │   │   ├── page.jsx
   |
   ├──/(introduction)
+  │   ├── about/
+  │   │   ├── page.jsx
+  │   ├── contact/
+  │   │   ├── page.jsx
+  │   ├── equipments/
+  │   │   ├── page.jsx
+  │   ├── projects/
+  │   │   ├── page.jsx
+  │   ├── services/
+  │   │   ├── page.jsx
+  │   ├── quote/
+  │   │   ├── page.jsx
   |
   ├──/(users)
+  │   ├── root/
+  │   │   ├── companies/
+  │   │   │   ├── projects/
+  │   │   │   │   ├── [projects_xxx/]
+  │   │   │   │   │   ├── page.jsx
+  │   │   │   │   ├── page.jsx
+  │   │   │   ├── users/
+  │   │   │   │   ├── page.jsx
+  │   │   │   ├── page.jsx
+  │   │   ├── requests/
+  │   │   │   ├── page.jsx
+  │   │   ├── others(not yet develop)/
+  │   ├── admin/
+  │   │   ├── dashboard/
+  │   │   │   ├── page.jsx
+  │   │   │   ├── [projects_xxx/]
+  │   │   │   │   ├── page.jsx
+  │   │   ├── requests/
+  │   │   │   ├── page.jsx
+  │   │   ├── profile/
+  │   │   │   ├── page.jsx
+  │   ├── user/
+  │   │   ├── dashboard/
+  │   │   │   ├── page.jsx
+  │   │   │   ├── [projects_xxx/]
+  │   │   │   │   ├── page.jsx
+  │   │   ├── requests/
+  │   │   │   ├── page.jsx
+  │   │   ├── profile/
+  │   │   │   ├── page.jsx
 
-/src
+📂src/
   /components
     /common
       ├── Button.js
@@ -40,10 +100,10 @@ IdeasDrone/
       /Home
         ├── HeroSection.js
         ├── FeaturedProducts.js
-      /About
+      /Login
         ├── Team.js
         ├── History.js
-      /Product
+      /Users
         ├── ProductDetails.js
         ├── ProductReviews.js
     /utils
