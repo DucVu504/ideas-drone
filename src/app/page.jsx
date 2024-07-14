@@ -8,13 +8,13 @@ import Contact from "../components/homepage/contact/Contact";
 import SocialMediaIcons from "../components/shared/quickcontact/SocialMediaIcons";
 import Navbar from "../components/homepage/navbar/Navbar";
 import Footer from "../components/homepage/footer/Footer";
-import { useTranslation } from 'next-i18next';
+// import { useTranslation } from 'next-i18next';
 
 export default function Home() {
-  const { t } = useTranslation('common');
+  // const { t } = useTranslation('common');
   return (
     <div>
-      <h1>{t('welcome')}</h1>
+      {/* <h1>{t('welcome')}</h1> */}
       <Navbar/>
       <Hero/>
       <ShortInfo/>

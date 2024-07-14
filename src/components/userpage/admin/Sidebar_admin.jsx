@@ -18,25 +18,25 @@ const Sidebar = () => {
                   <ul className="space-y-2 font-medium">
                      <li className="flex justify-center border-b border-gray-300 pb-2 ">
                         <a href="/" >
-                        <Image src="/Logos/Logo_2.jpg" alt="Home" width={200} height={50} className="items-center" />
+                        <Image src="/images/common/Logo_2.jpg" alt="Home" width={200} height={50} className="items-center" />
                         </a>
                      </li>
                      <li>
                      <a href="/admin/dashboard" className={`flex items-center ${currentPath === '/admin/dashboard' ? 'bg-green-100' : ''} border-b border-gray-300 p-6 text-gray-900 rounded-lg hover:bg-gray-200  group`}>
-                           <Image src="../UserPages/Icons/project.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg" />
+                           <Image src="../icons/common/project.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg" />
                            <span className="flex-1 ms-3 whitespace-nowrap">Tổng quan</span>
                            
                         </a>
                      </li>
                      <li>
                      <a href="/admin/account" className={`flex items-center ${currentPath === '/admin/account' ? 'bg-green-100' : ''} border-b border-gray-300 p-6 text-gray-900 rounded-lg hover:bg-gray-200  group`}>
-                        <Image src="../UserPages/Icons/user.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg" />
+                        <Image src="../icons/common/user.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg" />
                            <span className="flex-1 ms-3 whitespace-nowrap">Tài khoản</span>
                         </a>
                      </li>
                      <li>
                      <a href="/admin/setting" className={`flex items-center ${currentPath === '/admin/setting' ? 'bg-green-100' : ''} border-b border-gray-300 p-6 text-gray-900 rounded-lg hover:bg-gray-200  group`}>
-                        <Image src="../UserPages/Icons/setting.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg"/>
+                        <Image src="../icons/common/setting.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg"/>
                            <span className="flex-1 ms-3 whitespace-nowrap">Cài đặt</span>
                         </a>
                      </li>

@@ -44,7 +44,7 @@ const LoginForm = () => {
             <section className="bg-gray-50" style={{backgroundImage: "url('./login_backgound.jpeg')", backgroundSize: 'cover'}}>
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 ">
                     <a href="/" className="flex items-center mb-6 text-2xl font-semibold text-gray-900">
-                        <img className="w-40 h-14 mr-2" src="/Logos/Logo_main.png" alt="logo"/>
+                        <img className="w-40 h-14 mr-2" src="/images/common/Logo_main.png" alt="logo"/>
                     </a>
                     <div className="w-full bg-opacity-80 bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

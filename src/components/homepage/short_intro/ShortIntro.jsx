@@ -19,7 +19,7 @@ function ShortInfo() {
                         >
                         <Image
                             alt=""
-                            src="/HomePage/Others/RSE_pics.jpeg"
+                            src="/images/homepage/RSE_pics.jpeg"
                             className={`rounded-xl transition-transform duration-300 ${isHovered ? 'transform scale-110' : ''}`}
                             width={500}
                             height={500}

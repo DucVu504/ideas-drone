@@ -9,14 +9,14 @@ function RootLayout({ children }) {
   return (
     <>
       <Head>
-        <link rel="icon" href="/Logos/Logo_main.png" type="image/png" />
+        <link rel="icon" href="/images/common/Logo_main.png" type="image/png" />
         <title>Ideas-Drone</title>
         <meta name="description" content="A webSGIS application for drone management and monitoring" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
       </Head>
       <html lang="en">
         <body className={inter.className}>
-          {children}
+        {children}
         </body>
       </html>
     </>

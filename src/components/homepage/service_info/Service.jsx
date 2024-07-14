@@ -8,32 +8,32 @@ const Testimonials  = () => {
     {
       title: "KHẢO SÁT VÀ LẬP BẢN ĐỒ THÔNG MINH",
       detail: "Chúng tôi thực hiện các cuộc khảo sát và tạo ra các bản đồ thông minh chính xác và chi tiết, cung cấp thông tin hữu ích về địa hình và môi trường.",
-      image: "/HomePage/Icons/Icon_1.png"
+      image: "/images/homepage/s/Icon_1.png"
     },
     {
       title: "XÂY DỰNG MÔ HÌNH 3D",
       detail: "Chúng tôi sử dụng công nghệ tiên tiến để tạo ra các mô hình 3D chất lượng cao, giúp bạn hiểu rõ hơn về không gian và cấu trúc của các dự án.",
-      image: "/HomePage/Icons/Icon_2.png"
+      image: "/images/homepage/s/Icon_2.png"
     },
     {
       title: "KIỂM TRA KẾT CẤU",
       detail: "Chúng tôi cung cấp các dịch vụ kiểm tra kết cấu chuyên sâu, giúp bạn đảm bảo tính an toàn và chất lượng của các công trình xây dựng.",
-      image: "/HomePage/Icons/Icon_3.png"
+      image: "/images/homepage/s/Icon_3.png"
     },
     {
       title: "PHÂN TÍCH MÔI TRƯỜNG",
       detail: "Chúng tôi thực hiện các phân tích môi trường chi tiết để đánh giá tác động của các hoạt động nhân tạo và tự nhiên đối với môi trường xung quanh.",
-      image: "/HomePage/Icons/Icon_4.png"
+      image: "/images/homepage/s/Icon_4.png"
     },
     {
       title: "ĐÀO TẠO VÀ TƯ VẤN DOANH NGHIỆP",
       detail: "Chúng tôi cung cấp các dịch vụ đào tạo và tư vấn cho doanh nghiệp về việc sử dụng công nghệ UAV và ứng dụng trong hoạt động kinh doanh của họ.",
-      image: "/HomePage/Icons/Icon_5.png"
+      image: "/images/homepage/s/Icon_5.png"
     },
     {
       title: "CÁC SẢN PHẨM CHUYÊN DỤNG",
       detail: "Chúng tôi cung cấp các sản phẩm chuyên dụng được tùy chỉnh để đáp ứng các nhu cầu cụ thể của khách hàng trong lĩnh vực công nghệ UAV và ứng dụng của nó.",
-      image: "/HomePage/Icons/Icon_6.png"
+      image: "/images/homepage/s/Icon_6.png"
     },
   ];
   
