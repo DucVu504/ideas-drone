@@ -128,13 +128,13 @@ IdeasDrone/
 │   │   │   ├── AddUser.jsx
 │   │   │   ├── addUser.module.css
 │   │   ├── addProjectForm/
-│   │   │   ├── addProject.jsx
+│   │   │   ├── AddProject.jsx
 │   │   │   ├── addProject.module.css
 │   │   ├── addCompanyForm/
-│   │   │   ├── addCompany.jsx
+│   │   │   ├── AddCompany.jsx
 │   │   │   ├── addCompany.module.css
 │   │   ├── actionButton/
-│   │   │   ├── actionButton.jsx
+│   │   │   ├── ActionButton.jsx
 │   │   │   ├── actionButton.module.css
 │   │   ├── userProfile/
 │   │   │   ├── UserProfile.jsx
