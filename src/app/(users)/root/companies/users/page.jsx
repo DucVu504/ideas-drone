@@ -1,6 +1,6 @@
 
-import DashboardLayout from "../../../../../components/userpage/root/DashboardLayout"
-import Users from "../../../../../components/userpage/root/Companies/Users/Users";
+import DashboardLayout from "../../../../../components/userpage(draft)/root/DashboardLayout"
+import Users from "../../../../../components/userpage(draft)/root/Companies/Users/Users";
 
 import React from "react";
 

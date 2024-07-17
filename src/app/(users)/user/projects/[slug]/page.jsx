@@ -1,6 +1,6 @@
 
-import CesiumMap from '../../../../../components/projectpage/CesiumViewer';
-import ToolBox from '../../../../../components/projectpage/Toolbar';
+import CesiumMap from '../../../../../components/projectpage(draft)/CesiumViewer';
+import ToolBox from '../../../../../components/projectpage(draft)/Toolbar';
 
 const Project = () => {
   return (

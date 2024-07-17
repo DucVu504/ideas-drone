@@ -1,10 +1,10 @@
 
-import Navbar from "../../../../components/userpage/users/Navbar";
-import Sidebar from "../../../../components/userpage/users/Sidebar";
-import Mainboard from "../../../../components/userpage/users/Mainboard";
-import Mainboard_ad from "../../../../components/userpage/admin/Mainboard_admin";
-import UserProfile from "../../../../components/userpage/shared/UserProfile";
-import ContactForm from "../../../../components/userpage/users/Contact";
+import Navbar from "../../../../components/userpage(draft)/users/Navbar";
+import Sidebar from "../../../../components/userpage(draft)/users/Sidebar";
+import Mainboard from "../../../../components/userpage(draft)/users/Mainboard";
+import Mainboard_ad from "../../../../components/userpage(draft)/admin/Mainboard_admin";
+import UserProfile from "../../../../components/userpage(draft)/shared/UserProfile";
+import ContactForm from "../../../../components/userpage(draft)/users/Contact";
 import React from "react";
 
 const User = () => {

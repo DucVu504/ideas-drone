@@ -1,7 +1,7 @@
 
-import Navbar from "../../../../components/userpage/users/Navbar";
-import Sidebar_admin from "../../../../components/userpage/admin/Sidebar_admin";
-import Mainboard_ad from "../../../../components/userpage/admin/Mainboard_admin";
+import Navbar from "../../../../components/userpage(draft)/users/Navbar";
+import Sidebar_admin from "../../../../components/userpage(draft)/admin/Sidebar_admin";
+import Mainboard_ad from "../../../../components/userpage(draft)/admin/Mainboard_admin";
 import React from "react";
 
 const User = () => {

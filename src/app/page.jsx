@@ -1,13 +1,12 @@
 
-import Hero from "../components/homepage/hero/Hero";
-import ShortInfo from "../components/homepage/short_intro/ShortIntro";
-import Project from "../components/homepage/projects/Projects";
-import Service from "../components/homepage/service_info/Service";
-import Equipment from "../components/homepage/equipment/Equipment";
-import Contact from "../components/homepage/contact/Contact";
-import SocialMediaIcons from "../components/shared/quickcontact/SocialMediaIcons";
-import Navbar from "../components/homepage/navbar/Navbar";
-import Footer from "../components/homepage/footer/Footer";
+import Hero from "../components/pages/home/hero/Hero";
+import ShortInfo from "../components/pages/home/intro/Intro";
+import Project from "../components/pages/home/projects/Projects";
+import Service from "../components/pages/home/services/Services";
+import Equipment from "../components/pages/home/equipments/Equipments";
+import Contact from "../components/pages/home/contact/Contact";
+import SocialMediaIcons from "../components/common/socialMedia/SocialMedia";
+import HomeLayout from "../components/layout/homeLayout/HomeLayout";
 // import { useTranslation } from 'next-i18next';
 
 export default function Home() {
@@ -15,15 +14,15 @@ export default function Home() {
   return (
     <div>
       {/* <h1>{t('welcome')}</h1> */}
-      <Navbar/>
-      <Hero/>
-      <ShortInfo/>
-      <Project />
-      <Service/>
-      <Equipment/>
-      <Contact/>
-      <SocialMediaIcons/>
-      <Footer/>
+      <HomeLayout>
+        <Hero/>
+        <ShortInfo/>
+        <Project />
+        <Service/>
+        <Equipment/>
+        <Contact/>
+        <SocialMediaIcons/>
+      </HomeLayout>
     </div>
   );
 }

@@ -152,9 +152,15 @@ IdeasDrone/
 │   │   ├── sidebar/
 │   │   │   ├── Sidebar.jsx
 │   │   │   ├── sidebar.module.css
-│   │   ├── mainLayout/
-│   │   │   ├── MainLayout.jsx
-│   │   │   ├── mainLayout.module.css
+│   │   ├── rootLayout/
+│   │   │   ├── RootLayout.jsx
+│   │   │   ├── rootLayout.module.css
+│   │   ├── adminLayout/
+│   │   │   ├── AdminLayout.jsx
+│   │   │   ├── adminLayout.module.css
+│   │   ├── userLayout/
+│   │   │   ├── UserLayout.jsx
+│   │   │   ├── userLayout.module.css
 │   ├── /pages
 │   │   ├── /home
 │   │   │   ├── hero/
@@ -178,11 +184,13 @@ IdeasDrone/
 │   │   │   ├── quotes/
 │   │   │   │   ├── Quotes.jsx
 │   │   │   │   ├── quotes.module.css
-
 │   │   ├── /login
 │   │   │   ├── login/
 │   │   │   │   ├── Login.jsx
 │   │   │   │   ├── login.module.css
+│   │   │   ├── resetPassword/
+│   │   │   │   ├── ResetPassword.jsx
+│   │   │   │   ├── resetPassword.module.css
 │   │   ├── /users
 │   │   │   ├── root/
 │   │   │   │   ├── companies/
@@ -200,8 +208,13 @@ IdeasDrone/
 │   │   │   │   ├── allUsers/
 │   │   │   │   │   ├── empty
 │   │   │   ├── admin/
+│   │   │   │   ├── dashboard/
+│   │   │   │   │   ├── Dashboard.jsx
+│   │   │   │   │   ├── dashboard.module.css/
 │   │   │   ├── user/
-│   │   │   ├── common/
+│   │   │   │   ├── dashboard/
+│   │   │   │   │   ├── Dashboard.jsx
+│   │   │   │   │   ├── dashboard.module.css/
 │   ├── /utils
 │   │   ├── fetchData.js
 │   │   ├── formatDate.js

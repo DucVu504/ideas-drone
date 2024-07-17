@@ -1,6 +1,6 @@
 "use client"
-import React, { useState } from 'react';
-import LoginForm from '../../../components/login/LoginForm';
+import React from 'react';
+import LoginForm from '../../../components/pages/login/login/Login';
 import { BrowserRouter } from 'react-router-dom';
 
 export default function Login() {
