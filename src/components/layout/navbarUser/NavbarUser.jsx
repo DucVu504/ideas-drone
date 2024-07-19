@@ -1,4 +1,5 @@
 import Image from 'next/image'
+// import LanguageSwicher from '@/components/common/languageSwicher/LanguageSwicher';
 const NavbarUser = () => {
 
     return (
@@ -9,9 +10,10 @@ const NavbarUser = () => {
                 <Image src="/images/common/Logo_main.png" alt="Home" width={130} height={30} className="items-center" />
                 </a>
                 <div className="flex items-center space-x-4 border rounded-md py-1 px-2 shadow-md">
-                <p>Vũ Văn Đức</p>
+                    <p>Vũ Văn Đức</p>
                 <img className="w-8 h-8 rounded-md" src="/images/common/default_avartar.jpg" alt="user photo"/>
                 </div>
+
             </div>
         </nav>
   
