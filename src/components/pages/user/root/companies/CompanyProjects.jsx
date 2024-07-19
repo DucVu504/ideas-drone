@@ -1,9 +1,10 @@
 "use client"
-import { useState} from 'react';
+import { useState, useEffect} from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import ActionButton from '../../../../common/actionButton/ActionButton';
-import AddProjectForm from '../../../../common/addProjectForm/AddProjectForm';
+import Link from 'next/link';
+import ActionButton from '@/components/common/actionButton/ActionButton';
+import AddProjectForm from '@/components/common/addProjectForm/AddProjectForm';
 
 
 
@@ -86,14 +87,16 @@ const CompanyProjects = () => {
             <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
                 <div className="bg-white  relative shadow-md sm:rounded-lg overflow-hidden">
                     <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-                        <div class="flex items-center p-2 space-x-2 text-sm text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm sm:text-base  sm:space-x-4 ">
-                            <li class="flex items-center hover:text-blue-600 ">
-                                CÔNG TY IDEASDRONE
-                                <svg class="w-3 h-3 ms-2 sm:ms-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m7 9 4-4-4-4M1 9l4-4-4-4"/>
-                                </svg>
-                            </li>
-                            <li class="flex items-center">
+                        <div className="flex items-center p-2 space-x-2 text-sm text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm sm:text-base  sm:space-x-4 ">
+                            <Link href="/root/companies">
+                                <li className="flex items-center hover:text-blue-600 group">
+                                    CÔNG TY IDEASDRONE
+                                    <svg className="w-3 h-3 ms-2 sm:ms-4 rtl:rotate-0 group-hover:rotate-180 transition-transform" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 10">
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m7 9 4-4-4-4M1 9l4-4-4-4"/>
+                                    </svg>
+                                </li>
+                            </Link>
+                            <li className="flex items-center">
                                 Dự án
                             </li>
                         </div>

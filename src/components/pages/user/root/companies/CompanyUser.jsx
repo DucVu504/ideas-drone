@@ -1,15 +1,46 @@
 "use client"
-import { useState} from 'react';
+import { useState, useEffect} from 'react';
 import { useRouter } from 'next/navigation';
 import { FaUserTie, FaUserEdit, FaUser } from 'react-icons/fa';
-import ActionButton from '../../../../common/actionButton/ActionButton';
-import AddUser from '../../../../common/addUserForm/AddUserForm';
-import EditUser from '../../../../common/editUser/EditUser';
+import Link from 'next/link';
+import ActionButton from '@/components/common/actionButton/ActionButton';
+import AddUser from '@/components/common/addUserForm/AddUserForm';
+import EditUser from '@/components/common/editUser/EditUser';
 
 
-const CompanyUsers = () => {
-    const [sortConfig, setSortConfig] = useState({ key: 'productName', direction: 'ascending' });
+const fetchUsers = async (slug) => {
+    try {
+      const response = await fetch(`YOUR_API_ENDPOINT/${slug}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+      return []; // Return an empty array in case of error
+    }
+  };
 
+const CompanyUsers = ({ slug }) => {
+    
+    // Get users
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
+  
+    // Fetch users when the component mounts
+    useEffect(() => {
+      const getUsers = async () => {
+          const data = await fetchUsers(slug);
+          setUsers(data);
+          setLoading(false);
+        };
+        
+        getUsers();
+    }, [slug]);
+
+
+    // TODO: Replace this with the actual data from the API
     const products = [
         { name: 'NGUYỄN VĂN A', role: 'Quản trị viên', email: 'nguyenA@gmail.com', modified_time: '02/07/2024', status: true },
         { name: 'NGUYỄN VĂN B', role: 'Người xem', email: 'nguyenB@gmail.com', modified_time: '200', status: false },
@@ -20,9 +51,10 @@ const CompanyUsers = () => {
         { name: 'NGUYỄN VĂN C', role: 'Người chỉnh sửa', email: 'nguyenC@gmail.com', modified_time: '200', status: false },
         { name: 'NGUYỄN VĂN C', role: 'Người chỉnh sửa', email: 'nguyenC@gmail.com', modified_time: '200', status: false },
     ];
-
+    
+    const [sortConfig, setSortConfig] = useState({ key: 'productName', direction: 'ascending' });
     const totalRows = products.length;
-
+    
     const sortedProducts = [...products].sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
             return sortConfig.direction === 'ascending' ? -1 : 1;
@@ -43,14 +75,6 @@ const CompanyUsers = () => {
 
     const router = useRouter();
 
-    const handleEditClick = (id) => {
-      router.push(`/edit/${id}`);
-    };
-  
-    const handleViewClick = (id) => {
-      router.push(`/view/${id}`);
-    };
-
     // Control Add User Modal
     const [isOpen, setIsOpen] = useState(false);
     const toggleModal = () => {
@@ -70,14 +94,16 @@ const CompanyUsers = () => {
             <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
                 <div className="bg-white  relative shadow-md sm:rounded-lg overflow-hidden">
                     <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-                        <div class="flex items-center p-2 space-x-2 text-sm text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm sm:text-base  sm:space-x-4 ">
-                            <li class="flex items-center hover:text-blue-600 ">
-                                CÔNG TY IDEASDRONE
-                                <svg class="w-3 h-3 ms-2 sm:ms-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m7 9 4-4-4-4M1 9l4-4-4-4"/>
-                                </svg>
-                            </li>
-                            <li class="flex items-center">
+                        <div className="flex items-center p-2 space-x-2 text-sm text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm sm:text-base  sm:space-x-4 ">
+                            <Link href="/root/companies">
+                                <li className="flex items-center hover:text-blue-600 group">
+                                    CÔNG TY IDEASDRONE
+                                    <svg className="w-3 h-3 ms-2 sm:ms-4 rtl:rotate-0 group-hover:rotate-180 transition-transform" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 10">
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m7 9 4-4-4-4M1 9l4-4-4-4"/>
+                                    </svg>
+                                </li>
+                            </Link>
+                            <li className="flex items-center">
                                 Người dùng
                             </li>
                         </div>

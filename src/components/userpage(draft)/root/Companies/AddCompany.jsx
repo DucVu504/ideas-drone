@@ -55,7 +55,7 @@ const AddCompany = ({ isOpen, onClose }) => {
                   </div>
                 </div>
                 <div>
-                  <div class="flex items-center justify-center w-full">
+                  <div className="flex items-center justify-center w-full">
                       <Image
                         src="/UserPages/ProjectPictures/project_makeup.png"
                         alt="User avatar"

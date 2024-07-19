@@ -1,13 +1,45 @@
 "use client"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 import AddCompanyForm from '../../../../common/addCompanyForm/AddCompanyForm';
 
+
+
+const fetchCompanies = async () => {
+    try {
+      const response = await fetch('YOUR_API_ENDPOINT');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+    }
+  };
+
 const Companies = () => {
     
     // Call API to get companies
+    // State to store fetched companies
+    const [companies_test, setCompanies] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    // Fetch companies when the component mounts
+    useEffect(() => {
+        const getCompanies = async () => {
+        const data = await fetchCompanies();
+        setCompanies(data);
+        setLoading(false);
+        };
+
+        getCompanies();
+    }, []);
+
+
+    //TODO: Replace the following mock data with the real data from the API
     const companies = [
         { name: 'CÔNG TY CỔ PHẦN BÁCH VIỆT', slug: "bach-viet", country: '🇻🇳', address: '153 Ung văn Khiêm phương 25 quận Bình Thạnh, TPHCM', modified_time: '02/07/2024', is_disable: true },
         { name: 'CÔNG TY TNHH 1 THÀNH VIÊN IDEASDRONE',slug: "ideas-drone", country: '🇻🇳', address: '380 Nguyễn Thị Tú phương Bình Hưng Hoà B quận Bình Tân', modified_time: '200', is_disable: false },
@@ -32,16 +64,8 @@ const Companies = () => {
         setSortConfig({ key, direction });
     };
 
-    // Handle View User and Project
-    const router = useRouter();
-    const handleViewUsers = (id) => {
-      router.push(`/edit/${id}`);
-    };
-    const handleViewProjects = (id) => {
-      router.push(`/view/${id}`);
-    };
 
-    // Control Add User Modal
+    // Control Add Company Modal
     const [isOpen, setIsOpen] = useState(false);
     const toggleModal = () => {
         setIsOpen(!isOpen);

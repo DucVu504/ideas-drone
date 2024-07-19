@@ -50,12 +50,20 @@ const AddCompanyForm = ({ isOpen, onClose }) => {
                     <input type="text" name="lastName" id="lastName" className="border-b border-gray-300 text-gray-900 text-sm focus:ring-primary-600 focus:border-primary-600 block w-full p-2" placeholder="Tỉnh/ Thành phố" required />
                   </div>
                   <div className='py-4'>
-                    <label htmlFor="lastName" className="block mb-1 text-sm font-medium text-gray-900">Quốc gia</label>
-                    <input type="text" name="lastName" id="lastName" className="border-b border-gray-300 text-gray-900 text-sm focus:ring-primary-600 focus:border-primary-600 block w-full p-2" placeholder="Quốc gia" required />
+                    <label htmlFor="country" className="block mb-1 text-sm font-medium text-gray-900">Quốc gia</label>
+                      <select name="country" id="country" className="border-b border-gray-300 text-gray-900 text-sm focus:ring-primary-600 focus:border-primary-600 block w-full p-2" required>
+                        <option value="">Chọn quốc gia</option>
+                        <option value="VN">Việt Nam</option>
+                        <option value="US">Hoa Kỳ</option>
+                        <option value="JP">Nhật Bản</option>
+                        <option value="KR">Hàn Quốc</option>
+                        <option value="UK">Vương Quốc Anh</option>
+                        {/* <!-- Thêm các quốc gia khác tại đây --> */}
+                    </select>
                   </div>
-                </div>
+                </div>  
                 <div>
-                  <div class="flex items-center justify-center w-full">
+                  <div className="flex items-center justify-center w-full">
                       <Image
                         src="/UserPages/ProjectPictures/project_makeup.png"
                         alt="User avatar"
@@ -64,7 +72,7 @@ const AddCompanyForm = ({ isOpen, onClose }) => {
                       />
                   </div> 
                 </div>
-
+      
               </div>
               <div className="flex justify-end space-x-4">
                 <button type="button" className="text-gray-600 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5" onClick={onClose}>Không lưu</button>
