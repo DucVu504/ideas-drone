@@ -1,15 +1,15 @@
 import React from 'react';
-import NavbarRoot from "./NavbarRoot";
-import SidebarRoot from "./SidebarRoot";
+import NavbarUser from "../navbarUser/NavbarUser";
+import SidebarRoot from "../sidebarRoot/SidebarRoot";
 
-const AdminLayout = ({ children }) => {
+const RootLayout = ({ children }) => {
   return (
     <div className="bg-gray-50 min-h-screen">
       <SidebarRoot />
-      <NavbarRoot />
+      <NavbarUser />
       <div>{children}</div>
     </div>
   );
 };
 
-export default AdminLayout;
+export default RootLayout;

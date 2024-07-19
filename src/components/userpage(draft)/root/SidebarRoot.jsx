@@ -7,7 +7,7 @@ const Sidebar = () => {
 
    return (
          <div className='fixed mt-20'>
-            <aside id="logo-sidebar" className=" top-0 left-0 z-40 w-36 pt-2 h-screen transition-transform -translate-x-full bg-white  sm:translate-x-0" aria-label="Sidebar">
+            <aside id="logo-sidebar" className=" top-0 left-0 z-40 w-36 pt-2 h-screen transition-transform -translate-x-full bg-yellow-200  sm:translate-x-0" aria-label="Sidebar">
                <div className="h-full px-3 pb-4 overflow-y-auto bg-white ">
                   <ul className="space-y-2 font-medium">
                      <li>

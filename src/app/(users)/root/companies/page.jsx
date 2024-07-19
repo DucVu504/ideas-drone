@@ -1,16 +1,16 @@
 
-import DashboardLayout from "../../../../components/userpage(draft)/root/DashboardLayout"
-import Companies from "../../../../components/userpage(draft)/root/Companies/Companies";
+import RootLayout from "@/components/layout/rootLayout/RootLayout";
+import Companies from "@/components/pages/user/root/companies/Companies";
 
 import React from "react";
 
-const CompaniesDashboard = () => {
+const CompaniesPage = () => {
 
   return (
-    <DashboardLayout>
+    <RootLayout>
       <Companies/>
-    </DashboardLayout>
+    </RootLayout>
   );
 };
 
-export default CompaniesDashboard;
+export default CompaniesPage;

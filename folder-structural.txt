@@ -194,15 +194,10 @@ IdeasDrone/
 │   │   ├── /users
 │   │   │   ├── root/
 │   │   │   │   ├── companies/
-│   │   │   │   │   ├── companies/
-│   │   │   │   │   │   ├── Companies.jsx/
-│   │   │   │   │   │   ├── companies.module.css/
-│   │   │   │   │   ├── projects/
-│   │   │   │   │   │   ├── Projects.jsx/
-│   │   │   │   │   │   ├── projects.module.css/
-│   │   │   │   │   ├── users/
-│   │   │   │   │   │   ├── Users.jsx/
-│   │   │   │   │   │   ├── users.module.css/
+│   │   │   │   │   ├── Companies.jsx/
+│   │   │   │   │   ├── CompanyProjects.jsx/
+│   │   │   │   │   ├── CompanyUsers.jsx/
+│   │   │   │   │   ├── companies.module.css/
 │   │   │   │   ├── allProjects/
 │   │   │   │   │   ├── empty
 │   │   │   │   ├── allUsers/
