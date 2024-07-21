@@ -4,7 +4,7 @@ const NavbarUser = () => {
 
     return (
     
-        <nav className="content-center z-50 h-16 w-full bg-white border-b border-gray-200">
+        <nav className="fixed content-center h-16 w-full bg-white border-b border-gray-200">
             <div className="flex justify-between items-center px-10">
                 <a href="/">
                 <Image src="/images/common/Logo_main.png" alt="Home" width={130} height={30} className="items-center" />

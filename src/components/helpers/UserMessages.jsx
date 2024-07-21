@@ -1,8 +1,18 @@
-import { useIntl } from 'react-intl';
+"use client"
+import { useRouter } from 'next/navigation';
+import enCommon from '../locales/en/common.json';
+import enHomepage from '../locales/en/homepage.json';
+import viCommon from '../locales/vi/common.json';
+import viHomepage from '../locales/vi/homepage.json';
+
+const messages = {
+  en: { ...enCommon, ...enHomepage },
+  vi: { ...viCommon, ...viHomepage },
+};
 
 const useMessages = (namespace) => {
-  const intl = useIntl();
-  return (id, values = {}) => intl.formatMessage({ id: `${namespace}.${id}` }, values);
+  const { locale } = useRouter();
+  return (id) => messages[locale][`${namespace}.${id}`];
 };
 
 export default useMessages;

@@ -83,8 +83,8 @@ const CompanyProjects = () => {
     };
 
     return (
-        <section className="bg-gray-50  p-3 sm:p-5">
-            <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
+        <section className="bg-gray-50  p-3 sm:p-5 lg:ml-36">
+            <div className="mx-auto max-w-screen-xl px-4 lg:mt-16">
                 <div className="bg-white  relative shadow-md sm:rounded-lg overflow-hidden">
                     <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                         <div className="flex items-center p-2 space-x-2 text-sm text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm sm:text-base  sm:space-x-4 ">

@@ -1,31 +1,46 @@
 "use client"
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
+import {CompanyIdContext} from '@/components/helpers/CompanyIdContext';
 
-import AddCompanyForm from '../../../../common/addCompanyForm/AddCompanyForm';
+
+import AddCompanyForm from '@/components/common/addCompanyForm/AddCompanyForm';
+import slugify from '@/components/utils/slugify';
 
 
 
 const fetchCompanies = async () => {
     try {
-      const response = await fetch('YOUR_API_ENDPOINT');
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:3002/company/get-all', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      return data;
+      return data['Data'];
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }
   };
 
+function createFullAddress(addressLine1, addressLine2, city) {
+    const parts = [addressLine1, addressLine2].filter(Boolean);
+    return `${parts.join(', ')}, ${city}`;
+}
+
+
 const Companies = () => {
     
     // Call API to get companies
     // State to store fetched companies
-    const [companies_test, setCompanies] = useState([]);
+    const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const { updateCompanyId } = useContext(CompanyIdContext);
 
     // Fetch companies when the component mounts
     useEffect(() => {
@@ -39,12 +54,6 @@ const Companies = () => {
     }, []);
 
 
-    //TODO: Replace the following mock data with the real data from the API
-    const companies = [
-        { name: 'CÔNG TY CỔ PHẦN BÁCH VIỆT', slug: "bach-viet", country: '🇻🇳', address: '153 Ung văn Khiêm phương 25 quận Bình Thạnh, TPHCM', modified_time: '02/07/2024', is_disable: true },
-        { name: 'CÔNG TY TNHH 1 THÀNH VIÊN IDEASDRONE',slug: "ideas-drone", country: '🇻🇳', address: '380 Nguyễn Thị Tú phương Bình Hưng Hoà B quận Bình Tân', modified_time: '200', is_disable: false },
-        ];
-        
     // Handle sorting
     const [sortConfig, setSortConfig] = useState({ key: 'companyName', direction: 'ascending' });
     const sortedCompanies = [...companies].sort((a, b) => {
@@ -64,17 +73,19 @@ const Companies = () => {
         setSortConfig({ key, direction });
     };
 
-
     // Control Add Company Modal
     const [isOpen, setIsOpen] = useState(false);
     const toggleModal = () => {
         setIsOpen(!isOpen);
     };
 
+    const addCompany = (newCompany) => {
+        setCompanies([...companies, newCompany]);
+      };
 
     return (
-        <section className="bg-gray-50  p-3 sm:p-5">
-            <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
+        <section className="bg-gray-50  p-3 sm:p-5 lg:ml-36">
+            <div className="mx-auto max-w-screen-xl px-4 lg:mt-16">
                 <div className="bg-white  relative shadow-md sm:rounded-lg overflow-hidden">
                     <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                         <div className="w-full md:w-1/2">
@@ -104,62 +115,61 @@ const Companies = () => {
                         <table className="w-full text-sm text-left text-gray-500">
                             <thead className="text-sm text-gray-700 uppercase bg-gradient-to-r from-lime-200 to-lime-100 ">
                                 <tr>
-                                    <th scope="col" className="px-4 py-3">
-                                        <button type="button" onClick={() => requestSort('name')}>
-                                            TÊN CÔNG TY {sortConfig.key === 'name' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
-                                        </button>
-                                    </th>
-                                    <th scope="col" className="px-4 py-3 w-[130px]">
-                                        <button type="button" onClick={() => requestSort('country')}>
-                                            QUỐC GIA {sortConfig.key === 'country' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                    <th scope="col" className="px-4 py-3 w-72">
+                                        <button type="button" onClick={() => requestSort('Name')}>
+                                            TÊN CÔNG TY {sortConfig.key === 'Name' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3">
-                                        <button type="button" onClick={() => requestSort('address')}>
-                                            ĐỊA CHỈ {sortConfig.key === 'address' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                        <button type="button" onClick={() => requestSort('AddressLine1')}>
+                                            ĐỊA CHỈ {sortConfig.key === 'AddressLine1' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
-                                    <th scope="col" className="px-4 py-3 w-[180px]">
-                                        <button type="button" onClick={() => requestSort('modified_time')}>
-                                            NGÀY CẬP NHẬT {sortConfig.key === 'modified_time' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                    <th scope="col" className="px-4 py-3 w-32">
+                                        <button type="button" onClick={() => requestSort('Country')}>
+                                            QUỐC GIA {sortConfig.key === 'Country' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
-                                    <th scope="col" className="px-4 py-3 w-[150px]">
-                                        <button type="button" onClick={() => requestSort('is_disable')}>
-                                            TRẠNG THÁI {sortConfig.key === 'is_disable' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                    <th scope="col" className="px-4 py-3 w-48">
+                                        <button type="button" onClick={() => requestSort('ModifiedTime')}>
+                                            NGÀY CẬP NHẬT {sortConfig.key === 'ModifiedTime' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
-                                    <th scope="col" className="px-4 py-3 w-[130px]">
+                                    <th scope="col" className="px-4 py-3 w-40">
+                                        <button type="button" onClick={() => requestSort('IsDisabled')}>
+                                            TRẠNG THÁI {sortConfig.key === 'IsDisabled' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                        </button>
+                                    </th>
+                                    <th scope="col" className="px-4 py-3 w-32">
                                             NGƯỜI DÙNG
                                     </th>
-                                    <th scope="col" className="px-4 py-3 w-[100px]">
+                                    <th scope="col" className="px-4 py-3 w-24">
                                             DỰ ÁN
                                     </th>
-
                                 </tr>
                             </thead>
                             <tbody>
                                 {sortedCompanies.map((company, index) => (
                                     <tr key={index} className="border-b hover:bg-slate-50">
-                                        <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
-                                            {company.name}
+                                        <th scope="row" className="px-4 py-3 w-12 font-medium text-gray-900">
+                                            {company.Name}
                                         </th>
-                                        <td className="px-4 py-3">{company.country}</td>
-                                        <td className="px-4 py-3">{company.address}</td>
-                                        <td className="px-4 py-3">{company.modified_time}</td>
+                                        <td className="px-4 py-3">{createFullAddress(company.AddressLine2, company.AddressLine1, company.City)}</td>
+                                        <td className="px-4 py-3">{company.Country}</td>
+                                        <td className="px-4 py-3">{company.ModifiedTime}</td>
                                         <td className="px-4 py-3">
-                                            <div className={`h-4 w-4 rounded-md ${company.is_disable ? 'bg-red-500' : 'bg-green-500'}`}></div>
+                                            <div className={`h-4 w-4 rounded-md ${company.IsDisabled ? 'bg-red-500' : 'bg-green-500'}`}></div>
                                         </td>
                                         <td className="px-6 py-3">
-                                            <Link href={`/root/companies/users/${company.slug}`} passHref>
+                                            <Link href={`/root/companies/users/${slugify(company.Name)}`} passHref>
                                                 <button
-                                                className="border text-black hover:text-blue-700 px-2 py-1 rounded mr-2">
+                                                className="border text-black hover:text-blue-700 px-2 py-1 rounded mr-2" onClick={() => updateCompanyId(company.Name)} >
                                                 Xem
                                                 </button>
                                             </Link>
                                         </td>
                                         <td className="px-6 py-3">
-                                            <Link href={`/root/companies/projects/${company.slug}`} passHref>
+                                            <Link href={`/root/companies/projects/${slugify(company.Name)}`} passHref>
                                             <button
                                              className="border text-black hover:text-blue-700 px-2 py-1 rounded">
                                                 Xem
@@ -175,7 +185,7 @@ const Companies = () => {
                     
                 </div>
             </div>
-            <AddCompanyForm isOpen={isOpen} onClose={toggleModal} />
+            <AddCompanyForm isOpen={isOpen} onClose={toggleModal} onAddCompany={addCompany} />
         </section>
     );
 };

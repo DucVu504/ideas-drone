@@ -1,9 +1,9 @@
+"use client"
 import Head from 'next/head';
-// import { appWithTranslation } from 'next-i18next';
-import en from '/locales/en.json';
-import vi from '/locales/vi.json';
+import { appWithTranslation } from 'next-i18next';
 import { Inter } from 'next/font/google';
 import '../styles/globals.css';
+
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,4 +25,4 @@ function RootLayout({ children }) {
   );
 }
 
-export default RootLayout;
+export default appWithTranslation(RootLayout);

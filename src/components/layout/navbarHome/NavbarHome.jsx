@@ -4,6 +4,7 @@ import Links from "./Link"
 import Link from "next/link"
 import Image from "next/image"
 import styles from "./navbar.module.css"
+import LocaleSwitcher from "../../common/localeSwicher/LocaleSwitcher";
 
 const NavbarHome = () => {
     const [isSticky, setIsSticky] = useState(false);
@@ -22,6 +23,7 @@ const NavbarHome = () => {
     
     return (
       <nav className={`${styles[`nav-container`]} bg-opacity-5`}>
+      <LocaleSwitcher/>
         <nav className={`bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200 relative z-10 px-8`}>
           <div className="max-w-screen-xxl flex flex-wrap items-center justify-between mx-auto p-1">
             <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse ">

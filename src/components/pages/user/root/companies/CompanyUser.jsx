@@ -1,61 +1,78 @@
 "use client"
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useContext} from 'react';
 import { useRouter } from 'next/navigation';
 import { FaUserTie, FaUserEdit, FaUser } from 'react-icons/fa';
 import Link from 'next/link';
 import ActionButton from '@/components/common/actionButton/ActionButton';
 import AddUser from '@/components/common/addUserForm/AddUserForm';
 import EditUser from '@/components/common/editUser/EditUser';
+import {CompanyIdContext} from '@/components/helpers/CompanyIdContext';
 
 
-const fetchUsers = async (slug) => {
+const fetchUsers = async (company_id) => {
     try {
-      const response = await fetch(`YOUR_API_ENDPOINT/${slug}`);
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:3002/company/get-all-users/${company_id}`,{
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+
+      }
+    });
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      return data;
+      console.log(data);
+      return data['Data'];
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
       return []; // Return an empty array in case of error
     }
   };
 
-const CompanyUsers = ({ slug }) => {
+const CompanyUsers = () => {
     
     // Get users
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
+    // const company_id = 'cea48531-5ce0-46dc-afd6-f5ffce7a1520';
+    const { company_id } = useContext(CompanyIdContext);
+
+    console.log(company_id);
   
     // Fetch users when the component mounts
     useEffect(() => {
       const getUsers = async () => {
-          const data = await fetchUsers(slug);
+          const data = await fetchUsers(company_id);
           setUsers(data);
           setLoading(false);
         };
         
         getUsers();
-    }, [slug]);
+    }, []);
 
+    // Join user name
+    function getFullName(firstName, middleName, lastName) {
+        if (middleName) {
+            return `${firstName} ${middleName} ${lastName}`;
+        }
+        return `${firstName} ${lastName}`;
+    }
 
-    // TODO: Replace this with the actual data from the API
-    const products = [
-        { name: 'NGUYỄN VĂN A', role: 'Quản trị viên', email: 'nguyenA@gmail.com', modified_time: '02/07/2024', status: true },
-        { name: 'NGUYỄN VĂN B', role: 'Người xem', email: 'nguyenB@gmail.com', modified_time: '200', status: false },
-        { name: 'NGUYỄN VĂN B', role: 'Người xem', email: 'nguyenB@gmail.com', modified_time: '200', status: false },
-        { name: 'NGUYỄN VĂN B', role: 'Người xem', email: 'nguyenB@gmail.com', modified_time: '200', status: false },
-        { name: 'NGUYỄN VĂN C', role: 'Người chỉnh sửa', email: 'nguyenC@gmail.com', modified_time: '200', status: false },
-        { name: 'NGUYỄN VĂN C', role: 'Người chỉnh sửa', email: 'nguyenC@gmail.com', modified_time: '200', status: false },
-        { name: 'NGUYỄN VĂN C', role: 'Người chỉnh sửa', email: 'nguyenC@gmail.com', modified_time: '200', status: false },
-        { name: 'NGUYỄN VĂN C', role: 'Người chỉnh sửa', email: 'nguyenC@gmail.com', modified_time: '200', status: false },
-    ];
+    // Handle set role
+    function setRole(is_admin) {
+        if (is_admin) {
+            return 'Quản trị viên';
+        }
+        return 'Người chỉnh sửa';
+    }
+
     
     const [sortConfig, setSortConfig] = useState({ key: 'productName', direction: 'ascending' });
-    const totalRows = products.length;
+    const totalRows = users.length;
     
-    const sortedProducts = [...products].sort((a, b) => {
+    const sortedUsers = [...users].sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
             return sortConfig.direction === 'ascending' ? -1 : 1;
         }
@@ -90,8 +107,8 @@ const CompanyUsers = ({ slug }) => {
     };
 
     return (
-        <section className="bg-gray-50  p-3 sm:p-5">
-            <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
+        <section className="bg-gray-50  p-3 sm:p-5 lg:ml-36">
+            <div className="mx-auto max-w-screen-xl px-4 lg:mt-16">
                 <div className="bg-white  relative shadow-md sm:rounded-lg overflow-hidden">
                     <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                         <div className="flex items-center p-2 space-x-2 text-sm text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm sm:text-base  sm:space-x-4 ">
@@ -157,35 +174,35 @@ const CompanyUsers = ({ slug }) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {sortedProducts.map((users, index) => (
+                                {sortedUsers.map((user, index) => (
                                     <tr key={index} className="border-b hover:bg-slate-50">
                                         <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
-                                            {users.name}
+                                            {getFullName(user.FirstName, user.MiddleName, user.LastName)}
                                         </th>
                                         <td className="px-4 py-3">
-                                            {users.role === 'Quản trị viên' && (
+                                            {setRole(user.IsAdmin) === 'Quản trị viên' && (
                                             <div className="bg-blue-100 text-blue-800 px-1 rounded flex items-center">
                                                 <FaUserTie className="mr-2" />Quản trị viên
                                             </div>
                                             )}
-                                            {users.role === 'Người chỉnh sửa' && (
+                                            {setRole(user.IsAdmin) === 'Người chỉnh sửa' && (
                                             <div className="bg-violet-200 text-violet-800 px-1 rounded flex items-center">
                                                 <FaUserEdit className="mr-2" />Người chỉnh sửa
                                             </div>
                                             )}
-                                            {users.role === 'Người xem' && (
+                                            {setRole(user.IsAdmin)=== 'Người xem' && (
                                             <div className="bg-gray-200 text-black px-1 rounded flex items-center">
                                                 <FaUser className="mr-2" />Người xem
                                             </div>
                                             )}
                                         </td>
-                                        <td className="px-4 py-3">{users.email}</td>
-                                        <td className="px-4 py-3">{users.modified_time}</td>
+                                        <td className="px-4 py-3">{user.Email}</td>
+                                        <td className="px-4 py-3">{user.ModifiedTime}</td>
                                         <td className="px-4 py-3">
-                                            <div className={`h-4 w-4 rounded-md ${users.status ? 'bg-red-500' : 'bg-green-500'}`}></div>
+                                            <div className={`h-4 w-4 rounded-md ${user.status ? 'bg-red-500' : 'bg-green-500'}`}></div>
                                         </td>
                                         <td className="py-2 px-4 border-b relative">
-                                            <ActionButton rowIndex={index} totalRows={totalRows} onEdit={() => handleEditUserClick(users)}/>
+                                            <ActionButton rowIndex={index} totalRows={totalRows} onEdit={() => handleEditUserClick(user)}/>
                                         </td>
 
                                     </tr>

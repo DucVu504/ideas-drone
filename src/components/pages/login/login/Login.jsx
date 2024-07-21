@@ -1,10 +1,10 @@
 "use client"
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 const LoginForm= () => {
-    const navigate = useNavigate();
-    const [email, setEmail] = useState('');
+    const router = useRouter();
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
@@ -13,12 +13,12 @@ const LoginForm= () => {
         setError('');
 
         const loginData = {
-            email: email,
+            username: username,
             password: password,
         };
 
         try {
-            const response = await fetch('https://your-api-url/login', {
+            const response = await fetch('http://localhost:3002/account/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,7 +29,9 @@ const LoginForm= () => {
             if (response.ok) {
                 const data = await response.json();
                 localStorage.setItem('token', data.token);
-                navigate('/dashboard');
+                console.log("my test");
+                console.log(data);
+                router.push('/root/companies');
             } else {
                 const errorData = await response.json();
                 setError(errorData.message || 'Đăng nhập thất bại, vui lòng thử lại.');
@@ -53,16 +55,16 @@ const LoginForm= () => {
                             </h1>
                             <form className="space-y-4 md:space-y-6" onSubmit={handleLogin}>
                                 <div>
-                                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">Nhập email</label>
+                                    <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900 ">Tên đăng nhập</label>
                                     <input 
-                                        type="email" 
-                                        name="email" 
-                                        id="email" 
+                                        type="username" 
+                                        name="username" 
+                                        id="username" 
                                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " 
-                                        placeholder="name@company.com" 
+                                        placeholder="Tên đăng nhập" 
                                         required 
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
                                     />
                                 </div>
                                 <div>
