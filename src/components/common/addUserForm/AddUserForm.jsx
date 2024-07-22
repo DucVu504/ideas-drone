@@ -1,9 +1,20 @@
-"use client"
+"use client";
 
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const AddUserForm = ({ isOpen, onClose }) => {
+  const [formData, setFormData] = useState({
+    Username: '',
+    Password: '',
+    Email: '',
+    FirstName: '',
+    MiddleName: '',
+    LastName: '',
+    IsRoot: false,
+    IsAdmin: false,
+  });
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -11,6 +22,46 @@ const AddUserForm = ({ isOpen, onClose }) => {
       document.body.style.overflow = 'unset';
     }
   }, [isOpen]);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+  
+    if (name === 'role') {
+      setFormData({
+        ...formData,
+        IsAdmin: value === 'admin',
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: type === 'checkbox' ? checked : value,
+      });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('your_api_endpoint', { // Replace 'your_api_endpoint' with your actual API endpoint
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        // Handle success (e.g., display a success message, close the modal)
+        onClose();
+      } else {
+        // Handle error (e.g., display an error message)
+        console.error('Failed to add user');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   return (
     <div>
@@ -35,68 +86,68 @@ const AddUserForm = ({ isOpen, onClose }) => {
                 <span className="sr-only">Close modal</span>
               </button>
             </div>
-            <form action="#">
+            <form onSubmit={handleSubmit}>
               <div className="grid gap-4 mb-4 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="firstName" className="block mb-2 text-sm font-medium text-gray-900">Họ</label>
-                  <input type="text" name="firstName" id="firstName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="John" required />
+                  <label htmlFor="FirstName" className="block mb-2 text-sm font-medium text-gray-900">Họ</label>
+                  <input type="text" name="FirstName" id="FirstName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="John" value={formData.FirstName} onChange={handleChange} required />
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="block mb-2 text-sm font-medium text-gray-900">Tên đệm</label>
-                  <input type="text" name="lastName" id="lastName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Doe" required />
+                  <label htmlFor="MiddleName" className="block mb-2 text-sm font-medium text-gray-900">Tên đệm</label>
+                  <input type="text" name="MiddleName" id="MiddleName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Doe" value={formData.MiddleName} onChange={handleChange} required />
                 </div>
                 <div>
-                  <label htmlFor="firstName" className="block mb-2 text-sm font-medium text-gray-900">Tên</label>
-                  <input type="text" name="firstName" id="firstName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="John" required />
+                  <label htmlFor="LastName" className="block mb-2 text-sm font-medium text-gray-900">Tên</label>
+                  <input type="text" name="LastName" id="LastName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="John" value={formData.LastName} onChange={handleChange} required />
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="block mb-2 text-sm font-medium text-gray-900">Tên đăng nhập</label>
-                  <input type="text" name="lastName" id="lastName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Doe" required />
+                  <label htmlFor="Username" className="block mb-2 text-sm font-medium text-gray-900">Tên đăng nhập</label>
+                  <input type="text" name="Username" id="Username" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Doe" value={formData.Username} onChange={handleChange} required />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Email</label>
-                  <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="name@company.com" required />
+                  <label htmlFor="Email" className="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                  <input type="email" name="Email" id="Email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="name@company.com" value={formData.Email} onChange={handleChange} required />
                 </div>
                 <div>
-                  <label htmlFor="permissions" className="block mb-2 text-sm font-medium text-gray-900">Quyền người dùng</label>
-                  <select id="permissions" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+                  <label htmlFor="permissions" className="block mb-2 text-sm font-medium text-gray-500">Chức vụ</label>
+                  <select name="permissions" id="permissions" className="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5" disabled>
                     <option value="Operational">Quản lý</option>
                     <option value="Operational">Nhân viên</option>
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Mật khẩu</label>
-                  <input type="password" name="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required />
+                  <label htmlFor="Password" className="block mb-2 text-sm font-medium text-gray-900">Mật khẩu</label>
+                  <input type="password" name="Password" id="Password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" value={formData.Password} onChange={handleChange} required />
                 </div>
                 <div>
                   <label htmlFor="confirmPassword" className="block mb-2 text-sm font-medium text-gray-900">Xác nhận mật khẩu</label>
                   <input type="password" name="confirmPassword" id="confirmPassword" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required />
                 </div>
                 <div className="sm:col-span-2">
-                  <label htmlFor="biography" className="block mb-2 text-sm font-medium text-gray-900">Miêu tả</label>
-                  <textarea id="biography" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500" placeholder="Write a message here"></textarea>
+                  <label htmlFor="biography" className="block mb-2 text-sm font-medium text-gray-500">Miêu tả</label>
+                  <textarea id="biography" rows="4" className="block p-2.5 w-full text-sm text-gray-500 bg-gray-100 rounded-lg border border-gray-300" placeholder="Write a message here" disabled></textarea>
                 </div>
                 <div className="sm:col-span-2">
                   <label htmlFor="avatar" className="block mb-2 text-sm font-medium text-gray-900">Tải ảnh</label>
                   <div className="flex items-center space-x-4">
-                    <img className="w-10 h-10 rounded-full" src="https://via.placeholder.com/150" alt="User avatar" />
+                    <img className="w-10 h-10 rounded-md" src="https://via.placeholder.com/150" alt="User avatar" />
                     <input type="file" name="avatar" id="avatar" className="block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer focus:outline-none" />
                   </div>
                 </div>
                 <div className="sm:col-span-2">
-                  <label className="block mb-2 text-sm font-medium text-gray-900">Gán vai trò</label>
+                <label className="block mb-2 text-sm font-medium text-gray-900">Gán vai trò</label>
                   <div className="flex items-center space-x-4">
                     <div>
-                      <input type="radio" name="role" id="admin" className="form-radio text-primary-600" />
+                      <input type="radio" name="role" id="admin" className="form-radio text-primary-600" onChange={handleChange} />
                       <label htmlFor="admin" className="ml-2 text-sm font-medium text-gray-900">Quản trị viên</label>
                     </div>
                     <div>
-                      <input type="radio" name="role" id="member" className="form-radio text-primary-600" />
+                      <input type="radio" name="role" id="member" className="form-radio text-primary-600" onChange={handleChange} />
                       <label htmlFor="member" className="ml-2 text-sm font-medium text-gray-900">Người chỉnh sửa</label>
                     </div>
                     <div>
-                      <input type="radio" name="role" id="viewer" className="form-radio text-primary-600" defaultChecked />
-                      <label htmlFor="viewer" className="ml-2 text-sm font-medium text-gray-900">Người xem</label>
+                      <input type="radio" name="role" id="viewer" className="form-radio text-primary-600" disabled onChange={handleChange} />
+                      <label htmlFor="viewer" className="ml-2 text-sm font-medium text-gray-500">Người xem</label>
                     </div>
                   </div>
                 </div>

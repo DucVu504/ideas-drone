@@ -3,6 +3,8 @@ import Head from 'next/head';
 import { appWithTranslation } from 'next-i18next';
 import { Inter } from 'next/font/google';
 import '../styles/globals.css';
+import {CompanyIdProvider} from '@/components/helpers/CompanyIdContext';
+
 
 
 const inter = Inter({ subsets: ['latin'] });
@@ -18,7 +20,9 @@ function RootLayout({ children }) {
       </Head>
       <html lang="en">
         <body className={inter.className}>
-        {children}
+          <CompanyIdProvider>
+            {children}
+          </CompanyIdProvider>
         </body>
       </html>
     </>

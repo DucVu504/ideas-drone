@@ -5,10 +5,10 @@ import SidebarRoot from "../sidebarRoot/SidebarRoot";
 
 const RootLayout = ({ children }) => {
   return (
-      <div className="bg-gray-50 min-h-screen">
-        <NavbarUser />
-        <SidebarRoot />
-        <div>{children}</div>
+    <div className="bg-gray-50 min-h-screen">
+          <NavbarUser />
+          <SidebarRoot />
+          <div>{children}</div>
       </div>
   );
 };

@@ -3,7 +3,6 @@ import { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 import {CompanyIdContext} from '@/components/helpers/CompanyIdContext';
 
-
 import AddCompanyForm from '@/components/common/addCompanyForm/AddCompanyForm';
 import slugify from '@/components/utils/slugify';
 
@@ -40,12 +39,13 @@ const Companies = () => {
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const { updateCompanyId } = useContext(CompanyIdContext);
+    const { setCompanyId } = useContext(CompanyIdContext);
 
     // Fetch companies when the component mounts
     useEffect(() => {
         const getCompanies = async () => {
         const data = await fetchCompanies();
+
         setCompanies(data);
         setLoading(false);
         };
@@ -163,7 +163,7 @@ const Companies = () => {
                                         <td className="px-6 py-3">
                                             <Link href={`/root/companies/users/${slugify(company.Name)}`} passHref>
                                                 <button
-                                                className="border text-black hover:text-blue-700 px-2 py-1 rounded mr-2" onClick={() => updateCompanyId(company.Name)} >
+                                                className="border text-black hover:text-blue-700 px-2 py-1 rounded mr-2" onClick={() => setCompanyId(company.ID)} >
                                                 Xem
                                                 </button>
                                             </Link>

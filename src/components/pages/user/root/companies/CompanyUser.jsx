@@ -37,14 +37,12 @@ const CompanyUsers = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     // const company_id = 'cea48531-5ce0-46dc-afd6-f5ffce7a1520';
-    const { company_id } = useContext(CompanyIdContext);
+    const { companyId } = useContext(CompanyIdContext);
 
-    console.log(company_id);
-  
     // Fetch users when the component mounts
     useEffect(() => {
       const getUsers = async () => {
-          const data = await fetchUsers(company_id);
+          const data = await fetchUsers(companyId);
           setUsers(data);
           setLoading(false);
         };
@@ -61,6 +59,7 @@ const CompanyUsers = () => {
     }
 
     // Handle set role
+    // Todo: need to improve !!
     function setRole(is_admin) {
         if (is_admin) {
             return 'Quản trị viên';
