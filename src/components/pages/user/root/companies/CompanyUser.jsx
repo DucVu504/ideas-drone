@@ -1,12 +1,11 @@
 "use client"
-import { useState, useEffect, useContext} from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect} from 'react';
+import { useSearchParams } from 'next/navigation';
 import { FaUserTie, FaUserEdit, FaUser } from 'react-icons/fa';
 import Link from 'next/link';
 import ActionButton from '@/components/common/actionButton/ActionButton';
 import AddUser from '@/components/common/addUserForm/AddUserForm';
 import EditUser from '@/components/common/editUser/EditUser';
-import {CompanyIdContext} from '@/components/helpers/CompanyIdContext';
 
 
 const fetchUsers = async (company_id) => {
@@ -37,7 +36,9 @@ const CompanyUsers = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     // const company_id = 'cea48531-5ce0-46dc-afd6-f5ffce7a1520';
-    const { companyId } = useContext(CompanyIdContext);
+
+    const searchParams = useSearchParams()
+    const companyId = searchParams.get('companyId')
 
     // Fetch users when the component mounts
     useEffect(() => {
@@ -67,6 +68,10 @@ const CompanyUsers = () => {
         return 'Người chỉnh sửa';
     }
 
+    const addUser = (newUser) => {
+        setUsers([...users, newUser]);
+      };
+
     
     const [sortConfig, setSortConfig] = useState({ key: 'productName', direction: 'ascending' });
     const totalRows = users.length;
@@ -89,7 +94,6 @@ const CompanyUsers = () => {
         setSortConfig({ key, direction });
     };
 
-    const router = useRouter();
 
     // Control Add User Modal
     const [isOpen, setIsOpen] = useState(false);
@@ -213,7 +217,7 @@ const CompanyUsers = () => {
                 </div>
             </div>
             {isEditing && <EditUser user={currentUser} onClose={() => setIsEditing(false)} />}
-            <AddUser isOpen={isOpen} onClose={toggleModal} />
+            <AddUser isOpen={isOpen} onClose={toggleModal} onAddUser={addUser}/>
         </section>
     );
 };

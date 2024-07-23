@@ -2,8 +2,16 @@
 
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
-const AddUserForm = ({ isOpen, onClose }) => {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
+const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
+
+  const searchParams = useSearchParams()
+  const companyId = searchParams.get('companyId')
+
   const [formData, setFormData] = useState({
     Username: '',
     Password: '',
@@ -13,7 +21,12 @@ const AddUserForm = ({ isOpen, onClose }) => {
     LastName: '',
     IsRoot: false,
     IsAdmin: false,
+    CompanyID: companyId,
   });
+
+
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -26,10 +39,10 @@ const AddUserForm = ({ isOpen, onClose }) => {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
   
-    if (name === 'role') {
+    if (value === 'admin') {
       setFormData({
         ...formData,
-        IsAdmin: value === 'admin',
+        IsAdmin: true,
       });
     } else {
       setFormData({
@@ -39,11 +52,20 @@ const AddUserForm = ({ isOpen, onClose }) => {
     }
   };
 
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.Password !== confirmPassword) {
+      alert('Mật khẩu và mật khẩu xác nhận không khớp.');
+      return;
+    }
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('your_api_endpoint', { // Replace 'your_api_endpoint' with your actual API endpoint
+      const response = await fetch('http://localhost:3002/user/create', { 
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -52,10 +74,22 @@ const AddUserForm = ({ isOpen, onClose }) => {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        // Handle success (e.g., display a success message, close the modal)
+
+        const newUser= await response.json();
+        onAddUser(newUser["Data"]);
+
+        setFormData({
+          Username: '',
+          Password: '',
+          Email: '',
+          FirstName: '',
+          MiddleName: '',
+          LastName: '',
+          IsRoot: false,
+          IsAdmin: false,
+        })
         onClose();
       } else {
-        // Handle error (e.g., display an error message)
         console.error('Failed to add user');
       }
     } catch (error) {
@@ -115,13 +149,36 @@ const AddUserForm = ({ isOpen, onClose }) => {
                     <option value="Operational">Nhân viên</option>
                   </select>
                 </div>
-                <div>
+                <div className="relative">
                   <label htmlFor="Password" className="block mb-2 text-sm font-medium text-gray-900">Mật khẩu</label>
-                  <input type="password" name="Password" id="Password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" value={formData.Password} onChange={handleChange} required />
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="Password"
+                    id="Password"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    value={formData.Password}
+                    onChange={handleChange}
+                    required
+                  />
+                    <button
+                      type="button"
+                      onClick={toggleShowPassword}
+                      className="absolute right-2 top-[37px] text-gray-500 hover:text-gray-900 focus:outline-none"
+                    >
+                      <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} size="sm" />
+                    </button>
                 </div>
                 <div>
                   <label htmlFor="confirmPassword" className="block mb-2 text-sm font-medium text-gray-900">Xác nhận mật khẩu</label>
-                  <input type="password" name="confirmPassword" id="confirmPassword" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required />
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    id="confirmPassword"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    value={confirmPassword}
+                    onChange={e => setConfirmPassword(e.target.value)}
+                    required
+                  />
                 </div>
                 <div className="sm:col-span-2">
                   <label htmlFor="biography" className="block mb-2 text-sm font-medium text-gray-500">Miêu tả</label>
@@ -138,15 +195,15 @@ const AddUserForm = ({ isOpen, onClose }) => {
                 <label className="block mb-2 text-sm font-medium text-gray-900">Gán vai trò</label>
                   <div className="flex items-center space-x-4">
                     <div>
-                      <input type="radio" name="role" id="admin" className="form-radio text-primary-600" onChange={handleChange} />
+                      <input type="radio" name="role" id="admin" value="admin" className="form-radio text-primary-600" onChange={handleChange} />
                       <label htmlFor="admin" className="ml-2 text-sm font-medium text-gray-900">Quản trị viên</label>
                     </div>
                     <div>
-                      <input type="radio" name="role" id="member" className="form-radio text-primary-600" onChange={handleChange} />
+                      <input type="radio" name="role" id="member" value="member" className="form-radio text-primary-600" onChange={handleChange} />
                       <label htmlFor="member" className="ml-2 text-sm font-medium text-gray-900">Người chỉnh sửa</label>
                     </div>
                     <div>
-                      <input type="radio" name="role" id="viewer" className="form-radio text-primary-600" disabled onChange={handleChange} />
+                      <input type="radio" name="role" id="viewer" value="viewer" className="form-radio text-primary-600" disabled onChange={handleChange} />
                       <label htmlFor="viewer" className="ml-2 text-sm font-medium text-gray-500">Người xem</label>
                     </div>
                   </div>

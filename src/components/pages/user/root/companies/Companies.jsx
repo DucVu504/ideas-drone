@@ -1,11 +1,9 @@
 "use client"
-import { useState, useEffect, useContext } from 'react';
-import Link from 'next/link';
-import {CompanyIdContext} from '@/components/helpers/CompanyIdContext';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 import AddCompanyForm from '@/components/common/addCompanyForm/AddCompanyForm';
 import slugify from '@/components/utils/slugify';
-
 
 
 const fetchCompanies = async () => {
@@ -38,8 +36,11 @@ const Companies = () => {
     // State to store fetched companies
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(true);
+    const router = useRouter();
 
-    const { setCompanyId } = useContext(CompanyIdContext);
+    const handleCompanyClick = (path, companyId) => {
+        router.push(`${path}?companyId=${companyId}`);
+    };
 
     // Fetch companies when the component mounts
     useEffect(() => {
@@ -161,20 +162,18 @@ const Companies = () => {
                                             <div className={`h-4 w-4 rounded-md ${company.IsDisabled ? 'bg-red-500' : 'bg-green-500'}`}></div>
                                         </td>
                                         <td className="px-6 py-3">
-                                            <Link href={`/root/companies/users/${slugify(company.Name)}`} passHref>
-                                                <button
-                                                className="border text-black hover:text-blue-700 px-2 py-1 rounded mr-2" onClick={() => setCompanyId(company.ID)} >
-                                                Xem
-                                                </button>
-                                            </Link>
-                                        </td>
-                                        <td className="px-6 py-3">
-                                            <Link href={`/root/companies/projects/${slugify(company.Name)}`} passHref>
                                             <button
-                                             className="border text-black hover:text-blue-700 px-2 py-1 rounded">
+                                                className="border text-black hover:text-blue-700 px-2 py-1 rounded mr-2"
+                                                onClick={() => handleCompanyClick(`/root/companies/users/${slugify(company.Name)}`, company.ID)}>
                                                 Xem
                                             </button>
-                                            </Link>
+                                        </td>
+                                        <td className="px-6 py-3">
+                                            <button
+                                                className="border text-black hover:text-blue-700 px-2 py-1 rounded"
+                                                onClick={() => handleCompanyClick(`/root/companies/projects/${slugify(company.Name)}`, company.ID)}>
+                                                Xem
+                                            </button>
                                         </td>
 
                                     </tr>
