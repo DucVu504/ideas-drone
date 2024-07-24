@@ -11,7 +11,7 @@ import HomeLayout from "../components/layout/homeLayout/HomeLayout";
 import { useTranslation } from 'next-i18next';
 
 export default function Home() {
-  const { t, i18n } = useTranslation('common');
+  const { t, i18n } = useTranslation('translate');
 
   // Debugging: Log current language and translation keys
   console.log("Current language:", i18n.language);

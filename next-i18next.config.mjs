@@ -1,5 +1,5 @@
-import path from 'path';
-export const i18n = {
+
+export const nextI18NextConfig = {
   locales: ['en', 'vi'],
   defaultLocale: 'en',
 };

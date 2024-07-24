@@ -1,7 +1,8 @@
 import path from 'path';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import webpack from 'webpack';
-import { i18n } from './next-i18next.config.mjs';
+import {nextI18NextConfig} from './next-i18next.config.mjs';
+
 
 /** @type {import('next').NextConfig} */
 const cesiumSource = 'node_modules/cesium/Source';
@@ -11,6 +12,7 @@ const nextConfig = {
   images: {
     domains: ['example.com'], // Danh sách các miền tin cậy
   },
+  nextI18NextConfig,
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.cache = false;
@@ -36,7 +38,7 @@ const nextConfig = {
 
     return config;
   },
-  i18n,
+
 };
 
 export default nextConfig;

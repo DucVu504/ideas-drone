@@ -1,4 +1,5 @@
 "use client"
+
 import Head from 'next/head';
 import { appWithTranslation } from 'next-i18next';
 import { Inter } from 'next/font/google';
