@@ -6,45 +6,25 @@ import Link from 'next/link';
 import ActionButton from '@/components/common/actionButton/ActionButton';
 import AddUser from '@/components/common/addUserForm/AddUserForm';
 import EditUser from '@/components/common/editUser/EditUser';
+import { getData } from '@/components/utils/UserApi';
 
-
-const fetchUsers = async (company_id) => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:3002/company/get-all-users/${company_id}`,{
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-
-      }
-    });
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      console.log(data);
-      return data['Data'];
-    } catch (error) {
-      console.error('There was a problem with the fetch operation:', error);
-      return []; // Return an empty array in case of error
-    }
-  };
+const END_POINT = '/company/get-all-users/'
 
 const CompanyUsers = () => {
     
     // Get users
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
-    // const company_id = 'cea48531-5ce0-46dc-afd6-f5ffce7a1520';
 
+    // Get company ID
     const searchParams = useSearchParams()
     const companyId = searchParams.get('companyId')
 
     // Fetch users when the component mounts
     useEffect(() => {
       const getUsers = async () => {
-          const data = await fetchUsers(companyId);
-          setUsers(data);
+          const data = await getData(`${END_POINT}${companyId}`);
+          setUsers(data["Data"]);
           setLoading(false);
         };
         
@@ -72,7 +52,7 @@ const CompanyUsers = () => {
         setUsers([...users, newUser]);
       };
 
-    
+    // Handle sort
     const [sortConfig, setSortConfig] = useState({ key: 'productName', direction: 'ascending' });
     const totalRows = users.length;
     
@@ -101,6 +81,7 @@ const CompanyUsers = () => {
       setIsOpen(!isOpen);
     };
 
+    // Control Edit User Modal
     const [isEditing, setIsEditing] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
   

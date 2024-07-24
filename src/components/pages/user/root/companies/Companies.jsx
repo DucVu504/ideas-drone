@@ -3,32 +3,16 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import AddCompanyForm from '@/components/common/addCompanyForm/AddCompanyForm';
-import slugify from '@/components/utils/slugify';
+import slugify from '@/components/utils/Slugify';
+import { getData } from '@/components/utils/UserApi';
 
-
-const fetchCompanies = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3002/company/get-all', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      return data['Data'];
-    } catch (error) {
-      console.error('There was a problem with the fetch operation:', error);
-    }
-  };
 
 function createFullAddress(addressLine1, addressLine2, city) {
     const parts = [addressLine1, addressLine2].filter(Boolean);
     return `${parts.join(', ')}, ${city}`;
 }
 
+const END_POINT = '/company/get-all'
 
 const Companies = () => {
     
@@ -45,9 +29,9 @@ const Companies = () => {
     // Fetch companies when the component mounts
     useEffect(() => {
         const getCompanies = async () => {
-        const data = await fetchCompanies();
+        const data = await getData(END_POINT);
 
-        setCompanies(data);
+        setCompanies(data['Data']);
         setLoading(false);
         };
 

@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Toast from '@/components/common/toast/Toast';
+import { postData } from '@/components/utils/UserApi';
+
+const END_POINT = '/company/create';
 
 const AddCompanyForm = ({ isOpen, onClose, onAddCompany }) => {
   const [toastInfo, setToastInfo] = useState(["", ""]) // type and message
@@ -32,18 +35,10 @@ const AddCompanyForm = ({ isOpen, onClose, onAddCompany }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    const response = await fetch('http://localhost:3002/company/create', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    });
-    
-    if (response.ok) {
+    const newCompany = await postData(END_POINT, formData);
+
+    if (newCompany) {
       setToastInfo(['success', 'Thêm dự án thành công']);
-      const newCompany = await response.json();
       onAddCompany(newCompany["Data"]);
       setFormData({
         Name: '',
@@ -55,9 +50,11 @@ const AddCompanyForm = ({ isOpen, onClose, onAddCompany }) => {
         ZipCode: ''
       });
       onClose();
-    } else {
-      settoastInfo(['fail', 'Thêm dự án thất bại']);
-    }
+      return}
+      else {
+        setToastInfo(['fail', 'Thêm dự án thất bại']);
+      }
+
   };
 
   return (

@@ -7,10 +7,15 @@ import { useSearchParams } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
+import { postData } from '@/components/utils/UserApi';
+
+const END_POINT = '/user/create';
+
 const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
 
   const searchParams = useSearchParams()
   const companyId = searchParams.get('companyId')
+  const [toastInfo, setToastInfo] = useState(["", ""]) // type and message
 
   const [formData, setFormData] = useState({
     Username: '',
@@ -63,39 +68,27 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
       alert('Mật khẩu và mật khẩu xác nhận không khớp.');
       return;
     }
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3002/user/create', { 
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      if (response.ok) {
-
-        const newUser= await response.json();
+      const newUser= await postData(END_POINT, formData);
+      if (newUser) {
+        setToastInfo(['success', 'Thêm người dùng thành công']);
         onAddUser(newUser["Data"]);
-
-        setFormData({
-          Username: '',
-          Password: '',
-          Email: '',
-          FirstName: '',
-          MiddleName: '',
-          LastName: '',
-          IsRoot: false,
-          IsAdmin: false,
-        })
-        onClose();
-      } else {
-        console.error('Failed to add user');
+      setFormData({
+        Username: '',
+        Password: '',
+        Email: '',
+        FirstName: '',
+        MiddleName: '',
+        LastName: '',
+        IsRoot: false,
+        IsAdmin: false,
+        CompanyID: companyId,
+      });
+      onClose();
+      return}
+      else {
+        setToastInfo(['fail', 'Thêm người dùng thất bại']);
       }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+    };
 
   return (
     <div>

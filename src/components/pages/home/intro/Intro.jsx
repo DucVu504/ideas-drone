@@ -23,6 +23,7 @@ function Intro() {
                             className={`rounded-xl transition-transform duration-300 ${isHovered ? 'transform scale-110' : ''}`}
                             width={500}
                             height={500}
+                            style={{ width: "auto" }}
                         />
                         </div>
                         <div className="lg:w-1/2 px-8 pr-2 space-y-4">
