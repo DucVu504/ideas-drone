@@ -2,7 +2,7 @@
 
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 <Image
   src="https://via.placeholder.com/150"

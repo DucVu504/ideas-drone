@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect} from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Link from 'next/link';
 import ActionButton from '@/components/common/actionButton/ActionButton';
 import AddProjectForm from '@/components/common/addProjectForm/AddProjectForm';

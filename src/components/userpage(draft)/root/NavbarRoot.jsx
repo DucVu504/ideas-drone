@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from "next/legacy/image"
 const Navbar = () => {
 
     return (
@@ -10,7 +10,7 @@ const Navbar = () => {
                 </a>
                 <div className="flex items-center space-x-4 border rounded-md py-1 px-2 shadow-md">
                 <p>Vũ Văn Đức</p>
-                <img className="w-8 h-8 rounded-md" src="/UserPages/Profile/default.jpg" alt="user photo"/>
+                <Image src="/UserPages/Profile/default.jpg" alt="user photo" width={32} height={32} className="rounded-md" />
                 </div>
             </div>
         </nav>

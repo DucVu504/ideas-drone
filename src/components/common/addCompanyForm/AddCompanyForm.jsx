@@ -1,7 +1,7 @@
 "use client"
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Toast from '@/components/common/toast/Toast';
 import { postData } from '@/components/utils/UserApi';
 

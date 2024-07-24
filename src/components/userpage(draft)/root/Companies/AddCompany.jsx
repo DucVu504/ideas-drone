@@ -1,7 +1,7 @@
 "use client"
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 const AddCompany = ({ isOpen, onClose }) => {
   useEffect(() => {

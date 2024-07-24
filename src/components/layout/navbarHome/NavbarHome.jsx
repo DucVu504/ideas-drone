@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Links from "./Link"
 import Link from "next/link"
-import Image from "next/image"
+import Image from "next/legacy/image"
 import styles from "./navbar.module.css"
 import LocaleSwitcher from "../../common/localeSwicher/LocaleSwitcher";
 
@@ -27,7 +27,7 @@ const NavbarHome = () => {
         <nav className={`bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200 relative z-10 px-8`}>
           <div className="max-w-screen-xxl flex flex-wrap items-center justify-between mx-auto p-1">
             <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse ">
-              <Image src="/images/common/Logo_main.png" className="h-14 w-auto p-1" alt="DroneGIS Logo" width={200} height={50} />
+              <Image src="/images/common/Logo_main.png" className="h-14 w-auto p-1" alt="DroneGIS Logo" width={150} height={50} />
             </a>
             <div className="flex md:order-2 space-x-3 md:space-x-3 rtl:space-x-reverse">
               <button type="button" className="text-black border border-green-700 hover:border-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center">

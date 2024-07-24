@@ -5,7 +5,7 @@ import { FaUserTie, FaUserEdit, FaUser } from 'react-icons/fa';
 import ActionButton from './ActionButton';
 import AddProject from './AddProject';
 import EditProject from './EditProject';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 
 const Projects = () => {

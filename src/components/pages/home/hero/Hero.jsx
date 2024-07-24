@@ -2,7 +2,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react'
-import Image from 'next/image'
+import Image from "next/legacy/image"
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
 import styles from "./hero.module.css"
 
