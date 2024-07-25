@@ -1,28 +1,29 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import HttpBackend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import HttpApi from 'i18next-http-backend';
-import {nextI18NextConfig} from './next-i18next.config.mjs';
+// import HttpApi from 'i18next-http-backend';
 
 i18n
   // .use(HttpApi)
+  .use(HttpBackend)
   // .use(LanguageDetector)
-  .use(initReactI18next) // pass the i18n instance to react-i18next
+  .use(initReactI18next)
   .init({
-    ...nextI18NextConfig,
-    supportedLngs: ['en', 'vi'],
-    fallbackLng: 'en',
+    fallbackLng: 'vi',
     debug: true,
-    // Configuration options for your backend, language detection, etc.
     interpolation: {
-      escapeValue: false, // react already safes from xss
+      escapeValue: false,
     },
+    ns: ['common', 'homepage', 'login','user'],
+    defaultNS: 'common',
+    loadPath: '/locales/{{lng}}/{{ns}}.json',
     backend: {
-      loadPath: '/locales/{{lng}}/{{ns}}.json', // Path to your translation files
+      loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
-    detection: {
-      order: ['cookie', 'localStorage', 'querystring', 'sessionStorage', 'navigator'],
-      caches: ['cookie'],
+    react: {
+      useSuspense: false,
+      await: true,
     },
   });
 

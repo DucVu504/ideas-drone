@@ -8,18 +8,11 @@ import Equipment from "../components/pages/home/equipments/Equipments";
 import Contact from "../components/pages/home/contact/Contact";
 import SocialMediaIcons from "../components/common/socialMedia/SocialMedia";
 import HomeLayout from "../components/layout/homeLayout/HomeLayout";
-import { useTranslation } from 'next-i18next';
 
 export default function Home() {
-  const { t, i18n } = useTranslation('translate');
-
-  // Debugging: Log current language and translation keys
-  console.log("Current language:", i18n.language);
-  console.log("Translation for 'hello':", t('hello'));
   return (
     <div>
       <HomeLayout>
-        <h1>{t('hello')}</h1>
         <Hero/>
         <ShortInfo/>
         <Project />
@@ -30,4 +23,6 @@ export default function Home() {
       </HomeLayout>
     </div>
   );
-}
+};
+
+

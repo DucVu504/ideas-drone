@@ -1,7 +1,7 @@
 import path from 'path';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import webpack from 'webpack';
-import {nextI18NextConfig} from './next-i18next.config.mjs';
+import {i18n} from './next-i18next.config.mjs';
 
 
 /** @type {import('next').NextConfig} */
@@ -12,7 +12,7 @@ const nextConfig = {
   images: {
     domains: ['example.com'], // Danh sách các miền tin cậy
   },
-  nextI18NextConfig,
+  i18n,
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.cache = false;

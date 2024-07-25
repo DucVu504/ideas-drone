@@ -6,25 +6,22 @@ import Link from 'next/link';
   
 
 function Intro() {
-    const [isHovered, setIsHovered] = useState(false);
   return (
         <div className="relative overflow-hidden bg-white">
             <div className="px-4 py-20 lg:px-28 lg:py-24">
                 <div className="relative lg:container lg:mx-auto xl:px-20 px-4">
                     <div className="gap-16 lg:flex">
-                        <div
-                        className="lg:w-1/2 relative overflow-hidden rounded-xl "
-                        onMouseEnter={() => setIsHovered(true)}
-                        onMouseLeave={() => setIsHovered(false)}
-                        >
-                        <Image
-                            alt=""
-                            src="/images/homepage/mavic_pro.jpeg"
-                            className={`rounded-xl transition-transform duration-300 ${isHovered ? 'transform scale-110' : ''}`}
-                            width={500}
-                            height={500}
-                            style={{ width: "auto" }}
-                        />
+                        <div className="lg:w-1/2 relative overflow-hidden rounded-xl transform transition duration-300 hover:scale-110 ">
+                            <Image
+                                alt=""
+                                src="/images/homepage/mavic_pro.jpeg"
+                                className="rounded-xl"
+                                width={500}
+                                height={500}
+                                objectFit="cover"
+                                layout="responsive"
+                                priority
+                            />
                         </div>
                         <div className="lg:w-1/2 px-8 pr-2 space-y-4">
                         <h2 className="text-4xl pb-3 font-bold">SỨ MỆNH CỦA <span className="text-green-500">IDEAS-DRONE</span></h2>

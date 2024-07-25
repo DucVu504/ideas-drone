@@ -1,7 +1,7 @@
 "use client"
-
 import Head from 'next/head';
 import { appWithTranslation } from 'next-i18next';
+import '../../i18n';
 import { Inter } from 'next/font/google';
 import '../styles/globals.css';
 
