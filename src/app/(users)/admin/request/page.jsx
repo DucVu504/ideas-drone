@@ -1,16 +1,15 @@
-
 import AdminLayout from "@/components/layout/adminLayout/AdminLayout";
-import Dashboard from "@/components/pages/user/admin/dashboard/Dashboard";
+import UserRequest from "@/components/common/userRequest/UserRequest";
 
 import React from "react";
 
-const DashboardPage = () => {
+const Request = () => {
 
   return (
     <AdminLayout>
-        <Dashboard/>
+        <UserRequest/>
     </AdminLayout>
   );
 };
 
-export default DashboardPage;
+export default Request;

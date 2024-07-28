@@ -2,7 +2,7 @@
 "use client"
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import LocaleSwitcher from "@/components/common/localeSwicher/LocaleSwitcher";
+import LocaleSwitcher from "@/components/common/localeSwitcher/LocaleSwitcher";
 import { useTranslation } from 'next-i18next';
 
 const Links = () => {

@@ -5,7 +5,7 @@ import { MdLocationOn, MdLocalPhone, MdEmail } from 'react-icons/md';
 
 const ContactForm = () => {
   return (
-    <div className="flex flex-col md:flex-row bg-gray-50 p-6 my-8 mx-52 rounded-lg shadow-lg">
+    <div className="flex flex-col md:flex-row bg-gray-50 p-6 pt-20 mx-52 rounded-lg">
       <div className="md:w-1/3 bg-green-400 text-white p-6 rounded-lg shadow-md">
         <h2 className="text-xl font-bold mb-4">Liên hệ với chúng tôi để được hỗ trợ</h2>
         <p className="mb-4">Chúng tôi luôn sẵn sàng hỗ trợ bạn, gửi email hoặc liên hệ chúng tôi qua số điện thoại.</p>
@@ -28,24 +28,6 @@ const ContactForm = () => {
       <div className="md:w-2/3 bg-white p-6 rounded-lg shadow-md mt-6 md:mt-0 md:ml-6">
         <h3 className="text-xl font-bold mb-4">Liên hệ ngay</h3>
         <form>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex flex-col">
-              <label className="mb-2 font-semibold">Tên đầy đủ</label>
-              <input
-                type="text"
-                className="p-2 border border-gray-300 rounded"
-                placeholder="Name"
-              />
-            </div>
-            <div className="flex flex-col">
-              <label className="mb-2 font-semibold">Địa chỉ email</label>
-              <input
-                type="email"
-                className="p-2 border border-gray-300 rounded"
-                placeholder="Email"
-              />
-            </div>
-          </div>
           <div className="flex flex-col mt-4">
             <label className="mb-2 font-semibold">Tiêu đề</label>
             <input

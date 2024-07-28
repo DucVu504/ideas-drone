@@ -1,16 +1,19 @@
 // components/UserSettingsForm.js
 
 import React from 'react';
+import Image from 'next/image';
 
 const UserProfile = () => {
   return (
-    <div className="flex flex-col md:flex-row bg-gray-50 p-6 mx-52 my-8 rounded-lg shadow-lg">
+    <div className="flex flex-col md:flex-row bg-gray-50 p-6 mx-52 pt-20 rounded-lg ">
       <div className="md:w-1/3 bg-white p-4 rounded-lg shadow-md">
         <div className="flex flex-col items-center">
-          <img
-            className="w-24 h-24 rounded-full"
-            src="HomePage/Icon/Icon_4.png"
+        <Image
+            src="/images/common/default_avartar.jpg"
             alt="User Avatar"
+            width={96}
+            height={96}
+            className="rounded-md"
           />
           <h2 className="mt-4 text-xl font-bold">Đức Vũ</h2>
           <p className="text-gray-600">vuduc504@gmail.com</p>
@@ -18,7 +21,7 @@ const UserProfile = () => {
         <div className="mt-6">
           <h3 className="text-lg font-semibold text-green-400">Giới thiệu</h3>
           <p className="text-gray-700 mt-2">
-            Kỹ sư phần mềm tại công ty ABC. Tôi là một người yêu thích công nghệ và lập trình.
+            Extra information about the user. This can be used to describe the user in detail.
           </p>
         </div>
       </div>

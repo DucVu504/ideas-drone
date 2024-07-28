@@ -181,7 +181,7 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
                   <label htmlFor="avatar" className="block mb-2 text-sm font-medium text-gray-900">Tải ảnh</label>
                   <div className="flex items-center space-x-4">
                     <img className="w-10 h-10 rounded-md" src="https://via.placeholder.com/150" alt="User avatar" />
-                    <input type="file" name="avatar" id="avatar" className="block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer focus:outline-none" />
+                    <input type="file" name="avatar" id="avatar" className="block w-full p-1 text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer focus:outline-none" />
                   </div>
                 </div>
                 <div className="sm:col-span-2">

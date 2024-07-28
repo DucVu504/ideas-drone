@@ -1,16 +1,15 @@
-
 import AdminLayout from "@/components/layout/adminLayout/AdminLayout";
-import Dashboard from "@/components/pages/user/admin/dashboard/Dashboard";
+import UserProfile from "@/components/common/userProfile/UserProfile";
 
 import React from "react";
 
-const DashboardPage = () => {
+const Profile = () => {
 
   return (
     <AdminLayout>
-        <Dashboard/>
+        <UserProfile/>
     </AdminLayout>
   );
 };
 
-export default DashboardPage;
+export default Profile;

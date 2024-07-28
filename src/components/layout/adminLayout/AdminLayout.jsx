@@ -1,6 +1,6 @@
 import React from 'react';
-import NavbarAdmin from "../navbarUser/NavbarAdmin";
-import SidebarAdmin from "../sidebarAdmin/SidebarAdmin";
+import NavbarAdmin from "@/components/layout/navbarUser/NavbarUser";
+import SidebarAdmin from "@/components/layout/sidebarAdmin/SidebarAdmin";
 
 const AdminLayout = ({ children }) => {
   return (
