@@ -17,7 +17,7 @@ function RootLayout({ children }) {
         <meta name="description" content="A webSGIS application for drone management and monitoring" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
       </Head>
-      <html lang="en">
+      <html >
         <body className={inter.className}>
             {children}
         </body>

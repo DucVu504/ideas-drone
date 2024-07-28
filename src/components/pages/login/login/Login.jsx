@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
 
@@ -10,6 +11,7 @@ const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const { t } = useTranslation("common");
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -64,24 +66,24 @@ const LoginForm = () => {
                     <div className="w-full bg-opacity-80 bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-                                Đăng nhập tài khoản
+                                {t('login.title')}
                             </h1>
                             <form className="space-y-4 md:space-y-6" onSubmit={handleLogin}>
                                 <div>
-                                    <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">Tên đăng nhập</label>
+                                    <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">{t('login.user-name')}</label>
                                     <input 
                                         type="text" 
                                         name="username" 
                                         id="username" 
                                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" 
-                                        placeholder="Tên đăng nhập" 
+                                        placeholder={t('login.user-name')} 
                                         required 
                                         value={username}
                                         onChange={(e) => setUsername(e.target.value)}
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Mật khẩu</label>
+                                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">{t('login.password')}</label>
                                     <input 
                                         type="password" 
                                         name="password" 
@@ -104,14 +106,14 @@ const LoginForm = () => {
                                             />
                                         </div>
                                         <div className="ml-3 text-sm">
-                                            <label htmlFor="remember" className="text-gray-500">Lưu tài khoản</label>
+                                            <label htmlFor="remember" className="text-gray-500">{t('login.save-password')}</label>
                                         </div>
                                     </div>
-                                    <a href="#" className="text-sm font-medium text-primary-600 hover:underline">Quên mật khẩu?</a>
+                                    <a href="#" className="text-sm font-medium text-primary-600 hover:underline">{t('login.forgot-password')}?</a>
                                 </div>
-                                <button type="submit" className="w-full text-white bg-green-500 hover:bg-primary-700 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Đăng nhập</button>
+                                <button type="submit" className="w-full text-white bg-green-500 hover:bg-primary-700 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">{t('login.login')}</button>
                                 <p className="text-sm font-light text-gray-500">
-                                    Bạn chưa có tài khoản? <a href="#" className="font-medium text-primary-600 hover:underline">Liên hệ</a>
+                                    {t('login.not-have-account')}? <a href="#" className="font-medium text-primary-600 hover:underline">{t('login.contact')}</a>
                                 </p>
                             </form>
                         </div>

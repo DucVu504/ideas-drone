@@ -1,5 +1,24 @@
 {
     "english": "English",
+    "login": {
+        "contact": "Contact",
+        "forgot-password": "Forgot password",
+        "login": "Log in",
+        "not-have-account": "Do not have an account",
+        "password": "Password",
+        "save-password": "Save account",
+        "title": "Log in to your account",
+        "user-name": "User name"
+    },
+    "navbarHome": {
+        "about_us": "About us",
+        "contact": "Contact",
+        "equipments": "Equipments",
+        "home": "Home page",
+        "login": "Log in",
+        "projects": "Projects",
+        "quote": "Get a quote",
+        "services": "Service"
+    },
     "vietnamese": "Vietnamese"
-  }
-  
+}

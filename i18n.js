@@ -1,29 +1,27 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import HttpBackend from 'i18next-http-backend';
+import HttpApi from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
-// import HttpApi from 'i18next-http-backend';
 
 i18n
-  // .use(HttpApi)
-  .use(HttpBackend)
-  // .use(LanguageDetector)
+  .use(HttpApi)
+  .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     fallbackLng: 'vi',
-    debug: true,
-    interpolation: {
-      escapeValue: false,
-    },
-    ns: ['common', 'homepage', 'login','user'],
+    supportedLngs: ['en', 'vi'],
+    debug: false,
+    ns: ['common', 'public', 'user_board'],
     defaultNS: 'common',
-    loadPath: '/locales/{{lng}}/{{ns}}.json',
     backend: {
       loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
+    detection: {
+      order: ['querystring', 'cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
+      caches: ['localStorage', 'cookie'],
+    },
     react: {
       useSuspense: false,
-      await: true,
     },
   });
 

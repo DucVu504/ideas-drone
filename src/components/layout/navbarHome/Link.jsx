@@ -6,7 +6,7 @@ import LocaleSwitcher from "@/components/common/localeSwitcher/LocaleSwitcher";
 import { useTranslation } from 'next-i18next';
 
 const Links = () => {
-    const { t } = useTranslation("homepage");
+    const { t } = useTranslation("common");
     const generalStyle = "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 "
     const generalStyleActive = "block py-2 px-3 text-green-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0"
 
@@ -16,32 +16,32 @@ const Links = () => {
 
     const links = [
         {
-            title: t("home"),
+            title: t("navbarHome.home"),
             path: "/",
             className: currentPath === "/" ? generalStyleActive : generalStyle,
         },
         {
-            title: t("services"),
+            title: t("navbarHome.services"),
             path: "/our-services",
             className: currentPath === "/our-services" ? generalStyleActive : generalStyle,
         },
         {
-            title: t("projects"),
+            title: t("navbarHome.projects"),
             path: "/our-projects",
             className: currentPath === "/our-projects" ? generalStyleActive : generalStyle,
         },
         {
-            title: t("equipments"),
+            title: t("navbarHome.equipments"),
             path: "/our-equipments",
             className: currentPath === "/our-equipments" ? generalStyleActive : generalStyle,
         },
         {
-            title: t("about-us"),
-            path: "/about-us",
+            title: t("navbarHome.about_us"),
+            path: "/about_us",
             className: currentPath === "/about-us" ? generalStyleActive : generalStyle,
         },
         {
-            title: t("contact"),
+            title: t("navbarHome.contact"),
             path: "/contact-us",
             className: currentPath === "/contact-us" ? generalStyleActive : generalStyle,
         },

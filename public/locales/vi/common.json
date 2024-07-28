@@ -1,4 +1,24 @@
 {
-  "english":"Tiếng Anh",
-  "vietnamese":"Tiếng Việt"
+    "english": "Tiếng Anh",
+    "login": {
+        "contact": "Liên hệ",
+        "forgot-password": "Quên mật khẩu",
+        "login": "Đăng nhập",
+        "not-have-account": "Bạn chưa có tài khoản",
+        "password": "Mật khẩu",
+        "save-password": "Lưu tài khoản",
+        "title": "Đăng nhập tài khoản",
+        "user-name": "Tên đăng nhập"
+    },
+    "navbarHome": {
+        "about_us": "Về chúng tôi",
+        "contact": "Liên hệ",
+        "equipments": "Thiết bị",
+        "home": "Trang chủ",
+        "login": "Đăng nhập",
+        "projects": "Dự án",
+        "quote": "Nhận báo giá",
+        "services": "Dịch vụ"
+    },
+    "vietnamese": "Tiếng Việt"
 }
