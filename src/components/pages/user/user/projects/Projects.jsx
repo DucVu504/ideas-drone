@@ -114,7 +114,7 @@ const Projects = () => {
                             </div>
                         </div>
                           <div className='border px-4 py-8 rounded-r-md hover:text-blue-500'>
-                            <Link href={`/du-an/xem`}>
+                            <Link href={`/user/projects/project_1`}>
                               <FontAwesomeIcon icon={faDoorOpen} />
                             </Link>
                           </div>
