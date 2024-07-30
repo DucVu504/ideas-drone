@@ -15,19 +15,19 @@ const Users = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // Get company ID
-    const token = localStorage.getItem('token');
-
-    const decoded = jwtDecode(token);
-    const companyId = decoded.company_id;
-
+    
     // Fetch users when the component mounts
     useEffect(() => {
-      const getUsers = async () => {
-          const data = await getData(`${END_POINT}${companyId}`);
-          setUsers(data["Data"]);
-          setLoading(false);
-        };
+        // Get company ID
+        const token = localStorage.getItem('token');
+
+        const decoded = jwtDecode(token);
+        const companyId = decoded.company_id;
+        const getUsers = async () => {
+            const data = await getData(`${END_POINT}${companyId}`);
+            setUsers(data["Data"]);
+            setLoading(false);
+            };
         
         getUsers();
     }, []);

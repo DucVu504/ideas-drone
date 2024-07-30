@@ -7,12 +7,15 @@ import { GoHome } from "react-icons/go";
 import { PiNotePencilLight,PiPolygon,PiVectorTwoLight } from "react-icons/pi";
 import { VscOpenPreview } from "react-icons/vsc";
 
+import AddLabelForm from "@/components/common/projectWorkspace/addLabelForm/AddLabelForm";
+
 import * as Cesium from "cesium";
 import "cesium/Build/Cesium/Widgets/widgets.css";
 
-const CESIUM_ION_ACCESS_TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNzg4NmU4MC05NzU0LTQ0YWMtOTViOC1lOWY1OWQzOGIxZTkiLCJpZCI6MjA0MjgyLCJpYXQiOjE3MTEzNTk0NDJ9.sKyAJZcvRFs19Z5MFzxAPpwO8TzK6voLbkIZ0Odj6Bk";
-
+const ACCESS_TOKEN = process.env.NEXT_PUBLIC_CESIUM_ION_ACCESS_TOKEN;
+console.log("ACCESS_TOKEN");
+console.log(ACCESS_TOKEN);
+  
   const Toolbar = ({ setMode, mode }) => {
     return (
       <div className="fixed z-1 top-0 left-0 my-32 mx-3 flex flex-col bg-white bg-opacity-60 hover:bg-opacity-100  rounded-md shadow-lg p-1 space-y-3">
@@ -78,7 +81,7 @@ const mousePositionRef = useRef(mousePosition);
   }, [mode, mousePosition]);
 
   useEffect(() => {
-    Cesium.Ion.defaultAccessToken = CESIUM_ION_ACCESS_TOKEN;
+    Cesium.Ion.defaultAccessToken = ACCESS_TOKEN;
 
     if (!viewerRef.current) {
       const creditContainer = document.createElement("div");
@@ -294,7 +297,7 @@ const mousePositionRef = useRef(mousePosition);
     <div className="relative w-full h-screen">
       <div ref={cesiumContainerRef} className="w-full h-full" />
       <Toolbar setMode={setMode} mode={mode} />
-      <StyledForm/>
+      <AddLabelForm/>
     </div>
   );
 };

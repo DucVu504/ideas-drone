@@ -1,10 +1,10 @@
 
-import CesiumViewer from '@/components/common/cesiumViewer/CesiumViewer';
+import ProjectWorkspace from '@/components/layout/projectWorkspaceLayout/ProjectWorkspaceLayout';
 
 const Project = () => {
   return (
     <div>
-      <CesiumViewer/>
+      <ProjectWorkspace/>
     </div>
 
   );
