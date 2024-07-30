@@ -29,3 +29,5 @@ const Toolbar = ({ setMode, mode }) => {
       </div>
     );
   };
+
+  export default Toolbar;

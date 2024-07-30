@@ -1,66 +1,13 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import Draggable from 'react-draggable';
-
-import {IoMdCodeWorking,} from "react-icons/io";
-import { GoHome } from "react-icons/go";
-import { PiNotePencilLight,PiPolygon,PiVectorTwoLight } from "react-icons/pi";
-import { VscOpenPreview } from "react-icons/vsc";
 
 import AddLabelForm from "@/components/common/projectWorkspace/addLabelForm/AddLabelForm";
+import Toolbar from "@/components/common/projectWorkspace/ToolsBar/ToolBar";
 
 import * as Cesium from "cesium";
 import "cesium/Build/Cesium/Widgets/widgets.css";
 
 const ACCESS_TOKEN = process.env.NEXT_PUBLIC_CESIUM_ION_ACCESS_TOKEN;
-console.log("ACCESS_TOKEN");
-console.log(ACCESS_TOKEN);
-  
-  const Toolbar = ({ setMode, mode }) => {
-    return (
-      <div className="fixed z-1 top-0 left-0 my-32 mx-3 flex flex-col bg-white bg-opacity-60 hover:bg-opacity-100  rounded-md shadow-lg p-1 space-y-3">
-        <button className={`p-1 rounded ${mode === "distance" ? "bg-green-200" : "hover:bg-green-200"}`} onClick={() => setMode("distance")}>
-          <IoMdCodeWorking size={24} />
-        </button>
-        <button className={`p-1 rounded ${mode === "area" ? "bg-green-200" : "hover:bg-green-200"}`} onClick={() => setMode("area")}>
-          <PiPolygon size={24} />
-        </button>
-        <button className={`p-1 rounded ${mode === "annotation" ? "bg-green-200" : "hover:bg-green-200"}`} onClick={() => setMode("annotation")}>
-          <PiNotePencilLight size={24} />
-        </button>
-        <button className="p-1 hover:bg-green-200 rounded">
-          <PiVectorTwoLight size={24} />
-        </button>
-        <button className="p-1 hover:bg-green-200 rounded">
-          <VscOpenPreview size={24} />
-        </button>
-        <button className="p-1 hover:bg-green-200 rounded">
-          <GoHome size={24} />
-        </button>
-      </div>
-    );
-  };
-
-const StyledForm = () => {
-  return (
-    <Draggable>
-    <div className="fixed w-100 top-16 right-8 bg-white p-2 rounded shadow-lg max-w-sm text-center">
-      <h2 className="text-xl font-bold mb-2">Thêm chú thích</h2>
-      <form>
-        <div className="mb-4 text-left">
-          <label htmlFor="name" className="block text-green-600 font-bold mb-2">Tiêu đề</label>
-          <input type="text" id="name" name="name" className="w-full px-1 py-2 border border-gray-300 rounded" placeholder="Enter your name" />
-        </div>
-        <div className="mb-4 text-left">
-          <label htmlFor="message" className="block text-green-600 font-bold mb-2">Nội dung</label>
-          <textarea id="message" name="message" className="w-full px-1 py-2 border border-gray-300 rounded" placeholder="Enter your message" rows="4"></textarea>
-        </div>
-        <button type="submit" className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition duration-200">THÊM</button>
-      </form>
-    </div>
-    </Draggable>
-    )
-};
 
 const CesiumMap = () => {
   const cesiumContainerRef = useRef(null);
