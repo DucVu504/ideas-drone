@@ -3,7 +3,7 @@ import Draggable from 'react-draggable';
 const AddLabelForm = () => {
     return (
       <Draggable>
-      <div className="fixed w-100 top-16 right-8 bg-white p-2 rounded shadow-lg max-w-sm text-center">
+      <div className="fixed w-100 top-16 left-8 bg-white p-2 rounded shadow-lg max-w-sm text-center">
         <h2 className="text font-bold mb-2">Thêm chú thích</h2>
         <form>
           <div className="mb-4 text-left">

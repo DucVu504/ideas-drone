@@ -13,15 +13,13 @@ const CesiumMap = () => {
   const viewerRef = useRef(null);
 
   const [mode, setMode] = useState(null);
-  const [mousePosition, setMousePosition] = useState(null);
+  const [pickedFeatureInfo, setPickedFeatureInfo] = useState(null);
 
   const modeRef = useRef(mode);
-  const mousePositionRef = useRef(mousePosition);
 
   useEffect(() => {
     modeRef.current = mode;
-    mousePositionRef.current = mousePosition;
-  }, [mode, mousePosition]);
+  }, [mode]);
 
   useEffect(() => {
     if (!cesiumContainerRef.current || viewerRef.current) return;
@@ -46,11 +44,26 @@ const CesiumMap = () => {
       try {
         const resource = await Cesium.IonResource.fromAssetId(2684536);
 
-        console.log("resource", resource);
         const dataSource = await Cesium.GeoJsonDataSource.load(resource);
 
         viewer.dataSources.add(dataSource);
         viewer.zoomTo(dataSource);
+
+        // Add click event listener
+        const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+        handler.setInputAction((movement) => {
+          const pickedObject = viewer.scene.pick(movement.position);
+
+          
+          if (Cesium.defined(pickedObject) && pickedObject.id) {
+            const featureInfo = pickedObject.id.properties;
+            setPickedFeatureInfo(featureInfo);
+            
+            console.log("featureInfo", pickedFeatureInfo );
+          } else {
+            setPickedFeatureInfo(null);
+          }
+        }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
       } catch (error) {
         console.error("Error initializing Cesium map:", error);
@@ -72,6 +85,19 @@ const CesiumMap = () => {
       <div ref={cesiumContainerRef} className="w-full h-full" />
       <Toolbar setMode={setMode} mode={mode} />
       <AddLabelForm />
+      {console.log("TEST", pickedFeatureInfo )}
+      <div
+        className={`absolute top-0 w-80 mt-32 left-0 p-2 bg-white border transition-transform duration-500 ${
+          pickedFeatureInfo? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+      {pickedFeatureInfo && (
+          <div key={"key"}>
+            <strong>{"fname"}:</strong> {pickedFeatureInfo.fclass.getValue()}
+          </div>
+      )}
+
+      </div>
     </div>
   );
 };

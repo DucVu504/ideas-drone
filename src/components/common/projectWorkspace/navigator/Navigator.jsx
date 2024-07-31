@@ -13,7 +13,6 @@ const Navigator = () => {
             <span className="text-gray-500 text-sm mx-4 px-4 border-x ">DỰ ÁN DEMO</span>
           </div>
           <div className="flex items-center">
-            {/* Thêm các biểu tượng */}
             <Link href="/user/documents" className="flex items-center text-gray-700 border hover:text-green-500 hover:border-green-500 font-bold py-1 px-2 rounded-md mx-2">
               <FaArrowLeft className="mr-1" />
             </Link>
