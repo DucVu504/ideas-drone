@@ -16,7 +16,7 @@
     "@heroicons/react": "^1.0.6",
     "@mui/material": "^5.15.17",
     "axios": "^1.6.8",
-    "cesium": "^1.117.0",
+    "cesium": "^1.119.0",
     "datatables.net": "^2.0.8",
     "datatables.net-responsive": "^3.0.2",
     "embla-carousel-react": "^8.0.4",
