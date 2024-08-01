@@ -17,6 +17,8 @@ const CesiumMap = () => {
   const [mode, setMode] = useState(null);
   const [pickedFeatureInfo, setPickedFeatureInfo] = useState(null);
   const [isGeoJsonVisible, setIsGeoJsonVisible] = useState(true);
+  const [geoJsonColor, setGeoJsonColor] = useState(Cesium.Color.RED);
+  const [geoJsonOpacity, setGeoJsonOpacity] = useState(0.5);
 
   const modeRef = useRef(mode);
 
@@ -47,6 +49,14 @@ const CesiumMap = () => {
       try {
         const resource = await Cesium.IonResource.fromAssetId(2687088);
         const dataSource = await Cesium.GeoJsonDataSource.load(resource);
+        
+        // Set initial color and opacity for GeoJSON
+        dataSource.entities.values.forEach(entity => {
+          if (entity.polygon) {
+            entity.polygon.material = geoJsonColor.withAlpha(geoJsonOpacity);
+          }
+        });
+
         viewer.dataSources.add(dataSource);
         dataSourceRef.current = dataSource;
 
@@ -95,6 +105,16 @@ const CesiumMap = () => {
     }
   }, [isGeoJsonVisible]);
 
+  useEffect(() => {
+    if (dataSourceRef.current) {
+      dataSourceRef.current.entities.values.forEach(entity => {
+        if (entity.polygon) {
+          entity.polygon.material = geoJsonColor.withAlpha(geoJsonOpacity);
+        }
+      });
+    }
+  }, [geoJsonColor, geoJsonOpacity]);
+
   return (
     <div className="relative w-full h-screen">
       <div ref={cesiumContainerRef} className="w-full h-full" />
@@ -103,10 +123,32 @@ const CesiumMap = () => {
 
       <button
         onClick={() => setIsGeoJsonVisible(!isGeoJsonVisible)}
-        className="absolute top-32 left-4 z-10 bg-white p-2 rounded shadow"
+        className="absolute top-20 left-4 z-10 bg-white p-2 rounded shadow"
       >
         {isGeoJsonVisible ? "Hide GeoJSON" : "Show GeoJSON"}
       </button>
+
+      <div className="absolute top-32 left-4 z-10 bg-white p-2 rounded shadow">
+        <label>
+          Color:
+          <input
+            type="color"
+            value={geoJsonColor.toCssColorString()}
+            onChange={(e) => setGeoJsonColor(Cesium.Color.fromCssColorString(e.target.value))}
+          />
+        </label>
+        <label>
+          Opacity:
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.1"
+            value={geoJsonOpacity}
+            onChange={(e) => setGeoJsonOpacity(parseFloat(e.target.value))}
+          />
+        </label>
+      </div>
 
       <div
         className={`absolute top-0 w-72 mt-28 bg-white bg-opacity-15 right-16 p-4 rounded-l-md transition-transform duration-500 ${
