@@ -17,8 +17,14 @@ const CesiumMap = () => {
   const [mode, setMode] = useState(null);
   const [pickedFeatureInfo, setPickedFeatureInfo] = useState(null);
   const [isGeoJsonVisible, setIsGeoJsonVisible] = useState(true);
-  const [geoJsonColor, setGeoJsonColor] = useState(Cesium.Color.RED);
-  const [geoJsonOpacity, setGeoJsonOpacity] = useState(0.5);
+
+  const geoJsonColorRef = useRef(Cesium.Color.RED);
+  const geoJsonOpacityRef = useRef(0.5);
+
+  const highlighted = useRef({
+    feature: undefined,
+    originalColor: geoJsonColorRef.current.withAlpha(geoJsonOpacityRef.current),
+  });
 
   const modeRef = useRef(mode);
 
@@ -49,11 +55,11 @@ const CesiumMap = () => {
       try {
         const resource = await Cesium.IonResource.fromAssetId(2687088);
         const dataSource = await Cesium.GeoJsonDataSource.load(resource);
-        
+
         // Set initial color and opacity for GeoJSON
         dataSource.entities.values.forEach(entity => {
           if (entity.polygon) {
-            entity.polygon.material = geoJsonColor.withAlpha(geoJsonOpacity);
+            entity.polygon.material = geoJsonColorRef.current.withAlpha(geoJsonOpacityRef.current);
           }
         });
 
@@ -80,6 +86,28 @@ const CesiumMap = () => {
             setPickedFeatureInfo(null);
           }
         }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+        // Add mouse move event listener
+        handler.setInputAction((movement) => {
+          // If a feature was previously highlighted, undo the highlight
+          if (Cesium.defined(highlighted.current.feature)) {
+            highlighted.current.feature.polygon.material = highlighted.current.originalColor;
+            highlighted.current.feature = undefined;
+            return;
+          }
+
+          // Pick a new feature
+          const pickedFeature = viewer.scene.pick(movement.endPosition);
+          if (!Cesium.defined(pickedFeature) || !pickedFeature.id || !pickedFeature.id.polygon) {
+            return;
+          }
+
+          // Highlight the feature
+          highlighted.current.feature = pickedFeature.id;
+          Cesium.Color.clone(pickedFeature.id.polygon.material.color, highlighted.current.originalColor);
+          pickedFeature.id.polygon.material = Cesium.Color.YELLOW.withAlpha(geoJsonOpacityRef.current);
+        }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
       } catch (error) {
         console.error("Error initializing Cesium map:", error);
       }
@@ -105,15 +133,27 @@ const CesiumMap = () => {
     }
   }, [isGeoJsonVisible]);
 
-  useEffect(() => {
+  const handleColorChange = (e) => {
+    geoJsonColorRef.current = Cesium.Color.fromCssColorString(e.target.value);
     if (dataSourceRef.current) {
       dataSourceRef.current.entities.values.forEach(entity => {
         if (entity.polygon) {
-          entity.polygon.material = geoJsonColor.withAlpha(geoJsonOpacity);
+          entity.polygon.material = geoJsonColorRef.current.withAlpha(geoJsonOpacityRef.current);
         }
       });
     }
-  }, [geoJsonColor, geoJsonOpacity]);
+  };
+
+  const handleOpacityChange = (e) => {
+    geoJsonOpacityRef.current = parseFloat(e.target.value);
+    if (dataSourceRef.current) {
+      dataSourceRef.current.entities.values.forEach(entity => {
+        if (entity.polygon) {
+          entity.polygon.material = geoJsonColorRef.current.withAlpha(geoJsonOpacityRef.current);
+        }
+      });
+    }
+  };
 
   return (
     <div className="relative w-full h-screen">
@@ -133,8 +173,8 @@ const CesiumMap = () => {
           Color:
           <input
             type="color"
-            value={geoJsonColor.toCssColorString()}
-            onChange={(e) => setGeoJsonColor(Cesium.Color.fromCssColorString(e.target.value))}
+            defaultValue={geoJsonColorRef.current.toCssColorString()}
+            onChange={handleColorChange}
           />
         </label>
         <label>
@@ -144,8 +184,8 @@ const CesiumMap = () => {
             min="0"
             max="1"
             step="0.1"
-            value={geoJsonOpacity}
-            onChange={(e) => setGeoJsonOpacity(parseFloat(e.target.value))}
+            defaultValue={geoJsonOpacityRef.current}
+            onChange={handleOpacityChange}
           />
         </label>
       </div>
