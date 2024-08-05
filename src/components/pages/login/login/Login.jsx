@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/navigation';
-import { jwtDecode } from 'jwt-decode';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_USER_DATA_URL;
 
@@ -35,24 +34,21 @@ const LoginForm = () => {
                 const data = await response.json();
                 localStorage.setItem('token', data.token);
 
-                // Decode token to get user role
-                const decodedToken = jwtDecode(data.token);
-
                 // Navigate based on user role
-                if (decodedToken.is_root === true) {
+                if (data.is_root === true) {
                     router.push('/root/companies');
-                } else if (decodedToken.is_admin === true) {
+                } else if (data.is_admin === true) {
                     router.push('/admin/dashboard');
                 } else {
                     router.push('/user/home');
                 }
             } else {
                 const errorData = await response.json();
-                setError(errorData.message || 'Đăng nhập thất bại, vui lòng thử lại.');
+                setError(errorData.message || t('error.login_fail'));
             }
         } catch (error) {
             console.error('Login failed:', error);
-            setError('Đăng nhập thất bại, vui lòng thử lại.');
+            setError(t('error.login_fail'));
         }
     };
 

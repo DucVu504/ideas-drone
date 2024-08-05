@@ -7,8 +7,8 @@ import { useTranslation } from 'next-i18next';
 
 const Links = () => {
     const { t } = useTranslation("common");
-    const generalStyle = "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 "
-    const generalStyleActive = "block py-2 px-3 text-green-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0"
+    const generalStyle = "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:hover:text-green-700 xl:p-0 "
+    const generalStyleActive = "block py-2 px-3 text-green-500 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:hover:text-green-700 xl:p-0"
 
     const currentPath = usePathname();
     console.log("path name is" +currentPath)
@@ -48,13 +48,15 @@ const Links = () => {
     ];
 
     return (
-            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
+            <ul className="flex flex-col p-4 xl:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 xl:space-x-8 rtl:space-x-reverse xl:flex-row xl:mt-0 xl:border-0 xl:bg-white">
                 {links.map(link => (
                     <Link href={link.path} key={link.title}>
                         <div className={link.className} aria-current="page">{link.title}</div>
                     </Link>
                 ))}
-                <LocaleSwitcher/>
+                <div className='px-2 xl:py-0 py-2'>
+                    <LocaleSwitcher/>
+                </div>
             </ul>
     );
 };

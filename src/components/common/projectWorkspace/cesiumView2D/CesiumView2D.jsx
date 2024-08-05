@@ -57,7 +57,7 @@ const CesiumMap = () => {
         const dataSource = await Cesium.GeoJsonDataSource.load(resource);
 
         // Set initial color and opacity for GeoJSON
-        dataSource.entities.values.forEach(entity => {
+        dataSource.entities.values.forEach((entity) => {
           if (entity.polygon) {
             entity.polygon.material = geoJsonColor.withAlpha(geoJsonOpacity);
           }
@@ -66,7 +66,9 @@ const CesiumMap = () => {
         viewer.dataSources.add(dataSource);
         dataSourceRef.current = dataSource;
 
-        const imageryLayer = await Cesium.IonImageryProvider.fromAssetId(2662061);
+        const imageryLayer = await Cesium.IonImageryProvider.fromAssetId(
+          2662061
+        );
         viewer.imageryLayers.addImageryProvider(imageryLayer);
         console.log("imageryLayer", imageryLayer);
 
@@ -79,7 +81,8 @@ const CesiumMap = () => {
 
           if (highlightedFeature.current.feature) {
             // Restore the original color of the previously highlighted feature
-            highlightedFeature.current.feature.polygon.material = highlightedFeature.current.originalColor;
+            highlightedFeature.current.feature.polygon.material =
+              highlightedFeature.current.originalColor;
             highlightedFeature.current.feature = undefined;
             highlightedFeature.current.originalColor = undefined;
           }
@@ -90,15 +93,16 @@ const CesiumMap = () => {
 
             // Highlight the new feature
             highlightedFeature.current.feature = pickedObject.id;
-            highlightedFeature.current.originalColor = pickedObject.id.polygon.material;
-            pickedObject.id.polygon.material = Cesium.Color.YELLOW.withAlpha(geoJsonOpacity);
+            highlightedFeature.current.originalColor =
+              pickedObject.id.polygon.material;
+            pickedObject.id.polygon.material =
+              Cesium.Color.YELLOW.withAlpha(geoJsonOpacity);
 
             console.log("featureInfo", pickedFeatureInfo);
           } else {
             setPickedFeatureInfo(null);
           }
         }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-
       } catch (error) {
         console.error("Error initializing Cesium map:", error);
       }
@@ -126,7 +130,7 @@ const CesiumMap = () => {
 
   useEffect(() => {
     if (dataSourceRef.current) {
-      dataSourceRef.current.entities.values.forEach(entity => {
+      dataSourceRef.current.entities.values.forEach((entity) => {
         if (entity.polygon) {
           entity.polygon.material = geoJsonColor.withAlpha(geoJsonOpacity);
         }
