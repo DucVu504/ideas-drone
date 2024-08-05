@@ -33,6 +33,7 @@ const LoginForm = () => {
             if (response.ok) {
                 const data = await response.json();
                 localStorage.setItem('token', data.token);
+                localStorage.setItem('username', data.first_name + ' ' + data.last_name);
 
                 // Navigate based on user role
                 if (data.is_root === true) {

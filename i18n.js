@@ -11,11 +11,11 @@ i18n
     fallbackLng: 'vi',
     supportedLngs: ['en', 'vi'],
     debug: false,
-    ns: ['common', 'public', 'user_board'],
-    defaultNS: 'common',
-    backend: {
-      loadPath: '/locales/{{lng}}/{{ns}}.json',
-    },
+    // ns: ['common', 'public', 'user_board'],
+    // defaultNS: 'common',
+    // backend: {
+      // loadPath: '/locales/{{lng}}/{{ns}}.json',
+    // },
     detection: {
       order: ['querystring', 'cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
       caches: ['localStorage', 'cookie'],
