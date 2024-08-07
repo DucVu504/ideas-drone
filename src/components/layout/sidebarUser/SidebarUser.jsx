@@ -1,8 +1,10 @@
 "use client"
 import Image from "next/legacy/image"
 import { usePathname } from 'next/navigation';
+import { useTranslation } from 'next-i18next';
 
 const SidebarAdmin = () => {
+   const { t } = useTranslation("user_board");
    const currentPath = usePathname();
 
    return (
@@ -13,20 +15,20 @@ const SidebarAdmin = () => {
                      <li>
                         <a href="/user/projects" className={`flex flex-col items-center justify-center ${currentPath === '/user/projects' ? 'bg-green-100' : ''} border-b border-gray-300 p-2 text-gray-900 rounded-lg hover:bg-gray-200 group`}>
                            <Image src="/icons/common/project.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg" />
-                           <span className="mt-2 whitespace-nowrap text-sm">Dự án</span>
+                           <span className="mt-2 whitespace-nowrap text-sm">{t('projects')}</span>
                         </a>
                      </li>
 
                      <li>
                         <a href="/user/profile" className={`flex flex-col items-center justify-center ${currentPath === '/user/profile' ? 'bg-green-100' : ''} border-b border-gray-300 p-2 text-gray-900 rounded-lg hover:bg-gray-200 group`}>
                            <Image src="/icons/common/user.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg" />
-                           <span className="mt-2 whitespace-nowrap text-sm">Hồ sơ</span>
+                           <span className="mt-2 whitespace-nowrap text-sm">{t('users')}</span>
                         </a>
                      </li>
                      <li>
                         <a href="/user/request" className={`flex flex-col items-center justify-center ${currentPath === '/user/request' ? 'bg-green-100' : ''} border-b border-gray-300 p-2 text-gray-900 rounded-lg hover:bg-gray-200 group`}>
                            <Image src="/icons/common/request.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg" />
-                           <span className="mt-2 whitespace-nowrap text-sm">Yêu cầu</span>
+                           <span className="mt-2 whitespace-nowrap text-sm">{t('request')}</span>
                         </a>
                      </li>
                   </ul>

@@ -6,9 +6,9 @@
         "fullname_plh": "Fill in your name",
         "phone": "Phone",
         "reminder": "Message",
+        "send": "Send",
         "send_mail": "Email us for support.",
-        "title": "Your information",
-        "send": "Send"
+        "title": "Your information"
     },
     "equipment": {
         "detail": "DETAIL",
@@ -48,19 +48,30 @@
         "prj_6": "Linear survey of terrain (1:1000) in Ho Chi Minh City",
         "title": "PROJECTS OF"
     },
+    "quotes": {
+        "checkbox1": "I agree with IdeasDrone's",
+        "checkbox2": "Privacy Policy",
+        "firstname": "Firstname*",
+        "lastname": "Lastname*",
+        "mail": "Company email*",
+        "mes": "Let us know how we can help you.",
+        "term": "IdeasDrone may use your information to contact you about our products or services, you can unsubscribe from these communications at any time.",
+        "title": "Book a consultation with us",
+        "book" : "Book now"
+    },
     "services": {
         "detail_1": "We carry out surveys and create accurate and detailed smart maps, providing useful information about the terrain and environment.",
         "detail_2": "We use advanced technology to create high-quality 3D models, helping you better understand the space and structure of projects.",
         "detail_3": "We provide in-depth structural inspection services, helping you ensure the safety and quality of construction projects.",
         "detail_4": "We perform detailed environmental analyzes to assess the impact of man-made and natural activities on the surrounding environment.",
         "detail_5": "We provide training and consulting services to businesses on the use of UAV technology and applications in their business operations.",
-        "detail_6": "We offer specialized products customized to meet the specific needs of our customers in the field of UAV technology and its applications.",
+        "detail_6": "We offer digital geodetic data storage and display services, accessible on any platform, at any time, and from anywhere.",
         "sub_title_1": "SURVEY AND INTELLIGENT MAPPING",
         "sub_title_2": "BUILDING 3D MODELS",
         "sub_title_3": "STRUCTURAL INSPECTION",
         "sub_title_4": "ENVIRONMENTAL ANALYSIS",
         "sub_title_5": "TRAINING AND BUSINESS CONSULTATION",
-        "sub_title_6": "SPECIALIZED PRODUCTS",
+        "sub_title_6": "DIGITAL DATA STORAGE AND DISPLAY PLATFORM",
         "title": "SERVICES OF"
     }
 }

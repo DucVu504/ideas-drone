@@ -4,8 +4,10 @@ import { faBell, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import Image from "next/legacy/image";
 import LocaleSwitcher from "@/components/common/localeSwitcher/LocaleSwitcher";
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'next-i18next';
 
 const NavbarUser = () => {
+  const { t } = useTranslation("user_board");
   const [userName, setUserName] = useState('');
   const [menuVisible, setMenuVisible] = useState(false);
 
@@ -60,13 +62,13 @@ const NavbarUser = () => {
               </div>
             </div>
             {menuVisible && (
-              <div className="absolute right-0 mt-2 z-100 w-28 bg-white border rounded-md shadow-lg">
+              <div className="absolute right-0 mt-2 w-32 bg-white border rounded-md shadow-lg">
                 <button
                   className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-red-500"
                   onClick={handleLogout}
                 >
                   <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
-                  Logout
+                  {t('logout')}
                 </button>
               </div>
             )}

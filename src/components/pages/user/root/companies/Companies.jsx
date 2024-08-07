@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'next-i18next';
 
 import AddCompanyForm from '@/components/common/addCompanyForm/AddCompanyForm';
 import slugify from '@/components/utils/Slugify';
@@ -15,6 +16,8 @@ function createFullAddress(addressLine1, addressLine2, city) {
 const END_POINT = '/company/get-all'
 
 const Companies = () => {
+
+    const { t } = useTranslation("user_board");
     
     // Call API to get companies
     // State to store fetched companies
@@ -91,7 +94,7 @@ const Companies = () => {
                                 <svg className="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path clipRule="evenodd" fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                                 </svg>
-                                THÊM CÔNG TY
+                                {t('company_table.add')}
                             </button>
 
                         </div>
@@ -102,34 +105,34 @@ const Companies = () => {
                                 <tr>
                                     <th scope="col" className="px-4 py-3 w-72">
                                         <button type="button" onClick={() => requestSort('Name')}>
-                                            TÊN CÔNG TY {sortConfig.key === 'Name' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                        {t('company_table.name')} {sortConfig.key === 'Name' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3">
                                         <button type="button" onClick={() => requestSort('AddressLine1')}>
-                                            ĐỊA CHỈ {sortConfig.key === 'AddressLine1' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                            {t('company_table.address')}  {sortConfig.key === 'AddressLine1' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-32">
                                         <button type="button" onClick={() => requestSort('Country')}>
-                                            QUỐC GIA {sortConfig.key === 'Country' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                        {t('company_table.country')} {sortConfig.key === 'Country' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-48">
                                         <button type="button" onClick={() => requestSort('ModifiedTime')}>
-                                            NGÀY CẬP NHẬT {sortConfig.key === 'ModifiedTime' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                        {t('company_table.update_date')} {sortConfig.key === 'ModifiedTime' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-40">
                                         <button type="button" onClick={() => requestSort('IsDisabled')}>
-                                            TRẠNG THÁI {sortConfig.key === 'IsDisabled' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                           {t('company_table.status')} {sortConfig.key === 'IsDisabled' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-32">
-                                            NGƯỜI DÙNG
+                                    {t('company_table.users')}
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-24">
-                                            DỰ ÁN
+                                    {t('company_table.projects')}
                                     </th>
                                 </tr>
                             </thead>
@@ -149,14 +152,14 @@ const Companies = () => {
                                             <button
                                                 className="border text-black hover:text-blue-700 px-2 py-1 rounded mr-2"
                                                 onClick={() => handleCompanyClick(`/root/companies/users/${slugify(company.Name)}`, company.ID)}>
-                                                Xem
+                                                {t('company_table.view')}
                                             </button>
                                         </td>
                                         <td className="px-6 py-3">
                                             <button
                                                 className="border text-black hover:text-blue-700 px-2 py-1 rounded"
                                                 onClick={() => handleCompanyClick(`/root/companies/projects/${slugify(company.Name)}`, company.ID)}>
-                                                Xem
+                                                {t('company_table.view')}
                                             </button>
                                         </td>
 

@@ -5,10 +5,11 @@ import Image from "next/legacy/image";
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
-
+import { useTranslation } from 'next-i18next';
 
 
 const Projects = () => {
+    const { t } = useTranslation("user_board");
     const [sortConfig, setSortConfig] = useState({ key: 'productName', direction: 'ascending' });
 
     const projects = [
@@ -101,15 +102,15 @@ const Projects = () => {
                         </div>
                         <div className="flex space-x-8">
                             <div className="flex flex-col items-left space-y-4">
-                            <p className="text-gray-500 text-sm"><span className="text-blue-500 font-bold">| </span>Số bản cập nhật</p>
+                            <p className="text-gray-500 text-sm"><span className="text-blue-500 font-bold">| </span>{t('project_table.update_num')}</p>
                             <p className="text-gray-800 px-2 text-sm">{product.num_of_updated}</p>
                             </div>
                             <div className="flex flex-col items-left space-y-4">
-                            <p className="text-gray-500 text-sm"><span className="text-yellow-500 font-bold">| </span>Ngày cập nhật</p>
+                            <p className="text-gray-500 text-sm"><span className="text-yellow-500 font-bold">| </span>{t('project_table.update_date')}</p>
                             <p className="text-gray-800 px-2 text-sm">{product.date_updated}</p>
                             </div>
                             <div className="flex flex-col items-left space-y-4">
-                            <p className="text-gray-500 text-sm"><span className="text-fuchsia-400 font-bold">| </span>Định dạng</p>
+                            <p className="text-gray-500 text-sm"><span className="text-fuchsia-400 font-bold">| </span>{t('project_table.type')}</p>
                             <p className="text-gray-800 px-2 text-sm">{product.format}</p>
                             </div>
                         </div>

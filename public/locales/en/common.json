@@ -1,5 +1,8 @@
 {
     "english": "English",
+    "error": {
+        "login_fail": "Login failed, please try again"
+    },
     "login": {
         "contact": "Contact",
         "forgot-password": "Forgot password",

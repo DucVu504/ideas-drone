@@ -6,11 +6,13 @@ import AddUser from '@/components/common/addUserForm/AddUserForm';
 import EditUser from '@/components/common/editUser/EditUser';
 import { getData } from '@/components/utils/UserApi';
 import {jwtDecode} from 'jwt-decode';
+import { useTranslation } from 'next-i18next';
 
 const END_POINT = '/company/get-all-users/'
 
 const Users = () => {
     
+    const { t } = useTranslation("user_board");
     // Get users
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -44,9 +46,9 @@ const Users = () => {
     // Todo: need to improve !!
     function setRole(is_admin) {
         if (is_admin) {
-            return 'Quản trị viên';
+            return t('user_board.admin');
         }
-        return 'Người chỉnh sửa';
+        return t('user_board.normal_user');
     }
 
     const addUser = (newUser) => {
@@ -101,7 +103,7 @@ const Users = () => {
                                 <svg className="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path clipRule="evenodd" fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                                 </svg>
-                                THÊM NGƯỜI DÙNG
+                                {t('user_table.add_user')}
                             </button>
 
                         </div>
@@ -113,12 +115,12 @@ const Users = () => {
                                 <tr>
                                     <th scope="col" className="px-4 py-3 ">
                                         <button type="button" onClick={() => requestSort('name')}>
-                                            TÊN NGƯỜI DÙNG{sortConfig.key === 'name' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                        {t('user_table.user_name')}{sortConfig.key === 'name' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-[180px]">
                                         <button type="button" onClick={() => requestSort('role')}>
-                                            VAI TRÒ {sortConfig.key === 'role' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                        {t('user_table.role')} {sortConfig.key === 'role' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3">
@@ -128,17 +130,17 @@ const Users = () => {
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-[180px]">
                                         <button type="button" onClick={() => requestSort('modified_time')}>
-                                            NGÀY CẬP NHẬT {sortConfig.key === 'modified_time' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                        {t('user_table.update_day')} {sortConfig.key === 'modified_time' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-[150px]">
                                         <button type="button" onClick={() => requestSort('status')}>
-                                            TRẠNG THÁI {sortConfig.key === 'status' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                        {t('user_table.status')}  {sortConfig.key === 'status' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-[150px]">
                                         <button type="button" onClick={() => requestSort('status')}>
-                                            HÀNH ĐỘNG {sortConfig.key === 'status' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                        {t('user_table.action')} {sortConfig.key === 'status' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
 

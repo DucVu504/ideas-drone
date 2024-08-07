@@ -34,10 +34,10 @@ const NavbarHome = () => {
                         <Image src="/images/common/Logo_main.png" className="h-14 w-auto p-1" alt="DroneGIS Logo" width={150} height={50} />
                     </a>
                     <div className="flex items-center xl:order-2 space-x-3 xl:space-x-3 rtl:space-x-reverse">
-                        <button type="button" className="w-28 text-black border border-green-700 hover:border-green-500 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center">
+                        <button type="button" className="w-28 text-black border-green-500 border hover:bg-green-500 shadow-md font-medium rounded-lg text-sm px-4 py-2 text-center">
                             <Link href="/login">{t('navbarHome.login')}</Link>
                         </button>
-                        <button type="button" className="w-32 text-white bg-green-700 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center">
+                        <button type="button" className="w-32 text-white bg-green-500 border border-green-500 bg-gradient-to-r hover:from-green-500 hover:to-lime-300 font-medium rounded-lg shadow-md text-sm px-4 py-2 text-center">
                             <Link href="/quotes">{t('navbarHome.quote')}</Link>
                             
                         </button>

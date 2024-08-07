@@ -2,11 +2,13 @@
 import React from 'react';
 import Users from "./Users";
 import Projects from "./Projects";
+import { useTranslation } from 'next-i18next';
 
 import { useState } from 'react';
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('users');
+  const { t } = useTranslation("user_board");
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -16,13 +18,13 @@ const Dashboard = () => {
                 className={`py-2 px-4 rounded-l-md ${activeTab === 'users' ? 'bg-lime-400' : 'bg-gray-200'}`}
                 onClick={() => setActiveTab('users')}
                 >
-                Users
+                {t('users')}
                 </button>
                 <button
                 className={`py-2 px-4 rounded-r-md ${activeTab === 'projects' ? 'bg-lime-400' : 'bg-gray-200'}`}
                 onClick={() => setActiveTab('projects')}
                 >
-                Projects
+                {t('projects')}
                 </button>
                 <p className="text-gray-500 px-2"><span className="text-cyan-400 text-xl font-bold">| </span>CÔNG TY TNHH MỘT THÀNH VIÊN ABC</p>
             </div>

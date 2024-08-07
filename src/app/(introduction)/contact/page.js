@@ -1,16 +1,16 @@
+
 "use client"
-import { useTranslation } from 'react-i18next';
-import LocaleSwitcher from "@/components/common/localeSwitcher/LocaleSwitcher";
+import Contact from "@/components/pages/home/contact/Contact";
+import SocialMediaIcons from "@/components/common/socialMedia/SocialMedia";
+import HomeLayout from "@/components/layout/homeLayout/HomeLayout";
 
-const HomePage = () => {
-  const { t } = useTranslation('common');
-
+export default function Home() {
   return (
     <div>
-      <h1>{t('english')}</h1>
-      <LocaleSwitcher />
+      <HomeLayout>
+        <Contact/>
+        <SocialMediaIcons/>
+      </HomeLayout>
     </div>
   );
 };
-
-export default HomePage;

@@ -1,9 +1,11 @@
 "use client"
 import Image from "next/legacy/image"
 import { usePathname } from 'next/navigation';
+import { useTranslation } from 'next-i18next';
 
 const SidebarRoot = () => {
    const currentPath = usePathname();
+   const { t } = useTranslation("user_board");
 
    return (
          <div className='fixed mt-20'>
@@ -13,20 +15,20 @@ const SidebarRoot = () => {
                      <li>
                         <a href="/root/companies" className={`flex flex-col items-center justify-center ${currentPath === '/root/companies' ? 'bg-green-100' : ''} border-b border-gray-300 p-2 text-gray-900 rounded-lg hover:bg-gray-200 group`}>
                            <Image src="/icons/common/company.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg" />
-                           <span className="mt-2 whitespace-nowrap text-sm">Công ty</span>
+                           <span className="mt-2 whitespace-nowrap text-sm">{t('companies')}</span>
                         </a>
                      </li>
 
                      <li>
                         <a href="/root/all-projects" className={`flex flex-col items-center justify-center ${currentPath === '/root/all-projects' ? 'bg-green-100' : ''} border-b border-gray-300 p-2 text-gray-900 rounded-lg hover:bg-gray-200 group`}>
                            <Image src="/icons/common/projects.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg" />
-                           <span className="mt-2 whitespace-nowrap text-sm"> Dự án</span>
+                           <span className="mt-2 whitespace-nowrap text-sm"> {t('projects')}</span>
                         </a>
                      </li>
                      <li>
                         <a href="/root/all-users" className={`flex flex-col items-center justify-center ${currentPath === '/root/all-users' ? 'bg-green-100' : ''} border-b border-gray-300 p-2 text-gray-900 rounded-lg hover:bg-gray-200 group`}>
                            <Image src="/icons/common/users.svg" alt="Logo" width="50" height="50" className="border p-1 border-gray-300 rounded-lg" />
-                           <span className="mt-2 whitespace-nowrap text-sm"> Người dùng</span>
+                           <span className="mt-2 whitespace-nowrap text-sm"> {t('users')}</span>
                         </a>
                      </li>
                   </ul>

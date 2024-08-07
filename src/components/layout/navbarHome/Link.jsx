@@ -22,28 +22,28 @@ const Links = () => {
         },
         {
             title: t("navbarHome.services"),
-            path: "/our-services",
-            className: currentPath === "/our-services" ? generalStyleActive : generalStyle,
+            path: "/services",
+            className: currentPath === "/services" ? generalStyleActive : generalStyle,
         },
         {
             title: t("navbarHome.projects"),
-            path: "/our-projects",
-            className: currentPath === "/our-projects" ? generalStyleActive : generalStyle,
+            path: "/projects",
+            className: currentPath === "/projects" ? generalStyleActive : generalStyle,
         },
         {
             title: t("navbarHome.equipments"),
-            path: "/our-equipments",
-            className: currentPath === "/our-equipments" ? generalStyleActive : generalStyle,
+            path: "/equipments",
+            className: currentPath === "/equipments" ? generalStyleActive : generalStyle,
         },
         {
             title: t("navbarHome.about_us"),
-            path: "/about_us",
-            className: currentPath === "/about-us" ? generalStyleActive : generalStyle,
+            path: "/about",
+            className: currentPath === "/about" ? generalStyleActive : generalStyle,
         },
         {
             title: t("navbarHome.contact"),
-            path: "/contact-us",
-            className: currentPath === "/contact-us" ? generalStyleActive : generalStyle,
+            path: "/contact",
+            className: currentPath === "/contact" ? generalStyleActive : generalStyle,
         },
     ];
 
