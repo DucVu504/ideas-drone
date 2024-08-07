@@ -6,7 +6,8 @@ const ProjectWorkspace = () => {
     return (
       <div>
         <Navigator/>
-        <CesiumView2D/>
+        {/* <CesiumView2D/> */}
+        <CesiumView3DTiles/>
       </div>
   
     );

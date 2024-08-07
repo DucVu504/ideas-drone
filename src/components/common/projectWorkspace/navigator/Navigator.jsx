@@ -22,7 +22,7 @@ const Navigator = () => {
           </div>
           <div className="flex items-center">
             <Link
-              href="/user/documents"
+              href="/user/projects"
               className="flex items-center text-gray-700 border hover:text-green-500 hover:border-green-500 font-bold py-1 px-2 rounded-md mx-2"
             >
               <FaArrowLeft className="mr-1" />

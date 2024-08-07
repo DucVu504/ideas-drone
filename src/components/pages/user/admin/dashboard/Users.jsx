@@ -4,11 +4,11 @@ import { FaUserTie, FaUserEdit, FaUser } from 'react-icons/fa';
 import ActionButton from '@/components/common/actionButton/ActionButton';
 import AddUser from '@/components/common/addUserForm/AddUserForm';
 import EditUser from '@/components/common/editUser/EditUser';
-import { getData } from '@/components/utils/UserApi';
-import {jwtDecode} from 'jwt-decode';
+import { postData } from '@/components/utils/UserApi';
 import { useTranslation } from 'next-i18next';
 
-const END_POINT = '/company/get-all-users/'
+const END_POINT = '/user/getlist'
+const COUNT = 10;
 
 const Users = () => {
     
@@ -17,38 +17,71 @@ const Users = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const requestBody = (page, is_admin = "false") => ({
+        "page": page,
+        "count": COUNT,
+        "sort": [
+            {
+                "by": "first_name",
+                "type": "asc"
+            }
+        ],
+        "search": [
+            {
+                "by": "is_admin",
+                "value": is_admin
+            },
+            {
+                "by": "first_name",
+                "value": ""
+            }
+        ]
+    });
+
+    const [totalPages, setTotalPages] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const handleNext = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const handlePrevious = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const fetchUsers = async (page) => {
+        const user_data = await postData(END_POINT, requestBody(page , "false"));
+        const admin_data = await postData(END_POINT, requestBody(page, "true"));
+
+        setUsers(user_data.Data.List.concat(admin_data.Data.List));
+        setTotalPages(Math.ceil((user_data.Data.Total +user_data.Data.Total) / COUNT));
+        setLoading(false);
+        };
     
     // Fetch users when the component mounts
     useEffect(() => {
-        // Get company ID
-        const token = localStorage.getItem('token');
-
-        const decoded = jwtDecode(token);
-        const companyId = decoded.company_id;
-        const getUsers = async () => {
-            const data = await getData(`${END_POINT}${companyId}`);
-            setUsers(data["Data"]);
-            setLoading(false);
-            };
-        
-        getUsers();
-    }, []);
+            fetchUsers(currentPage);
+    }, [currentPage]);
 
     // Join user name
-    function getFullName(firstName, middleName, lastName) {
-        if (middleName) {
-            return `${firstName} ${middleName} ${lastName}`;
+    function getFullName(first_name, middle_name, last_name) {
+        if (middle_name) {
+            return `${first_name} ${middle_name} ${last_name}`;
         }
-        return `${firstName} ${lastName}`;
+        return `${first_name} ${last_name}`;
     }
 
     // Handle set role
     // Todo: need to improve !!
     function setRole(is_admin) {
         if (is_admin) {
-            return t('user_board.admin');
+            return t('user_table.admin');
         }
-        return t('user_board.normal_user');
+        return t('user_table.normal_user');
     }
 
     const addUser = (newUser) => {
@@ -151,27 +184,27 @@ const Users = () => {
                                 {sortedUsers.map((user, index) => (
                                     <tr key={index} className="border-b hover:bg-slate-50">
                                         <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
-                                            {getFullName(user.FirstName, user.MiddleName, user.LastName)}
+                                            {getFullName(user.first_name, user.middle_name, user.last_name)}
                                         </th>
                                         <td className="px-4 py-3">
-                                            {setRole(user.IsAdmin) === 'Quản trị viên' && (
+                                            {setRole(user.is_admin) === t('user_table.admin') && (
                                             <div className="bg-blue-100 text-blue-800 px-1 rounded flex items-center">
-                                                <FaUserTie className="mr-2" />Quản trị viên
+                                                <FaUserTie className="mr-2" />{t('user_table.admin')}
                                             </div>
                                             )}
-                                            {setRole(user.IsAdmin) === 'Người chỉnh sửa' && (
+                                            {setRole(user.is_admin) === t('user_table.normal_user') && (
                                             <div className="bg-violet-200 text-violet-800 px-1 rounded flex items-center">
-                                                <FaUserEdit className="mr-2" />Người chỉnh sửa
+                                                <FaUserEdit className="mr-2" />{t('user_table.normal_user')}
                                             </div>
                                             )}
-                                            {setRole(user.IsAdmin)=== 'Người xem' && (
+                                            {setRole(user.is_admin)=== 'Người xem' && (
                                             <div className="bg-gray-200 text-black px-1 rounded flex items-center">
                                                 <FaUser className="mr-2" />Người xem
                                             </div>
                                             )}
                                         </td>
-                                        <td className="px-4 py-3">{user.Email}</td>
-                                        <td className="px-4 py-3">{user.ModifiedTime}</td>
+                                        <td className="px-4 py-3">{user.email}</td>
+                                        <td className="px-4 py-3">{user.modified_time}</td>
                                         <td className="px-4 py-3">
                                             <div className={`h-4 w-4 rounded-md ${user.status ? 'bg-red-500' : 'bg-green-500'}`}></div>
                                         </td>
@@ -184,8 +217,43 @@ const Users = () => {
                             </tbody>
                         </table>
                     </div>
-                    
                 </div>
+                <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label="Table navigation">
+                    <span class="text-sm font-normal text-gray-500 mb-4 md:mb-0 block w-full md:inline md:w-auto">
+                        Showing <span class="font-semibold text-gray-900">{currentPage}</span> of <span class="font-semibold text-gray-900">{totalPages}</span>
+                    </span>
+                    <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
+                        <li>
+                            <button
+                                onClick={handlePrevious}
+                                className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700"
+                            >
+                                Previous
+                            </button>
+                        </li>
+
+                        {Array.from({ length: totalPages }, (_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => setCurrentPage(index + 1)}
+                                className={`${currentPage === index + 1
+                                    ? "flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+                                    : "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                                    }`}
+                            >
+                                {index + 1}
+                            </button>
+                        ))}
+                        <li>
+                            <button
+                                onClick={handleNext}
+                                className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700"
+                            >
+                                Next
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
             </div>
             {isEditing && <EditUser user={currentUser} onClose={() => setIsEditing(false)} />}
             <AddUser isOpen={isOpen} onClose={toggleModal} onAddUser={addUser}/>

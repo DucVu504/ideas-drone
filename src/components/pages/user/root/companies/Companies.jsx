@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next';
 
 import AddCompanyForm from '@/components/common/addCompanyForm/AddCompanyForm';
 import slugify from '@/components/utils/Slugify';
-import { getData } from '@/components/utils/UserApi';
+import { postData } from '@/components/utils/UserApi';
 
 
 function createFullAddress(addressLine1, addressLine2, city) {
@@ -14,32 +14,67 @@ function createFullAddress(addressLine1, addressLine2, city) {
 }
 
 const END_POINT = '/company/get-all'
+const COUNT = 5;
+
 
 const Companies = () => {
-
     const { t } = useTranslation("user_board");
-    
+
+    const requestBody = (page) => ({
+        "page": page,
+        "count": COUNT,
+        "sort": [
+            {
+                "by": "name",
+                "type": "asc"
+            }
+        ],
+        "search": [
+            {
+                "by": "city",
+                "value": ""
+            }
+        ]
+    });
+
+
     // Call API to get companies
     // State to store fetched companies
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const [totalPages, setTotalPages] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const handleNext = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const handlePrevious = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
     const router = useRouter();
 
     const handleCompanyClick = (path, companyId) => {
         router.push(`${path}?companyId=${companyId}`);
     };
 
+    const fetchCompanies = async (page) => {
+        const data = await postData(END_POINT, requestBody(page));
+
+        setCompanies(data.Data.List);
+        setTotalPages(Math.ceil(data.Data.Total / COUNT));
+        setLoading(false);
+    };
     // Fetch companies when the component mounts
     useEffect(() => {
-        const getCompanies = async () => {
-        const data = await getData(END_POINT);
-
-        setCompanies(data['Data']);
-        setLoading(false);
-        };
-
-        getCompanies();
-    }, []);
+        fetchCompanies(currentPage);
+    }, [currentPage]);
 
 
     // Handle sorting
@@ -69,7 +104,7 @@ const Companies = () => {
 
     const addCompany = (newCompany) => {
         setCompanies([...companies, newCompany]);
-      };
+    };
 
     return (
         <section className="bg-gray-50  p-3 sm:p-5 lg:ml-36">
@@ -90,7 +125,7 @@ const Companies = () => {
                             </form>
                         </div>
                         <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                            <button type="button" onClick={toggleModal}  className="flex items-center justify-center text-black bg-lime-300 hover:bg-lime-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2">
+                            <button type="button" onClick={toggleModal} className="flex items-center justify-center text-black bg-lime-300 hover:bg-lime-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2">
                                 <svg className="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path clipRule="evenodd" fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                                 </svg>
@@ -105,7 +140,7 @@ const Companies = () => {
                                 <tr>
                                     <th scope="col" className="px-4 py-3 w-72">
                                         <button type="button" onClick={() => requestSort('Name')}>
-                                        {t('company_table.name')} {sortConfig.key === 'Name' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                            {t('company_table.name')} {sortConfig.key === 'Name' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3">
@@ -115,24 +150,24 @@ const Companies = () => {
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-32">
                                         <button type="button" onClick={() => requestSort('Country')}>
-                                        {t('company_table.country')} {sortConfig.key === 'Country' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                            {t('company_table.country')} {sortConfig.key === 'Country' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-48">
                                         <button type="button" onClick={() => requestSort('ModifiedTime')}>
-                                        {t('company_table.update_date')} {sortConfig.key === 'ModifiedTime' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                            {t('company_table.update_date')} {sortConfig.key === 'ModifiedTime' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-40">
                                         <button type="button" onClick={() => requestSort('IsDisabled')}>
-                                           {t('company_table.status')} {sortConfig.key === 'IsDisabled' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                            {t('company_table.status')} {sortConfig.key === 'IsDisabled' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-32">
-                                    {t('company_table.users')}
+                                        {t('company_table.users')}
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-24">
-                                    {t('company_table.projects')}
+                                        {t('company_table.projects')}
                                     </th>
                                 </tr>
                             </thead>
@@ -140,25 +175,25 @@ const Companies = () => {
                                 {sortedCompanies.map((company, index) => (
                                     <tr key={index} className="border-b hover:bg-slate-50">
                                         <th scope="row" className="px-4 py-3 w-12 font-medium text-gray-900">
-                                            {company.Name}
+                                            {company.name}
                                         </th>
-                                        <td className="px-4 py-3">{createFullAddress(company.AddressLine2, company.AddressLine1, company.City)}</td>
-                                        <td className="px-4 py-3">{company.Country}</td>
-                                        <td className="px-4 py-3">{company.ModifiedTime}</td>
+                                        <td className="px-4 py-3">{createFullAddress(company.address_line_2, company.address_line_1, company.city)}</td>
+                                        <td className="px-4 py-3">{company.country}</td>
+                                        <td className="px-4 py-3">{new Date(company.modified_time).toLocaleDateString()}</td>
                                         <td className="px-4 py-3">
                                             <div className={`h-4 w-4 rounded-md ${company.IsDisabled ? 'bg-red-500' : 'bg-green-500'}`}></div>
                                         </td>
                                         <td className="px-6 py-3">
                                             <button
                                                 className="border text-black hover:text-blue-700 px-2 py-1 rounded mr-2"
-                                                onClick={() => handleCompanyClick(`/root/companies/users/${slugify(company.Name)}`, company.ID)}>
+                                                onClick={() => handleCompanyClick(`/root/companies/users/${slugify(company.name)}`, company.id)}>
                                                 {t('company_table.view')}
                                             </button>
                                         </td>
                                         <td className="px-6 py-3">
                                             <button
                                                 className="border text-black hover:text-blue-700 px-2 py-1 rounded"
-                                                onClick={() => handleCompanyClick(`/root/companies/projects/${slugify(company.Name)}`, company.ID)}>
+                                                onClick={() => handleCompanyClick(`/root/companies/projects/${slugify(company.name)}`, company.id)}>
                                                 {t('company_table.view')}
                                             </button>
                                         </td>
@@ -168,8 +203,45 @@ const Companies = () => {
                             </tbody>
                         </table>
                     </div>
-                    
+
                 </div>
+                <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label="Table navigation">
+                    <span class="text-sm font-normal text-gray-500 mb-4 md:mb-0 block w-full md:inline md:w-auto">
+                        Showing <span class="font-semibold text-gray-900">{currentPage}</span> of <span class="font-semibold text-gray-900">{totalPages}</span>
+                    </span>
+                    <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
+                        <li>
+                            <button
+                                onClick={handlePrevious}
+                                className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700"
+                            >
+                                Previous
+                            </button>
+                        </li>
+
+                        {Array.from({ length: totalPages }, (_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => setCurrentPage(index + 1)}
+                                className={`${currentPage === index + 1
+                                    ? "flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+                                    : "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                                    }`}
+                            >
+                                {index + 1}
+                            </button>
+                        ))}
+                        <li>
+                            <button
+                                onClick={handleNext}
+                                className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700"
+                            >
+                                Next
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+
             </div>
             <AddCompanyForm isOpen={isOpen} onClose={toggleModal} onAddCompany={addCompany} />
         </section>

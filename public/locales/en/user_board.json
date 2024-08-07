@@ -9,7 +9,7 @@
         "status": "STATUS",
         "update_date": "UPDATE DAY",
         "users": "USERS",
-        "view": "See"
+        "view": "View"
     },
     "dashboard": "Dashboard",
     "logout": "Log out",
@@ -39,7 +39,7 @@
     "user_table": {
         "action": "ACTION",
         "add_user": "ADD USER",
-        "admin": "Manager",
+        "admin": "Administrator",
         "normal_user": "User",
         "role": "ROLE",
         "status": "STATUS",
