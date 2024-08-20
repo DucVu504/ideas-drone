@@ -44,7 +44,7 @@ function Equipment() {
                                     <div className="p-4">
                                         <h5 className="text-xl font-semibold mb-2">{card.title}</h5>
                                         <h6 className="text-sm  text-gray-500 mb-2">{card.subtitle}</h6>
-                                        <p className="text-gray-700 h-32 mb-4 hidden xl:block hidden">{card.description}</p>
+                                        <p className="text-gray-700 h-32 mb-4 xl:block hidden">{card.description}</p>
                                         <button className="bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
                                         {t('equipment.detail')}
                                         </button>

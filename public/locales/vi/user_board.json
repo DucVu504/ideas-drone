@@ -2,14 +2,15 @@
     "companies": "Công ty",
     "company_table": {
         "add": "THÊM CÔNG TY",
-        "address": "ĐỊA CHỈ",
+        "address": "THÀNH PHỐ",
         "country": "QUỐC GIA",
         "name": "TÊN CÔNG TY",
         "projects": "DỰ ÁN",
         "status": "TRẠNG THÁI",
         "update_date": "NGÀY CẬP NHẬT",
         "users": "NGƯỜI DÙNG",
-        "view": "Xem"
+        "view": "Xem",
+        "not_yet_update": "Chưa cập nhật"
     },
     "dashboard": "Bảng điều khiển",
     "logout": "Đăng xuất",
@@ -44,6 +45,7 @@
         "role": "VAI TRÒ",
         "status": "TRẠNG THÁI",
         "update_day": "NGÀY CẬP NHẬT",
-        "user_name": "TÊN NGƯỜI DÙNG"
+        "user_name": "TÊN NGƯỜI DÙNG",
+        "not_yet_update": "Chưa cập nhật"
     }
 }

@@ -6,12 +6,16 @@ import Link from 'next/link';
 import ActionButton from '@/components/common/actionButton/ActionButton';
 import AddUser from '@/components/common/addUserForm/AddUserForm';
 import EditUser from '@/components/common/editUser/EditUser';
-import { getData } from '@/components/utils/UserApi';
+import Pagination from '@/components/common/pagination/Pagination';
+import { postData } from '@/components/utils/UserApi';
+import { useTranslation } from 'next-i18next';
 
-const END_POINT = '/company/get-all-users/'
+const END_POINT = '/user/getlist';
+const COUNT = 10;
 
 const CompanyUsers = () => {
     
+    const { t } = useTranslation("user_board");
     // Get users
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -20,32 +24,64 @@ const CompanyUsers = () => {
     const searchParams = useSearchParams()
     const companyId = searchParams.get('companyId')
 
+    const requestBody = (page) => ({
+        "page": page,
+        "count": COUNT,
+        "sort": [
+            {
+                "by": "first_name",
+                "type": "asc"
+            }
+        ],
+        "search": [
+
+        ],
+        "company_id": companyId
+    });
+
+    const [totalPages, setTotalPages] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const handleNext = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const handlePrevious = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const fetchUsers = async (page) => {
+        const users = await postData(END_POINT, requestBody(page));
+
+        setUsers(users.Data.List);
+        setTotalPages(Math.ceil((users.Data.Total) / COUNT));
+        setLoading(false);
+        };
+    
     // Fetch users when the component mounts
     useEffect(() => {
-      const getUsers = async () => {
-          const data = await getData(`${END_POINT}${companyId}`);
-          setUsers(data["Data"]);
-          setLoading(false);
-        };
-        
-        getUsers();
-    }, []);
+            fetchUsers(currentPage);
+    }, [currentPage]);
 
     // Join user name
-    function getFullName(firstName, middleName, lastName) {
-        if (middleName) {
-            return `${firstName} ${middleName} ${lastName}`;
+    function getFullName(first_name, middle_name, last_name) {
+        if (middle_name) {
+            return `${first_name} ${middle_name} ${last_name}`;
         }
-        return `${firstName} ${lastName}`;
+        return `${first_name} ${last_name}`;
     }
 
     // Handle set role
     // Todo: need to improve !!
     function setRole(is_admin) {
         if (is_admin) {
-            return 'Quản trị viên';
+            return t('user_table.admin');
         }
-        return 'Người chỉnh sửa';
+        return t('user_table.normal_user');
     }
 
     const addUser = (newUser) => {
@@ -53,7 +89,7 @@ const CompanyUsers = () => {
       };
 
     // Handle sort
-    const [sortConfig, setSortConfig] = useState({ key: 'productName', direction: 'ascending' });
+    const [sortConfig, setSortConfig] = useState({ key: 'first_name', direction: 'ascending' });
     const totalRows = users.length;
     
     const sortedUsers = [...users].sort((a, b) => {
@@ -98,7 +134,7 @@ const CompanyUsers = () => {
                         <div className="flex items-center p-2 space-x-2 text-sm text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm sm:text-base  sm:space-x-4 ">
                             <Link href="/root/companies">
                                 <li className="flex items-center hover:text-blue-600 group">
-                                    CÔNG TY IDEASDRONE
+                                    CÔNG TY
                                     <svg className="w-3 h-3 ms-2 sm:ms-4 rtl:rotate-0 group-hover:rotate-180 transition-transform" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 10">
                                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m7 9 4-4-4-4M1 9l4-4-4-4"/>
                                     </svg>
@@ -113,7 +149,7 @@ const CompanyUsers = () => {
                                 <svg className="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path clipRule="evenodd" fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                                 </svg>
-                                THÊM NGƯỜI DÙNG
+                                {t('user_table.add_user')}
                             </button>
 
                         </div>
@@ -124,13 +160,13 @@ const CompanyUsers = () => {
                             <thead className="text-sm text-gray-700 uppercase bg-gradient-to-r from-lime-200 to-lime-100 ">
                                 <tr>
                                     <th scope="col" className="px-4 py-3 ">
-                                        <button type="button" onClick={() => requestSort('name')}>
-                                            TÊN NGƯỜI DÙNG{sortConfig.key === 'name' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                        <button type="button" onClick={() => requestSort('first_name')}>
+                                        {t('user_table.user_name')}{sortConfig.key === 'name' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-[180px]">
-                                        <button type="button" onClick={() => requestSort('role')}>
-                                            VAI TRÒ {sortConfig.key === 'role' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                        <button type="button" onClick={() => requestSort('is_admin')}>
+                                        {t('user_table.role')} {sortConfig.key === 'role' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3">
@@ -140,17 +176,17 @@ const CompanyUsers = () => {
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-[180px]">
                                         <button type="button" onClick={() => requestSort('modified_time')}>
-                                            NGÀY CẬP NHẬT {sortConfig.key === 'modified_time' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                        {t('user_table.update_day')} {sortConfig.key === 'modified_time' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-[150px]">
                                         <button type="button" onClick={() => requestSort('status')}>
-                                            TRẠNG THÁI {sortConfig.key === 'status' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                        {t('user_table.status')}  {sortConfig.key === 'status' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-[150px]">
                                         <button type="button" onClick={() => requestSort('status')}>
-                                            HÀNH ĐỘNG {sortConfig.key === 'status' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                        {t('user_table.action')} {sortConfig.key === 'status' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
 
@@ -161,27 +197,29 @@ const CompanyUsers = () => {
                                 {sortedUsers.map((user, index) => (
                                     <tr key={index} className="border-b hover:bg-slate-50">
                                         <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
-                                            {getFullName(user.FirstName, user.MiddleName, user.LastName)}
+                                            {getFullName(user.first_name, user.middle_name, user.last_name)}
                                         </th>
                                         <td className="px-4 py-3">
-                                            {setRole(user.IsAdmin) === 'Quản trị viên' && (
+                                            {setRole(user.is_admin) === t('user_table.admin') && (
                                             <div className="bg-blue-100 text-blue-800 px-1 rounded flex items-center">
-                                                <FaUserTie className="mr-2" />Quản trị viên
+                                                <FaUserTie className="mr-2" />{t('user_table.admin')}
                                             </div>
                                             )}
-                                            {setRole(user.IsAdmin) === 'Người chỉnh sửa' && (
+                                            {setRole(user.is_admin) === t('user_table.normal_user') && (
                                             <div className="bg-violet-200 text-violet-800 px-1 rounded flex items-center">
-                                                <FaUserEdit className="mr-2" />Người chỉnh sửa
+                                                <FaUserEdit className="mr-2" />{t('user_table.normal_user')}
                                             </div>
                                             )}
-                                            {setRole(user.IsAdmin)=== 'Người xem' && (
+                                            {setRole(user.is_admin)=== 'Người xem' && (
                                             <div className="bg-gray-200 text-black px-1 rounded flex items-center">
                                                 <FaUser className="mr-2" />Người xem
                                             </div>
                                             )}
                                         </td>
-                                        <td className="px-4 py-3">{user.Email}</td>
-                                        <td className="px-4 py-3">{user.ModifiedTime}</td>
+                                        <td className="px-4 py-3">{user.email}</td>
+                                        <td className="px-4 py-3">
+                                            {user.modified_time ? new Date(user.modified_time).toLocaleDateString() : t('user_table.not_yet_update')}
+                                        </td>
                                         <td className="px-4 py-3">
                                             <div className={`h-4 w-4 rounded-md ${user.status ? 'bg-red-500' : 'bg-green-500'}`}></div>
                                         </td>
@@ -194,8 +232,14 @@ const CompanyUsers = () => {
                             </tbody>
                         </table>
                     </div>
-                    
                 </div>
+                <Pagination 
+                currentPage={currentPage}
+                totalPages={totalPages}
+                setCurrentPage={setCurrentPage}
+                handlePrevious={handlePrevious}
+                handleNext={handleNext}
+                />
             </div>
             {isEditing && <EditUser user={currentUser} onClose={() => setIsEditing(false)} />}
             <AddUser isOpen={isOpen} onClose={toggleModal} onAddUser={addUser}/>

@@ -18,15 +18,15 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
   const [toastInfo, setToastInfo] = useState(["", ""]) // type and message
 
   const [formData, setFormData] = useState({
-    Username: '',
-    Password: '',
-    Email: '',
-    FirstName: '',
-    MiddleName: '',
-    LastName: '',
-    IsRoot: false,
-    IsAdmin: false,
-    CompanyID: companyId,
+    username: '',
+    password: '',
+    email: '',
+    first_name: '',
+    middle_name: '',
+    last_name: '',
+    is_root: false,
+    is_admin: false,
+    company_id: companyId,
   });
 
 
@@ -47,7 +47,7 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
     if (value === 'admin') {
       setFormData({
         ...formData,
-        IsAdmin: true,
+        is_admin: true,
       });
     } else {
       setFormData({
@@ -64,7 +64,7 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.Password !== confirmPassword) {
+    if (formData.password !== confirmPassword) {
       alert('Mật khẩu và mật khẩu xác nhận không khớp.');
       return;
     }
@@ -73,15 +73,15 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
         setToastInfo(['success', 'Thêm người dùng thành công']);
         onAddUser(newUser["Data"]);
       setFormData({
-        Username: '',
-        Password: '',
-        Email: '',
-        FirstName: '',
-        MiddleName: '',
-        LastName: '',
-        IsRoot: false,
-        IsAdmin: false,
-        CompanyID: companyId,
+        username: '',
+        password: '',
+        email: '',
+        first_name: '',
+        middle_name: '',
+        last_name: '',
+        is_root: false,
+        is_admin: false,
+        company_id: companyId,
       });
       onClose();
       return}
@@ -116,24 +116,24 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
             <form onSubmit={handleSubmit}>
               <div className="grid gap-4 mb-4 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="FirstName" className="block mb-2 text-sm font-medium text-gray-900">Họ</label>
-                  <input type="text" name="FirstName" id="FirstName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="John" value={formData.FirstName} onChange={handleChange} required />
+                  <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900">Họ</label>
+                  <input type="text" name="first_name" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="John" value={formData.first_name} onChange={handleChange} required />
                 </div>
                 <div>
-                  <label htmlFor="MiddleName" className="block mb-2 text-sm font-medium text-gray-900">Tên đệm</label>
-                  <input type="text" name="MiddleName" id="MiddleName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Doe" value={formData.MiddleName} onChange={handleChange} required />
+                  <label htmlFor="middle_name" className="block mb-2 text-sm font-medium text-gray-900">Tên đệm</label>
+                  <input type="text" name="middle_name" id="middle_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Doe" value={formData.middle_name} onChange={handleChange} required />
                 </div>
                 <div>
-                  <label htmlFor="LastName" className="block mb-2 text-sm font-medium text-gray-900">Tên</label>
-                  <input type="text" name="LastName" id="LastName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="John" value={formData.LastName} onChange={handleChange} required />
+                  <label htmlFor="last_name" className="block mb-2 text-sm font-medium text-gray-900">Tên</label>
+                  <input type="text" name="last_name" id="last_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="John" value={formData.last_name} onChange={handleChange} required />
                 </div>
                 <div>
-                  <label htmlFor="Username" className="block mb-2 text-sm font-medium text-gray-900">Tên đăng nhập</label>
-                  <input type="text" name="Username" id="Username" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Doe" value={formData.Username} onChange={handleChange} required />
+                  <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">Tên đăng nhập</label>
+                  <input type="text" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Doe" value={formData.username} onChange={handleChange} required />
                 </div>
                 <div>
-                  <label htmlFor="Email" className="block mb-2 text-sm font-medium text-gray-900">Email</label>
-                  <input type="email" name="Email" id="Email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="name@company.com" value={formData.Email} onChange={handleChange} required />
+                  <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                  <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="name@company.com" value={formData.email} onChange={handleChange} required />
                 </div>
                 <div>
                   <label htmlFor="permissions" className="block mb-2 text-sm font-medium text-gray-500">Chức vụ</label>
@@ -143,13 +143,13 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
                   </select>
                 </div>
                 <div className="relative">
-                  <label htmlFor="Password" className="block mb-2 text-sm font-medium text-gray-900">Mật khẩu</label>
+                  <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Mật khẩu</label>
                   <input
                     type={showPassword ? "text" : "password"}
-                    name="Password"
-                    id="Password"
+                    name="password"
+                    id="password"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                    value={formData.Password}
+                    value={formData.password}
                     onChange={handleChange}
                     required
                   />

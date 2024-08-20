@@ -12,6 +12,7 @@ const LoginForm = () => {
     const [error, setError] = useState('');
     const { t } = useTranslation("common");
 
+
     const handleLogin = async (e) => {
         e.preventDefault();
         setError('');
@@ -32,8 +33,11 @@ const LoginForm = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('username', data.first_name + ' ' + data.last_name);
+                if (typeof window !== 'undefined') {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('username', data.first_name + ' ' + data.last_name);
+                    localStorage.setItem('company_name', data.CompanyName);
+                }
 
                 // Navigate based on user role
                 if (data.is_root === true) {
@@ -52,6 +56,7 @@ const LoginForm = () => {
             setError(t('error.login_fail'));
         }
     };
+
 
     return (
         <div>

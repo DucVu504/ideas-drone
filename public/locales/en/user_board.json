@@ -2,14 +2,15 @@
     "companies": "Companies",
     "company_table": {
         "add": "ADD COMPANY",
-        "address": "ADDRESS",
+        "address": "CITY",
         "country": "NATION",
         "name": "COMPANY NAME",
         "projects": "PROJECTS",
         "status": "STATUS",
         "update_date": "UPDATE DAY",
         "users": "USERS",
-        "view": "View"
+        "view": "View",
+        "not_yet_update": "Not yet update"
     },
     "dashboard": "Dashboard",
     "logout": "Log out",
@@ -44,6 +45,7 @@
         "role": "ROLE",
         "status": "STATUS",
         "update_day": "UPDATE DAY",
-        "user_name": "USER NAME"
+        "user_name": "USER NAME",
+        "not_yet_update": "Not yet update"
     }
 }

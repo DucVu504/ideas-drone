@@ -4,14 +4,15 @@ import { useRouter } from 'next/navigation';
 import { useTranslation } from 'next-i18next';
 
 import AddCompanyForm from '@/components/common/addCompanyForm/AddCompanyForm';
+import Pagination from '@/components/common/pagination/Pagination';
 import slugify from '@/components/utils/Slugify';
 import { postData } from '@/components/utils/UserApi';
 
 
-function createFullAddress(addressLine1, addressLine2, city) {
-    const parts = [addressLine1, addressLine2].filter(Boolean);
-    return `${parts.join(', ')}, ${city}`;
-}
+// function createFullAddress(addressLine1, addressLine2, city) {
+//     const parts = [addressLine1, addressLine2].filter(Boolean);
+//     return `${parts.join(', ')}, ${city}`;
+// }
 
 const END_POINT = '/company/get-all'
 const COUNT = 5;
@@ -107,7 +108,7 @@ const Companies = () => {
     };
 
     return (
-        <section className="bg-gray-50  p-3 sm:p-5 lg:ml-36">
+        <section className="bg-gray-50 z-0 p-3 sm:p-5 lg:ml-36">
             <div className="mx-auto max-w-screen-xl px-4 lg:mt-16">
                 <div className="bg-white  relative shadow-md sm:rounded-lg overflow-hidden">
                     <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
@@ -177,9 +178,11 @@ const Companies = () => {
                                         <th scope="row" className="px-4 py-3 w-12 font-medium text-gray-900">
                                             {company.name}
                                         </th>
-                                        <td className="px-4 py-3">{createFullAddress(company.address_line_2, company.address_line_1, company.city)}</td>
+                                        <td className="px-4 py-3">{company.city}</td>
                                         <td className="px-4 py-3">{company.country}</td>
-                                        <td className="px-4 py-3">{new Date(company.modified_time).toLocaleDateString()}</td>
+                                        <td className="px-4 py-3">
+                                            {company.modified_time ? new Date(company.modified_time).toLocaleDateString() : t('company_table.not_yet_update')}
+                                        </td>
                                         <td className="px-4 py-3">
                                             <div className={`h-4 w-4 rounded-md ${company.IsDisabled ? 'bg-red-500' : 'bg-green-500'}`}></div>
                                         </td>
@@ -205,43 +208,13 @@ const Companies = () => {
                     </div>
 
                 </div>
-                <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label="Table navigation">
-                    <span class="text-sm font-normal text-gray-500 mb-4 md:mb-0 block w-full md:inline md:w-auto">
-                        Showing <span class="font-semibold text-gray-900">{currentPage}</span> of <span class="font-semibold text-gray-900">{totalPages}</span>
-                    </span>
-                    <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
-                        <li>
-                            <button
-                                onClick={handlePrevious}
-                                className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700"
-                            >
-                                Previous
-                            </button>
-                        </li>
-
-                        {Array.from({ length: totalPages }, (_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => setCurrentPage(index + 1)}
-                                className={`${currentPage === index + 1
-                                    ? "flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
-                                    : "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                                    }`}
-                            >
-                                {index + 1}
-                            </button>
-                        ))}
-                        <li>
-                            <button
-                                onClick={handleNext}
-                                className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700"
-                            >
-                                Next
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
-
+                <Pagination 
+                currentPage={currentPage}
+                totalPages={totalPages}
+                setCurrentPage={setCurrentPage}
+                handlePrevious={handlePrevious}
+                handleNext={handleNext}
+                />
             </div>
             <AddCompanyForm isOpen={isOpen} onClose={toggleModal} onAddCompany={addCompany} />
         </section>
