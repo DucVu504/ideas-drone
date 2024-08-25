@@ -1,5 +1,5 @@
-import NavbarHome from '../navbarHome/NavbarHome';
-import FooterHome from '../footerHome/FooterHome';
+import NavbarHome from '../../pages/home/navbarHome/NavbarHome';
+import FooterHome from '../../pages/home/footerHome/FooterHome';
 
 const HomeLayout = ({ children }) => {
   return (

@@ -31,7 +31,10 @@
     "sidebarRoot": {
         "company": "Companies",
         "projects": "Projects",
-        "users": "Users"
+        "users": "Users",
+        "dashboard": "Dashboard",
+        "permission": "Roles & Permissions",
+        "setting": "Setting"
     },
     "sidebarUser": {
         "profile": "Profile",

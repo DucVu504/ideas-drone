@@ -31,7 +31,10 @@
     "sidebarRoot": {
         "company": "Công ty",
         "projects": "Dự án",
-        "users": "Người dùng"
+        "users": "Người dùng",
+        "dashboard": "Bảng điều khiển",
+        "permission": "Quyền hạn",
+        "setting": "Cài đặt"
     },
     "sidebarUser": {
         "profile": "Hồ sơ",

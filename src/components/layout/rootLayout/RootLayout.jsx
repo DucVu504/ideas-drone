@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
-import NavbarUser from "../navbarUser/NavbarUser";
-import SidebarRoot from "../sidebarRoot/SidebarRoot";
+import NavbarUser from "../../pages/user/share/navbarUser/NavbarUser";
+import SidebarRoot from "../../pages/user/root/sidebarRoot/SidebarRoot";
 
 const RootLayout = ({ children }) => {
   return (

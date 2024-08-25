@@ -9,6 +9,7 @@
         "status": "STATUS",
         "update_date": "UPDATE DAY",
         "users": "USERS",
+        "actions": "ACTIONS",
         "view": "View",
         "not_yet_update": "Not yet update"
     },
