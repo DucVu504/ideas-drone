@@ -130,7 +130,7 @@ const Users = () => {
     return (
         <section className="bg-gray-50  p-3 sm:p-5 lg:ml-36">
             <div className="mx-auto max-w-screen-xl px-4 lg:mt-4">
-                <div className="bg-white  relative shadow-md sm:rounded-lg overflow-hidden">
+                <div className="bg-white   shadow-md sm:rounded-lg overflow-hidden">
                 <div className="flex flex-col md:flex-row items-right justify-end space-y-3 md:space-y-0 md:space-x-4 p-4">
                         <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                             <button type="button" onClick={toggleModal} className="flex items-center justify-center text-black bg-lime-300 hover:bg-lime-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2">

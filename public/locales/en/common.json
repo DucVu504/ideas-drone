@@ -24,9 +24,11 @@
         "services": "Service"
     },
     "sidebarAdmin": {
+        "projects": "Projects",
+        "users": "Users",
         "dashboard": "Dashboard",
-        "profile": "Profile",
-        "request": "Request"
+        "permission": "Roles & Permissions",
+        "setting": "Setting"
     },
     "sidebarRoot": {
         "company": "Companies",

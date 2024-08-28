@@ -7,7 +7,7 @@ import { useTranslation } from 'next-i18next';
 
 
 function Intro() {
-    const { t } = useTranslation("public");
+  const { t } = useTranslation("public");
 
   return (
     <div className="relative overflow-hidden bg-white">
@@ -28,30 +28,30 @@ function Intro() {
             </div>
             <div className="lg:w-1/2 px-8 pr-2 space-y-4">
               <h2 className="text-4xl pb-3 font-bold">
-              {t('intro.title')} <span className="text-green-500">IDEAS-DRONE</span>
+                {t('intro.title')} <span className="text-green-500">IDEAS-DRONE</span>
               </h2>
               <div className="flex items-center space-x-2">
                 <CheckCircleIcon className="h-5 w-5 flex-shrink-0 text-green-500" />
                 <p className="text-lg">
-                {t('intro.para_1')}
+                  {t('intro.para_1')}
                 </p>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircleIcon className="h-5 w-5 flex-shrink-0 text-green-500" />
                 <p className="text-lg">
-                {t('intro.para_2')}
+                  {t('intro.para_2')}
                 </p>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircleIcon className="h-5 w-5 flex-shrink-0 text-green-500" />
                 <p className="text-lg">
-                {t('intro.para_3')}
+                  {t('intro.para_3')}
                 </p>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircleIcon className="h-5 w-5 flex-shrink-0 text-green-500" />
                 <p className="text-lg">
-                {t('intro.para_4')}
+                  {t('intro.para_4')}
                 </p>
               </div>
               <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse pt-2">

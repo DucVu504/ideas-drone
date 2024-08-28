@@ -2,46 +2,12 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useRouter } from 'next/navigation';
 import Pagination from '@/components/common/pagination/Pagination';
+import CompanyCard from '@/components/pages/user/share/companyCard/CompanyCard';
 import slugify from '@/components/utils/Slugify';
 import { postData } from '@/components/utils/UserApi';
 
 const END_POINT = '/company/get-all';
 const COUNT = 15;
-
-const imageSources = [
-  "/images/common/company_1.png",
-  "/images/common/company_2.png",
-  "/images/common/company_3.png",
-  "/images/common/company_4.png",
-  "/images/common/company_5.png"
-];
-
-// Card component
-const CompanyCard = ({ company, imageSrc, onClick }) => (
-  <div
-    className="relative border rounded-lg overflow-hidden flex flex-col justify-center items-center shadow-sm bg-yellow-50 group"
-    onClick={onClick}
-  >
-    <div className="relative w-full flex justify-center items-center">
-      <img
-        src={imageSrc}
-        alt={company.name}
-        className="w-24 h-24 object-cover p-4"
-      />
-      <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <span className="text-white text-lg bg-opacity-100">VIEW</span>
-      </div>
-    </div>
-    <div className="p-2 w-full bg-white ">
-      <div className="text-gray-800 text-sm text-left">
-        {company.name}
-      </div>
-      <div className="text-gray-500 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        Last modified: {new Date(company.modified_time).toLocaleDateString()}
-      </div>
-    </div>
-  </div>
-);
 
 
 // Main component
@@ -116,7 +82,6 @@ const CompaniesHandler = () => {
           <CompanyCard
             key={company.id}
             company={company}
-            imageSrc={imageSources[index % imageSources.length]}
             onClick={() => handleCompanyClick(`/root/users/${slugify(company.name)}`, company.id)}>
 
             </CompanyCard>

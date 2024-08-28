@@ -24,9 +24,11 @@
         "services": "Dịch vụ"
     },
     "sidebarAdmin": {
+        "projects": "Dự án",
+        "users": "Người dùng",
         "dashboard": "Bảng điều khiển",
-        "profile": "Hồ sơ",
-        "request": "Yêu cầu"
+        "permission": "Quyền hạn",
+        "setting": "Cài đặt"
     },
     "sidebarRoot": {
         "company": "Công ty",

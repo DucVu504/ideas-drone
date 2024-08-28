@@ -41,7 +41,7 @@ const LoginForm = () => {
 
                 // Navigate based on user role
                 if (data.is_root === true) {
-                    router.push('/root/companies');
+                    router.push('/root/dashboard');
                 } else if (data.is_admin === true) {
                     router.push('/admin/dashboard');
                 } else {
@@ -73,26 +73,26 @@ const LoginForm = () => {
                             <form className="space-y-4 md:space-y-6" onSubmit={handleLogin}>
                                 <div>
                                     <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">{t('login.user-name')}</label>
-                                    <input 
-                                        type="text" 
-                                        name="username" 
-                                        id="username" 
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" 
-                                        placeholder={t('login.user-name')} 
-                                        required 
+                                    <input
+                                        type="text"
+                                        name="username"
+                                        id="username"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                        placeholder={t('login.user-name')}
+                                        required
                                         value={username}
                                         onChange={(e) => setUsername(e.target.value)}
                                     />
                                 </div>
                                 <div>
                                     <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">{t('login.password')}</label>
-                                    <input 
-                                        type="password" 
-                                        name="password" 
-                                        id="password" 
-                                        placeholder="••••••••" 
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" 
-                                        required 
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        id="password"
+                                        placeholder="••••••••"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                        required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
@@ -101,10 +101,10 @@ const LoginForm = () => {
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-start">
                                         <div className="flex items-center h-5">
-                                            <input 
-                                                id="remember" 
-                                                type="checkbox" 
-                                                className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300" 
+                                            <input
+                                                id="remember"
+                                                type="checkbox"
+                                                className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300"
                                             />
                                         </div>
                                         <div className="ml-3 text-sm">

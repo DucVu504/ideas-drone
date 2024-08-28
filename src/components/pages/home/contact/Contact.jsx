@@ -55,7 +55,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="mb-[18px] text-lg font-semibold text-dark">
-                  {t('contact.send_mail')}
+                    {t('contact.send_mail')}
                   </h3>
                   <p className="text-base text-body-color">
                     phungngocanhbk@gmail.com
@@ -66,12 +66,12 @@ const Contact = () => {
           </div>
           <div className="w-full px-4 lg:w-5/12 xl:w-4/12">
             <div
-              className="wow fadeInUp rounded-lg bg-white px-8 py-10 shadow-testimonial sm:px-10 sm:py-12 md:p-[60px] lg:p-10 lg:px-10 lg:py-12 2xl:p-[60px] shadow-xl"
+              className="wow fadeInUp rounded-lg bg-gray-100 opacity-95 backdrop-blur-sm px-8 py-10 shadow-testimonial sm:px-10 sm:py-12 md:p-[60px] lg:p-10 lg:px-10 lg:py-12 2xl:p-[60px] shadow-xl"
               data-wow-delay=".2s
                 "
             >
               <h3 className="mb-8 text-2xl font-semibold text-dark md:text-[28px] md:leading-[1.42]">
-              {t('contact.title')}
+                {t('contact.title')}
               </h3>
               <form>
                 <div className="mb-[22px]">
@@ -121,7 +121,7 @@ const Contact = () => {
                     htmlFor="message"
                     className="mb-4 block text-sm text-body-color"
                   >
-                    {t('contact.reminder')} 
+                    {t('contact.reminder')}
                   </label>
                   <textarea
                     name="message"
@@ -135,7 +135,7 @@ const Contact = () => {
                     type="submit"
                     className="inline-flex items-center justify-center rounded-md text-white px-10 py-3 text-base font-medium transition duration-300 ease-in-out bg-green-500 hover:scale-105 transform"
                   >
-                    {t('contact.send')} 
+                    {t('contact.send')}
                   </button>
                 </div>
               </form>

@@ -14,7 +14,7 @@ const PresentBlock = ({ content }) => {
     <div className="w-full px-20 left-1/2">
       <div className="z-10 max-w-2xl mb-8 p-2 rounded-lg overflow-hidden bg-black bg-opacity-10">
         <h1 className="text-2xl font-bold leading-snug tracking-tight text-gray-800 lg:text-2xl lg:leading-tight xl:text-5xl xl:leading-tight dark:text-gray">
-        {t('hero.title')}{" "}
+          {t('hero.title')}{" "}
           <span className="text-green-500">IDEAS-DRONE</span>
         </h1>
         <p className="py-5 text-xl leading-normal text-gray-100 lg:text-xl xl:text-2xl">
@@ -77,7 +77,7 @@ function Hero() {
     {
       id: 1,
       content: [
-        t('hero.sub-title_1'),t('hero.sub-title_2'),
+        t('hero.sub-title_1'), t('hero.sub-title_2'),
         t('hero.sub-title_3'),
       ],
       path: "/images/homepage/mavic_pro_1.jpeg",
@@ -102,11 +102,9 @@ function Hero() {
         {models.map((model, index) => (
           <div
             key={model.id}
-            className={`${
-              styles.embla__slide
-            } flex items-center justify-center main-banner item-${
-              index + 1
-            } object-cover relative`}
+            className={`${styles.embla__slide
+              } flex items-center justify-center main-banner item-${index + 1
+              } object-cover relative`}
           >
             {/*
              */}
