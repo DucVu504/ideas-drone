@@ -23,6 +23,11 @@
         "quote": "Nhận báo giá",
         "services": "Dịch vụ"
     },
+    "navbarUser": {
+        "hello": "Chào",
+        "profile": "Quản lý tài khoản",
+        "logout": "Đăng xuất"
+    },
     "sidebarAdmin": {
         "projects": "Dự án",
         "users": "Người dùng",

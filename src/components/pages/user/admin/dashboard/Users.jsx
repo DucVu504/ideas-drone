@@ -128,21 +128,9 @@ const Users = () => {
     };
 
     return (
-        <section className="bg-gray-50  p-3 sm:p-5 lg:ml-36">
-            <div className="mx-auto max-w-screen-xl px-4 lg:mt-4">
-                <div className="bg-white   shadow-md sm:rounded-lg overflow-hidden">
-                <div className="flex flex-col md:flex-row items-right justify-end space-y-3 md:space-y-0 md:space-x-4 p-4">
-                        <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                            <button type="button" onClick={toggleModal} className="flex items-center justify-center text-black bg-lime-300 hover:bg-lime-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2">
-                                <svg className="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                    <path clipRule="evenodd" fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
-                                </svg>
-                                {t('user_table.add_user')}
-                            </button>
-
-                        </div>
-                    </div>
-
+        <div>
+            <div className="mx-auto max-w-screen-xl">
+                <div className="bg-white  p-1 shadow-md sm:rounded-lg overflow-hidden">
                     <div className="overflow-x-auto">
                         <table className="w-full text-sm text-left text-gray-500">
                             <thead className="text-sm text-gray-700 uppercase bg-gradient-to-r from-lime-200 to-lime-100 ">
@@ -162,23 +150,7 @@ const Users = () => {
                                             EMAIL {sortConfig.key === 'email' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
-                                    <th scope="col" className="px-4 py-3 w-[180px]">
-                                        <button type="button" onClick={() => requestSort('modified_time')}>
-                                        {t('user_table.update_day')} {sortConfig.key === 'modified_time' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
-                                        </button>
-                                    </th>
-                                    <th scope="col" className="px-4 py-3 w-[150px]">
-                                        <button type="button" onClick={() => requestSort('status')}>
-                                        {t('user_table.status')}  {sortConfig.key === 'status' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
-                                        </button>
-                                    </th>
-                                    <th scope="col" className="px-4 py-3 w-[150px]">
-                                        <button type="button">
-                                        {t('user_table.action')}
-                                        </button>
-                                    </th>
-
-
+  
                                 </tr>
                             </thead>
                             <tbody>
@@ -204,17 +176,6 @@ const Users = () => {
                                             </div>
                                             )}
                                         </td>
-                                        <td className="px-4 py-3">{user.email}</td>
-                                        <td className="px-4 py-3">
-                                            {user.modified_time ? new Date(user.modified_time).toLocaleDateString() : t('user_table.not_yet_update')}
-                                        </td>
-                                        <td className="px-4 py-3">
-                                            <div className={`h-4 w-4 rounded-md ${user.status ? 'bg-red-500' : 'bg-green-500'}`}></div>
-                                        </td>
-                                        <td className="py-2 px-4 border-b relative">
-                                            <ActionButton rowIndex={index} totalRows={totalRows} onEdit={() => handleEditUserClick(user)}/>
-                                        </td>
-
                                     </tr>
                                 ))}
                             </tbody>
@@ -231,7 +192,7 @@ const Users = () => {
             </div>
             {isEditing && <EditUser user={currentUser} onClose={() => setIsEditing(false)} />}
             <AddUser isOpen={isOpen} onClose={toggleModal} onAddUser={addUser}/>
-        </section>
+        </div>
     );
 };
 

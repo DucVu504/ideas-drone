@@ -8,7 +8,7 @@ const Quotes = () => {
     <div>
       <div className="flex flex-col xl:flex-row items-center justify-center p-6 xl:p-32 xl:mx-16 space-y-10   bg-white text-gray-800">
         <div className="xl:w-1/2 mb-6 md:mb-0">
-          <h1 className="text-3xl font-bold mb-4">Giải pháp toàn diện. <br /> <span className="text-red-500">Dịch vụ Drone.</span></h1>
+          <h1 className="text-3xl font-bold mb-4">Giải pháp toàn diện. <br /> <span className="text-green-500">Dịch vụ Drone.</span></h1>
           <p className="mb-4">
             IdeasDrone delivers 3D models in a secure, cloud-based environment with powerful tools to report, monitor and take action on the condition of built assets – faster, safer, better.
           </p>
@@ -42,9 +42,9 @@ const Quotes = () => {
             <div className=" items-center space-y-2">
               <p className="text-xs font-thin py-2">{t('quotes.term')}</p>
               <input type="checkbox" id="privacyPolicy" />
-              <label htmlFor="privacyPolicy" className="text-sm font-light px-2">{t('quotes.checkbox1')}<span className="text-red-500">{t('quotes.checkbox2')}</span></label>
+              <label htmlFor="privacyPolicy" className="text-sm font-light px-2">{t('quotes.checkbox1')}<span className="text-green-500">{t('quotes.checkbox2')}</span></label>
             </div>
-            <button type="submit" className="w-full p-2 bg-red-500 text-white font-bold rounded">{t('quotes.book')}</button>
+            <button type="submit" className="w-full p-2 bg-green-500 text-white font-bold rounded">{t('quotes.book')}</button>
           </form>
         </div>
       </div>
@@ -52,40 +52,40 @@ const Quotes = () => {
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold">Lưu trữ dữ liệu của bạn trên nền tảng của chúng tôi</h2>
           <p className="mt-2 text-gray-600">
-            IdeasDrone cung cấp dịch vụ lưu trữ dữ liệu  <span className="text-red-500">thông tin địa lý</span>, trên nền tảng đám mây.
+            IdeasDrone cung cấp dịch vụ lưu trữ dữ liệu  <span className="text-green-500 font-bold">thông tin địa lý</span>, trên nền tảng đám mây.
           </p>
         </div>
-        <div className="flex justify-center space-x-8">
-          <div className="text-center">
+        <div className="flex justify-center space-x-16">
+          <div className="w-32 text-center">
             <img
-              className="w-16 h-16 mx-auto"
+              className="w-16 h-16 mx-auto bg-green-200 rounded-2xl"
               src="./icons/homepage/check.svg"
               alt="An toàn"
             />
             <p className="mt-4 text-gray-500  font-semibold">An toàn</p>
 
           </div>
-          <div className="text-center">
+          <div className="w-32 text-center">
             <img
-              className="w-16 h-16 mx-auto"
+              className="w-16 h-16 mx-auto bg-green-200 rounded-2xl"
               src="./icons/homepage/check.svg"
               alt="Tiện dụng"
             />
             <p className="mt-4 text-gray-500 font-semibold">Tiện dụng</p>
 
           </div>
-          <div className="text-center">
+          <div className="w-32 text-center">
             <img
-              className="w-16 h-16 mx-auto"
+              className="w-16 h-16 mx-auto bg-green-200 rounded-2xl"
               src="./icons/homepage/check.svg"
               alt="Truy cập mọi nơi"
             />
             <p className="mt-4 text-gray-500  font-semibold">Truy cập mọi nơi</p>
 
           </div>
-          <div className="text-center">
+          <div className="w-32 text-center">
             <img
-              className="w-16 h-16 mx-auto"
+              className="w-16 h-16 mx-auto bg-green-200 rounded-2xl"
               src="./icons/homepage/check.svg"
               alt="Dễ dàng quản lý"
             />

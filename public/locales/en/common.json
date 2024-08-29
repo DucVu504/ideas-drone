@@ -23,6 +23,11 @@
         "quote": "Get a quote",
         "services": "Service"
     },
+    "navbarUser": {
+        "hello": "Hello",
+        "profile": "My profile",
+        "logout": "Logout"
+    },
     "sidebarAdmin": {
         "projects": "Projects",
         "users": "Users",

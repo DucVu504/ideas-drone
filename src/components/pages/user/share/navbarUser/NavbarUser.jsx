@@ -1,13 +1,13 @@
 "use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell, faSignOutAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faBell, faSignOutAlt, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/legacy/image";
 import LocaleSwitcher from "@/components/common/localeSwitcher/LocaleSwitcher";
 import { useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 
 const NavbarUser = () => {
-  const { t } = useTranslation("user_board");
+  const { t } = useTranslation("common");
   const [userName, setUserName] = useState("");
   const [menuVisible, setMenuVisible] = useState(false);
 
@@ -59,14 +59,14 @@ const NavbarUser = () => {
               </div>
             </div>
             {menuVisible && (
-              <div className="absolute right-0 mt-2 w-72 bg-white border rounded-lg shadow-lg z-50 p-4">
+              <div className="absolute right-0 mt-2 w-64 bg-white border rounded-lg shadow-lg z-50 p-4">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 flex items-center justify-center bg-green-500 rounded-full text-white font-bold text-xl">
                       {getInitials(userName)}
                     </div>
                     <div>
-                      <p className="text-gray-700">{t("hello", { name: userName })}</p>
+                      <p className="text-gray-700">{t("navbarUser.hello")}</p>
                       <p className="text-xl text-gray-500">{userName}</p>
                     </div>
                   </div>
@@ -81,18 +81,17 @@ const NavbarUser = () => {
                 <button
                   className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
-                  Quản lý Profile
+                  <FontAwesomeIcon icon={faUser} className="mr-2"/>
+                  {t("navbarUser.profile")}
                 </button>
                 <button
-                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:text-red-500 hover:bg-gray-100"
                   onClick={handleLogout}
                 >
                   <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
-                  {t("logout")}
+                  {t("navbarUser.logout")}
                 </button>
-                <div className="px-4 py-2 text-xs text-gray-400">
-                  {t("termsOfService")}
-                </div>
+
               </div>
             )}
           </div>
