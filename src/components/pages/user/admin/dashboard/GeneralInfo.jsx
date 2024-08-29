@@ -11,7 +11,7 @@ import { useTranslation } from 'next-i18next';
 const END_POINT = '/user/getlist'
 const COUNT = 10;
 
-const Users = () => {
+const GeneralInfo = () => {
     
     const { t } = useTranslation("user_board");
     // Get users
@@ -196,4 +196,4 @@ const Users = () => {
     );
 };
 
-export default Users;
+export default GeneralInfo;
