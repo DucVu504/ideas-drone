@@ -2,10 +2,12 @@
 
 import React from 'react';
 import { MdLocationOn, MdLocalPhone, MdEmail } from 'react-icons/md';
+import ContainerWrapper from '@/components/pages/user/share/containerWrapper/ContainerWrapper';
 
 const ContactForm = () => {
   return (
-    <div className="flex flex-col md:flex-row bg-gray-50 p-6 pt-20 mx-52 rounded-lg">
+    <ContainerWrapper>
+    <div className="flex flex-col md:flex-row bg-gray-50  rounded-lg ">
       <div className="md:w-1/3 bg-green-400 text-white p-6 rounded-lg shadow-md">
         <h2 className="text-xl font-bold mb-4">Liên hệ với chúng tôi để được hỗ trợ</h2>
         <p className="mb-4">Chúng tôi luôn sẵn sàng hỗ trợ bạn, gửi email hoặc liên hệ chúng tôi qua số điện thoại.</p>
@@ -50,7 +52,8 @@ const ContactForm = () => {
           </div>
         </form>
       </div>
-    </div>
+      </div>
+    </ContainerWrapper> 
   );
 };
 

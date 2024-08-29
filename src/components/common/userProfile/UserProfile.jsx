@@ -2,10 +2,12 @@
 
 import React from 'react';
 import Image from 'next/image';
+import ContainerWrapper from '@/components/pages/user/share/containerWrapper/ContainerWrapper';
 
 const UserProfile = () => {
   return (
-    <div className="flex flex-col md:flex-row bg-gray-50 p-6 mx-52 pt-20 rounded-lg ">
+    <ContainerWrapper>
+    <div className="flex flex-col md:flex-row bg-gray-50  rounded-lg ">
       <div className="md:w-1/3 bg-white p-4 rounded-lg shadow-md">
         <div className="flex flex-col items-center">
         <Image
@@ -91,6 +93,7 @@ const UserProfile = () => {
         </form>
       </div>
     </div>
+    </ContainerWrapper>
   );
 };
 

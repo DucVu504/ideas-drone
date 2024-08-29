@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useRouter } from 'next/navigation';
 import Pagination from '@/components/common/pagination/Pagination';
 import CompanyCard from '@/components/pages/user/share/companyCard/CompanyCard';
+import ContainerWrapper from '@/components/pages/user/share/containerWrapper/ContainerWrapper';
 import slugify from '@/components/utils/Slugify';
 import { postData } from '@/components/utils/UserApi';
 
@@ -44,11 +45,10 @@ const CompaniesHandler = () => {
 
   const handleCompanyClick = useCallback((path, company_id) => {
     router.push(`${path}?company_id=${company_id}`);
-}, [router]);
+  }, [router]);
 
   return (
-    <section className="bg-gray-50 z-0 p-3 sm:p-5 lg:ml-36">
-      <div className="mx-auto max-w-screen-xl px-4 lg:mt-16">
+    <ContainerWrapper>
       <form className="max-w-md pl-4">
         <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
         <div className="relative">
@@ -84,7 +84,7 @@ const CompaniesHandler = () => {
             company={company}
             onClick={() => handleCompanyClick(`/root/projects/${slugify(company.name)}`, company.id)}>
           </CompanyCard>
-          
+
         ))}
       </div>
       <div className="px-4">
@@ -96,8 +96,7 @@ const CompaniesHandler = () => {
           handleNext={() => currentPage < totalPages && setCurrentPage(currentPage + 1)}
         />
       </div>
-      </div>
-      </section>
+    </ContainerWrapper>
   );
 };
 

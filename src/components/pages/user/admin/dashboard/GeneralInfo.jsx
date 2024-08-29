@@ -68,22 +68,6 @@ const GeneralInfo = () => {
             fetchUsers(currentPage);
     }, [currentPage]);
 
-    // Join user name
-    function getFullName(first_name, middle_name, last_name) {
-        if (middle_name) {
-            return `${first_name} ${middle_name} ${last_name}`;
-        }
-        return `${first_name} ${last_name}`;
-    }
-
-    // Handle set role
-    // Todo: need to improve !!
-    function setRole(is_admin) {
-        if (is_admin) {
-            return t('user_table.admin');
-        }
-        return t('user_table.normal_user');
-    }
 
     const addUser = (newUser) => {
         setUsers([...users, newUser]);
@@ -137,17 +121,17 @@ const GeneralInfo = () => {
                                 <tr>
                                     <th scope="col" className="px-4 py-3 ">
                                         <button type="button" onClick={() => requestSort('first_name')}>
-                                        {t('user_table.user_name')}{sortConfig.key === 'name' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                        TÊN DỰ ÁN{sortConfig.key === 'name' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3 w-[180px]">
                                         <button type="button" onClick={() => requestSort('is_admin')}>
-                                        {t('user_table.role')} {sortConfig.key === 'role' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                        ĐỊA ĐIỂM {sortConfig.key === 'role' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
                                     <th scope="col" className="px-4 py-3">
                                         <button type="button" onClick={() => requestSort('email')}>
-                                            EMAIL {sortConfig.key === 'email' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                            SỐ THÀNH VIÊN{sortConfig.key === 'email' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                                         </button>
                                     </th>
   
@@ -157,25 +141,14 @@ const GeneralInfo = () => {
                                 {sortedUsers.map((user, index) => (
                                     <tr key={index} className="border-b hover:bg-slate-50">
                                         <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
-                                            {getFullName(user.first_name, user.middle_name, user.last_name)}
+                                            TEST
                                         </th>
-                                        <td className="px-4 py-3">
-                                            {setRole(user.is_admin) === t('user_table.admin') && (
-                                            <div className="bg-blue-100 text-blue-800 px-1 rounded flex items-center">
-                                                <FaUserTie className="mr-2" />{t('user_table.admin')}
-                                            </div>
-                                            )}
-                                            {setRole(user.is_admin) === t('user_table.normal_user') && (
-                                            <div className="bg-violet-200 text-violet-800 px-1 rounded flex items-center">
-                                                <FaUserEdit className="mr-2" />{t('user_table.normal_user')}
-                                            </div>
-                                            )}
-                                            {setRole(user.is_admin)=== 'Người xem' && (
-                                            <div className="bg-gray-200 text-black px-1 rounded flex items-center">
-                                                <FaUser className="mr-2" />Người xem
-                                            </div>
-                                            )}
-                                        </td>
+                                        <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
+                                            TEST
+                                        </th>
+                                        <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
+                                            TEST
+                                        </th>
                                     </tr>
                                 ))}
                             </tbody>

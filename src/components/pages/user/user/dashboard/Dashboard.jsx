@@ -1,19 +1,37 @@
 "use client"
 import React from 'react';
 import Projects from "./Projects";
+import { useTranslation } from 'next-i18next';
+import ContainerWrapper from '@/components/pages/user/share/containerWrapper/ContainerWrapper';
+import MapProjects from '@/components/common/mapProjects/MapProjects';
 
 
 const Dashboard = () => {
+  const { t } = useTranslation("user_board");
+
+  const projects = [
+    { name: 'Dự án 1', address: 'Hà Nội, Việt Nam' },
+    { name: 'Dự án 2', address: 'TP Hồ Chí Minh, Việt Nam' },
+    { name: 'Dự án 2', address: 'Huế, Việt Nam' },
+    { name: 'Dự án 2', address: 'Thanh Hóa, Việt Nam' },
+    // Thêm các dự án khác
+  ];
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-        <div className="flex justify-left px-8 pt-20 bg-gray-50 lg:ml-36">
-            <div className="items-center  bg-white p-2 rounded-md inline-flex">
-                <p className="text-gray-500 px-2"><span className="text-cyan-400 text-xl font-bold">| </span>CÔNG TY TNHH MỘT THÀNH VIÊN ABC</p>
-            </div>
+    <ContainerWrapper>
+      <div className="bg-gray-50 min-h-screen">
+        <div className="grid grid-cols-2 grid-rows-4 gap-4 h-full">
+          <div className="col-span-1 row-span-1 bg-gray-50">
+            <Projects />
+          </div>
+          <div className="col-span-1 row-span-4 bg-gray-50" style={{ height: '750px' }}>
+            <MapProjects projects={projects} />
+          </div>
+
         </div>
-    <Projects />
-    </div>
+      </div>
+    </ContainerWrapper>
+
   );
 };
 

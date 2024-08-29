@@ -3,6 +3,7 @@ import React from 'react';
 import GeneralInfo from "./GeneralInfo";
 import { useTranslation } from 'next-i18next';
 import Overview from '@/components/pages/user/admin/dashboard/Overview';
+import ContainerWrapper from '@/components/pages/user/share/containerWrapper/ContainerWrapper';
 import MapProjects from '@/components/common/mapProjects/MapProjects';
 
 
@@ -18,23 +19,21 @@ const Dashboard = () => {
   ];
 
   return (
-    <section className="bg-gray-50 z-0 p-3 sm:p-5 lg:ml-36">
-      <div className="mx-auto max-w-screen-xl px-4 lg:mt-16">
-        <div className="bg-gray-50 min-h-screen">
-          <div className="grid grid-cols-2 grid-rows-4 gap-4 h-full">
-            <div className="col-span-1 row-span-1 bg-gray-50">
-              <Overview />
-            </div>
-            <div className="col-span-1 row-span-4 bg-gray-50" style={{ height: '750px' }}>
-              <MapProjects projects={projects} />
-            </div>
-            <div className="col-span-1 row-span-3 rounded-lg border-2 border-white bg-gray-50 shadow-md">
-              <GeneralInfo />
-            </div>
+    <ContainerWrapper>
+      <div className="bg-gray-50 min-h-screen">
+        <div className="grid grid-cols-2 grid-rows-4 gap-4 h-full">
+          <div className="col-span-1 row-span-1 bg-gray-50">
+            <Overview />
+          </div>
+          <div className="col-span-1 row-span-4 bg-gray-50" style={{ height: '750px' }}>
+            <MapProjects projects={projects} />
+          </div>
+          <div className="col-span-1 row-span-3 rounded-lg border-2 border-white bg-gray-50 shadow-md">
+            <GeneralInfo />
           </div>
         </div>
       </div>
-    </section>
+    </ContainerWrapper>
 
   );
 };
