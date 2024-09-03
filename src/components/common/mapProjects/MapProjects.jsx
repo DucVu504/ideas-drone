@@ -12,10 +12,9 @@ const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), { 
 
 // Custom red icon for markers
 const redIcon = new L.Icon({
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png', // Use CDN URL
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png', // Retina version of the icon
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png', // Shadow image
-  iconSize: [25, 41], // Icon size
+  iconUrl: '/images/common/location.png',
+  iconRetinaUrl: '/images/common/location.png',
+  iconSize: [40, 44], // Icon size
   iconAnchor: [12, 41], // Position of the icon anchor
   popupAnchor: [1, -34], // Position of the popup relative to the icon
   shadowSize: [41, 41] // Shadow size

@@ -1,0 +1,148 @@
+"use client"
+import React, { useState } from 'react';
+import Image from 'next/image';
+
+import ContainerWrapper from '@/components/pages/user/share/containerWrapper/ContainerWrapper';
+
+const RolePermissionSettings = () => {
+    const [selectedRole, setSelectedRole] = useState("Executive");
+
+    const handleClick = (role) => {
+        setSelectedRole(role);
+        console.log(`You clicked on ${role}`);
+    };
+    return (
+        <ContainerWrapper>
+            <div className="flex space-x-8 bg-gray-50 rounded-xl shadow-md">
+                {/* Role/User List */}
+                <div className="bg-gray-200  p-4   w-1/5 rounded-xl laptop:h-[550px] desktop:h-[750px] overflow-y-auto">
+                    <h2 className="font-bold mb-4">ROLE LIST</h2>
+                    <ul>
+                        {['Executive', 'Engineer', 'Maintainer', 'Guest', 'Design Planner'].map((role) => (
+                            <li
+                                key={role}
+                                className={`mb-2 p-2 rounded-md cursor-pointer border hover:border-lime-300 ${selectedRole === role ? 'bg-lime-300' : 'bg-white'
+                                    }`}
+                                onClick={() => handleClick(role)}
+                            >
+                                {role}
+                            </li>
+                        ))}
+                    </ul>
+                    <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+                        <button type="button"  className="w-full flex items-center justify-center text-black bg-lime-300 hover:bg-lime-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2">
+                            <svg className="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path clipRule="evenodd" fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                            </svg>
+                            THÊM VAI TRÒ
+                        </button>
+                    </div>
+                </div>
+
+                {/* Projects */}
+                <div className="bg-white px-4 w-1/2 rounded-t-md shadow-md laptop:h-[550px] desktop:h-[750px] overflow-y-auto">
+                    <div className='flex flex-row items-center justify-between sticky top-0 bg-white z-10'>
+                        <h2 className="font-bold mb-4 pt-4  ">PROJECTS</h2>
+                        <form class="flex items-center w-2/3">
+                            <label for="simple-search" class="sr-only">Search</label>
+
+                            <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-green-500 focus:border-green-500 block w-full p-2" placeholder="Search branch name..." required />
+
+                            <button type="submit" class="p-2.5 text-sm font-medium text-white bg-green-500 rounded-r-lg border border-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300">
+                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                </svg>
+                                <span class="sr-only">Search</span>
+                            </button>
+                        </form>
+                    </div>
+                    {["Dự án cải tạo đất", "Dự án nhà xưởng", "Dự án nhà ở công nhân", "Dự án trụ điện số 12"].map((project, index) => (
+                        <div key={index} className="mb-4 p-4 border rounded-md bg-gray-50 hover:shadow-md ">
+                            <h3 className="font-semibold bg-gray-200 p-2 rounded-t-md">{project}</h3>
+                            <div className="flex justify-between mt-2">
+                                <Image src={"/images/common/role_project.png"} alt={project.name} width={80} height={50} className="w-1/5 mt-2 bg-gray-200 p-2 rounded-md" />
+                                <div className="flex flex-col justify-between mt-2 w-full">
+                                    <label class="inline-flex items-center justify-between cursor-pointer p-1 pl-10 pr-4 hover:bg-gray-100 hover:rounded-md">
+                                        <input type="checkbox" value="" class="sr-only peer" />
+                                        <span class="ms-3 text-sm font-medium text-gray-900">Toàn quyền</span>
+                                        <div class="relative w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
+                                    </label>
+                                    <label class="inline-flex items-center justify-between cursor-pointer p-1 pl-10 pr-4 hover:bg-gray-100 hover:rounded-md">
+                                        <input type="checkbox" value="" class="sr-only peer" />
+                                        <span class="ms-3 text-sm font-medium text-gray-900">Toàn quyền</span>
+                                        <div class="relative w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
+                                    </label>
+                                    <label class="inline-flex items-center justify-between cursor-pointer p-1 pl-10 pr-4 hover:bg-gray-100 hover:rounded-md">
+                                        <input type="checkbox" value="" class="sr-only peer" />
+                                        <span class="ms-3 text-sm font-medium text-gray-900">Toàn quyền</span>
+                                        <div class="relative w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
+                                    </label>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Settings */}
+                <div className="bg-white px-4 w-1/2 rounded-md laptop:h-[550px] desktop:h-[750px] overflow-y-auto">
+                    <div className='flex flex-row items-center justify-between sticky top-0 bg-white z-10'>
+                        <h2 className=" font-bold pt-4 mb-4 sticky top-0 bg-white z-10">SETTINGS</h2>
+                        <form class="flex items-center w-2/3">
+                            <label for="simple-search" class="sr-only">Search</label>
+
+                            <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-green-500 focus:border-green-500 block w-full p-2" placeholder="Search branch name..." required />
+
+                            <button type="submit" class="p-2.5 text-sm font-medium text-white bg-green-500 rounded-r-lg border border-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300">
+                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                </svg>
+                                <span class="sr-only">Search</span>
+                            </button>
+                        </form>
+                    </div>
+                    {["Quản lý tài khoản", "Phân quyền", "Other"].map((setting, index) => (
+                        <div key={index} className="mb-4 p-4 border rounded-md bg-gray-50 hover:shadow-md ">
+                            <h3 className="font-semibold bg-gray-200 p-2 rounded-t-md">{setting}</h3>
+                            <div className="flex justify-between mt-2">
+                                <Image src={"/images/common/role_setting.png"} alt={setting.name} width={80} height={50} className="w-1/5 mt-2 bg-gray-200 p-2 rounded-md" />
+                                <div className="flex flex-col justify-between mt-2 w-full">
+                                    <label class="inline-flex items-center justify-between cursor-pointer p-1 pl-10 pr-4 hover:bg-gray-100 hover:rounded-md">
+                                        <input type="checkbox" value="" class="sr-only peer" />
+                                        <span class="ms-3 text-sm font-medium text-gray-900">Toàn quyền</span>
+                                        <div class="relative w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
+                                    </label>
+                                    <label class="inline-flex items-center justify-between cursor-pointer p-1 pl-10 pr-4 hover:bg-gray-100 hover:rounded-md">
+                                        <input type="checkbox" value="" class="sr-only peer" />
+                                        <span class="ms-3 text-sm font-medium text-gray-900">Toàn quyền</span>
+                                        <div class="relative w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
+                                    </label>
+                                    <label class="inline-flex items-center justify-between cursor-pointer p-1 pl-10 pr-4 hover:bg-gray-100 hover:rounded-md">
+                                        <input type="checkbox" value="" class="sr-only peer" />
+                                        <span class="ms-3 text-sm font-medium text-gray-900">Toàn quyền</span>
+                                        <div class="relative w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
+                                    </label>
+                                    <label class="inline-flex items-center justify-between cursor-pointer p-1 pl-10 pr-4 hover:bg-gray-100 hover:rounded-md">
+                                        <input type="checkbox" value="" class="sr-only peer" />
+                                        <span class="ms-3 text-sm font-medium text-gray-900">Toàn quyền</span>
+                                        <div class="relative w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
+                                    </label>
+                                    <label class="inline-flex items-center justify-between cursor-pointer p-1 pl-10 pr-4 hover:bg-gray-100 hover:rounded-md">
+                                        <input type="checkbox" value="" class="sr-only peer" />
+                                        <span class="ms-3 text-sm font-medium text-gray-900">Toàn quyền</span>
+                                        <div class="relative w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
+                                    </label>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </ContainerWrapper>
+    );
+};
+
+export default RolePermissionSettings;

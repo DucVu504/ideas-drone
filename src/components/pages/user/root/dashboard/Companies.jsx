@@ -6,6 +6,7 @@ import { useTranslation } from 'next-i18next';
 import AddCompanyForm from '@/components/common/addCompanyForm/AddCompanyForm';
 import Pagination from '@/components/common/pagination/Pagination';
 import Overview from '@/components/pages/user/root/dashboard/Overview';
+import ContainerWrapper from '@/components/pages/user/share/containerWrapper/ContainerWrapper';
 import { postData } from '@/components/utils/UserApi';
 
 
@@ -103,85 +104,83 @@ const Companies = () => {
     };
 
     return (
-        <section className="bg-gray-50 z-0 p-3 sm:p-5 lg:ml-36">
-            <div className="mx-auto max-w-screen-xl px-4 lg:mt-16">
-                <Overview />
-                <div className="bg-white shadow-md sm:rounded-lg overflow-hidden">
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-sm text-left text-gray-500">
-                            <thead className="text-sm text-gray-700 uppercase bg-gradient-to-r from-lime-200 to-lime-100 ">
-                                <tr>
-                                    <th scope="col" className="px-4 py-3 w-72">
-                                        <button type="button" onClick={() => requestSort('Name')}>
-                                            {t('company_table.name')} {sortConfig.key === 'Name' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
-                                        </button>
+        <ContainerWrapper>
+            <Overview />
+            <div className="bg-white shadow-md sm:rounded-lg overflow-hidden">
+                <div className="overflow-x-auto">
+                    <table className="w-full text-sm text-left text-gray-500">
+                        <thead className="text-sm text-gray-700 uppercase bg-gradient-to-r from-lime-200 to-lime-100 ">
+                            <tr>
+                                <th scope="col" className="px-4 py-3 w-72">
+                                    <button type="button" onClick={() => requestSort('Name')}>
+                                        {t('company_table.name')} {sortConfig.key === 'Name' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                    </button>
+                                </th>
+                                <th scope="col" className="px-4 py-3 w-48">
+                                    <button type="button" onClick={() => requestSort('AddressLine1')}>
+                                        {t('company_table.address')}  {sortConfig.key === 'AddressLine1' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                    </button>
+                                </th>
+                                <th scope="col" className="px-4 py-3 w-48">
+                                    <button type="button" onClick={() => requestSort('Country')}>
+                                        {t('company_table.country')} {sortConfig.key === 'Country' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                    </button>
+                                </th>
+                                <th scope="col" className="px-4 py-3 w-48">
+                                    <button type="button" onClick={() => requestSort('ModifiedTime')}>
+                                        {t('company_table.update_date')} {sortConfig.key === 'ModifiedTime' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                    </button>
+                                </th>
+                                <th scope="col" className="px-4 py-3 w-32">
+                                    <button type="button" onClick={() => requestSort('IsDisabled')}>
+                                        {t('company_table.status')} {sortConfig.key === 'IsDisabled' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                                    </button>
+                                </th>
+                                <th scope="col" className="px-4 py-3 w-32">
+                                    {t('company_table.users')}
+                                </th>
+                                <th scope="col" className="px-4 py-3 w-24">
+                                    {t('company_table.projects')}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {sortedCompanies.map((company, index) => (
+                                <tr key={index} className="border-b hover:bg-slate-50">
+                                    <th scope="row" className="px-4 py-3 w-12 font-medium text-gray-900">
+                                        {company.name}
                                     </th>
-                                    <th scope="col" className="px-4 py-3 w-48">
-                                        <button type="button" onClick={() => requestSort('AddressLine1')}>
-                                            {t('company_table.address')}  {sortConfig.key === 'AddressLine1' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
-                                        </button>
-                                    </th>
-                                    <th scope="col" className="px-4 py-3 w-48">
-                                        <button type="button" onClick={() => requestSort('Country')}>
-                                            {t('company_table.country')} {sortConfig.key === 'Country' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
-                                        </button>
-                                    </th>
-                                    <th scope="col" className="px-4 py-3 w-48">
-                                        <button type="button" onClick={() => requestSort('ModifiedTime')}>
-                                            {t('company_table.update_date')} {sortConfig.key === 'ModifiedTime' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
-                                        </button>
-                                    </th>
-                                    <th scope="col" className="px-4 py-3 w-32">
-                                        <button type="button" onClick={() => requestSort('IsDisabled')}>
-                                            {t('company_table.status')} {sortConfig.key === 'IsDisabled' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
-                                        </button>
-                                    </th>
-                                    <th scope="col" className="px-4 py-3 w-32">
-                                        {t('company_table.users')}
-                                    </th>
-                                    <th scope="col" className="px-4 py-3 w-24">
-                                        {t('company_table.projects')}
-                                    </th>
+                                    <td className="px-4 py-3">{company.city}</td>
+                                    <td className="px-4 py-3">{company.country}</td>
+                                    <td className="px-4 py-3">
+                                        {company.modified_time ? new Date(company.modified_time).toLocaleDateString() : t('company_table.not_yet_update')}
+                                    </td>
+                                    <td className="px-4 py-3">
+                                        <div className={`h-4 w-4 rounded-md ${company.IsDisabled ? 'bg-red-500' : 'bg-green-500'}`}></div>
+                                    </td>
+                                    <td className="px-6 py-3">
+                                        100
+                                    </td>
+                                    <td className="px-6 py-3">
+                                        234
+                                    </td>
+
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {sortedCompanies.map((company, index) => (
-                                    <tr key={index} className="border-b hover:bg-slate-50">
-                                        <th scope="row" className="px-4 py-3 w-12 font-medium text-gray-900">
-                                            {company.name}
-                                        </th>
-                                        <td className="px-4 py-3">{company.city}</td>
-                                        <td className="px-4 py-3">{company.country}</td>
-                                        <td className="px-4 py-3">
-                                            {company.modified_time ? new Date(company.modified_time).toLocaleDateString() : t('company_table.not_yet_update')}
-                                        </td>
-                                        <td className="px-4 py-3">
-                                            <div className={`h-4 w-4 rounded-md ${company.IsDisabled ? 'bg-red-500' : 'bg-green-500'}`}></div>
-                                        </td>
-                                        <td className="px-6 py-3">
-                                            100
-                                        </td>
-                                        <td className="px-6 py-3">
-                                            234
-                                        </td>
-
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
-                <Pagination 
+
+            </div>
+            <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 setCurrentPage={setCurrentPage}
                 handlePrevious={handlePrevious}
                 handleNext={handleNext}
-                />
-            </div>
+            />
             <AddCompanyForm isOpen={isOpen} onClose={toggleModal} onAddCompany={addCompany} />
-        </section>
+        </ContainerWrapper>
     );
 };
 

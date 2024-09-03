@@ -30,7 +30,7 @@ const stats = [
 
 export default function StatsCards() {
   return (
-    <div className="flex pb-6 space-x-4">
+    <div className="flex pb-1 space-x-4">
       {stats.map((stat) => (
         <div
           key={stat.id}
@@ -49,7 +49,7 @@ export default function StatsCards() {
                 />
             </span>
           </div>
-          <div className="ml-4">
+          <div>
             <p className="flex justify-center text-sm text-gray-500">{stat.label}</p>
             <p className="flex justify-center text-2xl font-semibold">{stat.value}</p>
           </div>

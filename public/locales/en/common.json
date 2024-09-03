@@ -44,8 +44,8 @@
         "setting": "Setting"
     },
     "sidebarUser": {
-        "profile": "Profile",
-        "projects": "Project",
+        "dashboard": "Dashboard",
+        "setting": "Setting",
         "request": "Request"
     },
     "vietnamese": "Vietnamese"

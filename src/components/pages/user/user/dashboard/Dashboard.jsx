@@ -19,15 +19,14 @@ const Dashboard = () => {
 
   return (
     <ContainerWrapper>
-      <div className="bg-gray-50 min-h-screen">
-        <div className="grid grid-cols-2 grid-rows-4 gap-4 h-full">
-          <div className="col-span-1 row-span-1 bg-gray-50">
+      <div className="bg-gray-50">
+        <div className="grid grid-cols-5 grid-rows-1 gap-4 h-full">
+          <div className="col-span-2 row-span-1 bg-gray-50  rounded-lg border-2 border-white shadow-md ">
             <Projects />
           </div>
-          <div className="col-span-1 row-span-4 bg-gray-50" style={{ height: '750px' }}>
+          <div className="col-span-3 row-span-1 bg-gray-50 laptop:h-[650px] desktop:h-[750px]">
             <MapProjects projects={projects} />
           </div>
-
         </div>
       </div>
     </ContainerWrapper>

@@ -22,13 +22,13 @@ const Dashboard = () => {
     <ContainerWrapper>
       <div className="bg-gray-50 min-h-screen">
         <div className="grid grid-cols-2 grid-rows-4 gap-4 h-full">
-          <div className="col-span-1 row-span-1 bg-gray-50">
+          <div className="col-span-1 row-span-1 bg-gray-50 ">
             <Overview />
           </div>
-          <div className="col-span-1 row-span-4 bg-gray-50" style={{ height: '750px' }}>
+          <div className="col-span-1 row-span-4 bg-gray-50 laptop:h-[650px] desktop:h-[750px]">
             <MapProjects projects={projects} />
           </div>
-          <div className="col-span-1 row-span-3 rounded-lg border-2 border-white bg-gray-50 shadow-md">
+          <div className="col-span-1 row-span-3 rounded-lg border-2 border-white bg-gray-50 shadow-md ">
             <GeneralInfo />
           </div>
         </div>

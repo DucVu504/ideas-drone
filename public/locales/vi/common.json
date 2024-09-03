@@ -44,8 +44,8 @@
         "setting": "Cài đặt"
     },
     "sidebarUser": {
-        "profile": "Hồ sơ",
-        "projects": "Dự án",
+        "dashboard": "Bảng điều khiển",
+        "setting": "Cài đặt",
         "request": "Yêu cầu"
     },
     "vietnamese": "Tiếng Việt"

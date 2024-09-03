@@ -85,7 +85,8 @@ const CompaniesHandler = () => {
           <CompanyCard
             key={company.id}
             company={company}
-            onClick={() => handleCompanyClick(`/root/projects/${slugify(company.name)}`, company.id)}>
+            onClick={() => handleCompanyClick(`/root/role-permission/test`, company.id)}>
+            {/* onClick={() => handleCompanyClick(`/root/role-permission/${slugify(company.name)}`, company.id)}> */}
           </CompanyCard>
 
         ))}

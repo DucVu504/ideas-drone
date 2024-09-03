@@ -1,6 +1,6 @@
 "use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell, faSignOutAlt, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
+import {faBell, faSignOutAlt, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/legacy/image";
 import LocaleSwitcher from "@/components/common/localeSwitcher/LocaleSwitcher";
 import { useEffect, useState } from "react";
@@ -31,7 +31,7 @@ const NavbarUser = () => {
   };
 
   return (
-    <nav className="fixed content-center h-16 w-full bg-white border-b border-gray-200">
+    <nav className="fixed content-center z-auto h-16 w-full bg-white border-b border-gray-200">
       <div className="flex justify-between items-center px-10">
         <a href="/">
           <Image
@@ -42,7 +42,7 @@ const NavbarUser = () => {
             className="items-center"
           />
         </a>
-        <div className="flex items-center space-x-4">
+        <div className="relative flex items-center space-x-4">
           <LocaleSwitcher />
           <div className="relative">
             <FontAwesomeIcon icon={faBell} className="h-6 w-6 text-gray-700" />
