@@ -14,7 +14,7 @@ const END_POINT = '/user/create';
 const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
 
   const searchParams = useSearchParams()
-  const companyId = searchParams.get('companyId')
+  const company_id = searchParams.get('company_id')
   const [toastInfo, setToastInfo] = useState(["", ""]) // type and message
 
   const [formData, setFormData] = useState({
@@ -26,7 +26,7 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
     last_name: '',
     is_root: false,
     is_admin: false,
-    company_id: companyId,
+    company_id: company_id,
   });
 
 
@@ -43,7 +43,7 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-  
+
     if (value === 'admin') {
       setFormData({
         ...formData,
@@ -68,10 +68,10 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
       alert('Mật khẩu và mật khẩu xác nhận không khớp.');
       return;
     }
-      const newUser= await postData(END_POINT, formData);
-      if (newUser) {
-        setToastInfo(['success', 'Thêm người dùng thành công']);
-        onAddUser(newUser["Data"]);
+    const newUser = await postData(END_POINT, formData);
+    if (newUser) {
+      setToastInfo(['success', 'Thêm người dùng thành công']);
+      onAddUser(newUser["Data"]);
       setFormData({
         username: '',
         password: '',
@@ -81,14 +81,15 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
         last_name: '',
         is_root: false,
         is_admin: false,
-        company_id: companyId,
+        company_id: company_id,
       });
       onClose();
-      return}
-      else {
-        setToastInfo(['fail', 'Thêm người dùng thất bại']);
-      }
-    };
+      return
+    }
+    else {
+      setToastInfo(['fail', 'Thêm người dùng thất bại']);
+    }
+  };
 
   return (
     <div>
@@ -102,9 +103,9 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
               <h3 className="text-lg font-semibold text-gray-900">
                 Thêm người dùng
               </h3>
-              <button 
-                type="button" 
-                className="text-gray-400 bg-transparent hover:bg-red-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" 
+              <button
+                type="button"
+                className="text-gray-400 bg-transparent hover:bg-red-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
                 onClick={onClose}
               >
                 <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -117,31 +118,27 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
               <div className="grid gap-4 mb-4 sm:grid-cols-2">
                 <div>
                   <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900">Họ</label>
-                  <input type="text" name="first_name" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="John" value={formData.first_name} onChange={handleChange} required />
+                  <input type="text" name="first_name" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Họ" value={formData.first_name} onChange={handleChange} required />
                 </div>
                 <div>
                   <label htmlFor="middle_name" className="block mb-2 text-sm font-medium text-gray-900">Tên đệm</label>
-                  <input type="text" name="middle_name" id="middle_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Doe" value={formData.middle_name} onChange={handleChange} required />
+                  <input type="text" name="middle_name" id="middle_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Tên đệm" value={formData.middle_name} onChange={handleChange} required />
                 </div>
                 <div>
                   <label htmlFor="last_name" className="block mb-2 text-sm font-medium text-gray-900">Tên</label>
-                  <input type="text" name="last_name" id="last_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="John" value={formData.last_name} onChange={handleChange} required />
+                  <input type="text" name="last_name" id="last_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Tên" value={formData.last_name} onChange={handleChange} required />
                 </div>
                 <div>
                   <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">Tên đăng nhập</label>
-                  <input type="text" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Doe" value={formData.username} onChange={handleChange} required />
+                  <input type="text" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Tên đặng nhập" value={formData.username} onChange={handleChange} required />
                 </div>
-                <div>
-                  <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                <div className="col-span-1">
+                  <label htmlFor="email" className="block  mb-2 text-sm font-medium text-gray-900">Email</label>
                   <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="name@company.com" value={formData.email} onChange={handleChange} required />
                 </div>
                 <div>
-                  <label htmlFor="permissions" className="block mb-2 text-sm font-medium text-gray-500">Chức vụ</label>
-                  <select name="permissions" id="permissions" className="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5" disabled>
-                    <option value="Operational">Quản lý</option>
-                    <option value="Operational">Nhân viên</option>
-                  </select>
                 </div>
+
                 <div className="relative">
                   <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Mật khẩu</label>
                   <input
@@ -153,13 +150,13 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
                     onChange={handleChange}
                     required
                   />
-                    <button
-                      type="button"
-                      onClick={toggleShowPassword}
-                      className="absolute right-2 top-[37px] text-gray-500 hover:text-gray-900 focus:outline-none"
-                    >
-                      <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} size="sm" />
-                    </button>
+                  <button
+                    type="button"
+                    onClick={toggleShowPassword}
+                    className="absolute right-2 top-[37px] text-gray-500 hover:text-gray-900 focus:outline-none"
+                  >
+                    <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} size="sm" />
+                  </button>
                 </div>
                 <div>
                   <label htmlFor="confirmPassword" className="block mb-2 text-sm font-medium text-gray-900">Xác nhận mật khẩu</label>
@@ -174,10 +171,6 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
                   />
                 </div>
                 <div className="sm:col-span-2">
-                  <label htmlFor="biography" className="block mb-2 text-sm font-medium text-gray-500">Miêu tả</label>
-                  <textarea id="biography" rows="4" className="block p-2.5 w-full text-sm text-gray-500 bg-gray-100 rounded-lg border border-gray-300" placeholder="Write a message here" disabled></textarea>
-                </div>
-                <div className="sm:col-span-2">
                   <label htmlFor="avatar" className="block mb-2 text-sm font-medium text-gray-900">Tải ảnh</label>
                   <div className="flex items-center space-x-4">
                     <img className="w-10 h-10 rounded-md" src="https://via.placeholder.com/150" alt="User avatar" />
@@ -185,7 +178,7 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
                   </div>
                 </div>
                 <div className="sm:col-span-2">
-                <label className="block mb-2 text-sm font-medium text-gray-900">Gán vai trò</label>
+                  <label className="block mb-2 text-sm font-medium text-gray-900">Gán vai trò</label>
                   <div className="flex items-center space-x-4">
                     <div>
                       <input type="radio" name="role" id="admin" value="admin" className="form-radio text-primary-600" onChange={handleChange} />

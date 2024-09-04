@@ -34,11 +34,10 @@ const AddCompanyForm = ({ isOpen, onClose, onAddCompany }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
     const newCompany = await postData(END_POINT, formData);
 
     if (newCompany) {
-      setToastInfo(['success', 'Thêm dự án thành công']);
+      setToastInfo(['success', 'Thêm công ty thành công']);
       onAddCompany(newCompany["Data"]);
       setFormData({
         Name: '',
@@ -68,7 +67,7 @@ const AddCompanyForm = ({ isOpen, onClose, onAddCompany }) => {
           <div className="relative p-6 bg-white rounded-lg shadow-lg">
             <div className="flex justify-between items-center pb-4 mb-4 border-b">
               <h3 className="text-lg font-semibold text-gray-900">
-                Thêm dự án
+                Thêm công ty
               </h3>
               <button
                 type="button"
@@ -85,13 +84,13 @@ const AddCompanyForm = ({ isOpen, onClose, onAddCompany }) => {
               <div className="grid gap-4 mb-4 sm:grid-cols-3">
                 <div className="col-span-2">
                   <div className='py-4'>
-                    <label htmlFor="Name" className="block mb-1 text-sm font-medium text-gray-900">Tên dự án</label>
+                    <label htmlFor="Name" className="block mb-1 text-sm font-medium text-gray-900">Tên công ty</label>
                     <input
                       type="text"
                       name="Name"
                       id="Name"
                       className="text-gray-900 border-b border-gray-300 text-sm focus:border-b-primary-600 focus:border-t-0 focus:border-x-0 focus:ring-0 block w-full p-2"
-                      placeholder="Tên dự án"
+                      placeholder="Tên công ty"
                       value={formData.Name}
                       onChange={handleChange}
                       required
@@ -153,7 +152,7 @@ const AddCompanyForm = ({ isOpen, onClose, onAddCompany }) => {
                 <div>
                   <div className="flex items-center justify-center w-full">
                     <Image
-                      src="/UserPages/ProjectPictures/project_makeup.png"
+                      src="/images/common/company.png"
                       alt="User avatar"
                       width={150}
                       height={150}
