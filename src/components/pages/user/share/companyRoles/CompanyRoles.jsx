@@ -1,47 +1,23 @@
 "use client"
 import React, { useState } from 'react';
 import Image from 'next/image';
+import RoleList from './RoleList';
+
 
 import ContainerWrapper from '@/components/pages/user/share/containerWrapper/ContainerWrapper';
 
-const RolePermissionSettings = () => {
-    const [selectedRole, setSelectedRole] = useState("Executive");
 
-    const handleClick = (role) => {
-        setSelectedRole(role);
-        console.log(`You clicked on ${role}`);
-    };
+const RolePermissionSettings = () => {
+
     return (
         <ContainerWrapper>
             <div className="flex space-x-8 bg-gray-50 rounded-xl shadow-md">
                 {/* Role/User List */}
-                <div className="bg-gray-200  p-4   w-1/5 rounded-xl laptop:h-[550px] desktop:h-[750px] overflow-y-auto">
-                    <h2 className="font-bold mb-4">ROLE LIST</h2>
-                    <ul>
-                        {['Executive', 'Engineer', 'Maintainer', 'Guest', 'Design Planner'].map((role) => (
-                            <li
-                                key={role}
-                                className={`mb-2 p-2 rounded-md cursor-pointer border hover:border-lime-300 ${selectedRole === role ? 'bg-lime-300' : 'bg-white'
-                                    }`}
-                                onClick={() => handleClick(role)}
-                            >
-                                {role}
-                            </li>
-                        ))}
-                    </ul>
-                    <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                        <button type="button"  className="w-full flex items-center justify-center text-black bg-lime-300 hover:bg-lime-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2">
-                            <svg className="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path clipRule="evenodd" fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
-                            </svg>
-                            THÊM VAI TRÒ
-                        </button>
-                    </div>
-                </div>
+                <RoleList />
 
                 {/* Projects */}
                 <div className="bg-white px-4 w-1/2 rounded-t-md shadow-md laptop:h-[550px] desktop:h-[750px] overflow-y-auto">
-                    <div className='flex flex-row items-center justify-between sticky top-0 bg-white z-10'>
+                    <div className='flex flex-row items-center justify-between sticky top-0 bg-white z-10 '>
                         <h2 className="font-bold mb-4 pt-4  ">PROJECTS</h2>
                         <form class="flex items-center w-2/3">
                             <label for="simple-search" class="sr-only">Search</label>
