@@ -37,12 +37,6 @@ const SidebarRoot = () => {
                      </a>
                   </li>
                   <li>
-                     <a href="/root/role-permission" className={`flex flex-row items-center justify-left ${currentPath.includes('/root/role-permission') ? 'bg-lime-100' : ''} border-b border-gray-300 p-2 text-gray-900 rounded-lg hover:bg-gray-200 group`}>
-                        <Image src="/icons/common/permission.svg" alt="Logo" width="40" height="40" className="border p-1 border-green-800 rounded-lg" />
-                        <span className="hidden laptop:block pl-4 mt-2 whitespace-nowrap text-sm">{t('sidebarRoot.permission')}</span>
-                     </a>
-                  </li>
-                  <li>
                      <a href="/root/setting" className={`flex flex-row items-center justify-left ${currentPath.includes('/root/setting') ? 'bg-lime-100' : ''} border-b border-gray-300 p-2 text-gray-900 rounded-lg hover:bg-gray-200 group`}>
                         <Image src="/icons/common/setting_1.svg" alt="Logo" width="40" height="40" className="border p-1 border-green-800 rounded-lg" />
                         <span className="hidden laptop:block pl-4 mt-2 whitespace-nowrap text-sm">{t('sidebarRoot.setting')}</span>

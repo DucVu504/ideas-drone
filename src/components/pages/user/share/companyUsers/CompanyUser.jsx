@@ -6,6 +6,7 @@ import ActionButton from '@/components/common/actionButton/ActionButton';
 import AddUser from '@/components/common/addUserForm/AddUserForm';
 import EditUser from '@/components/common/editUser/EditUser';
 import Pagination from '@/components/common/pagination/Pagination';
+import SearchByCategories from '@/components/common/searchByCategories/SearchByCategories';
 import NavRoute from '@/components/pages/user/share/navRoute/NavRoute';
 import ContainerWrapper from '@/components/pages/user/share/containerWrapper/ContainerWrapper';
 import { postData } from '@/components/utils/UserApi';
@@ -16,6 +17,13 @@ const COUNT = 10;
 
 const CompanyUsers = ({ backRoute }) => {
     const { t } = useTranslation("user_board");
+    const categories = {
+        "First name": 'first_name',
+        "Last name": 'last_name',
+        "Email": 'email',
+        "Role": 'is_admin',
+        "Update date": 'modified_time',
+    };
     const searchParams = useSearchParams();
     const companyId = searchParams.get('company_id');
 
@@ -28,24 +36,37 @@ const CompanyUsers = ({ backRoute }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
     const [sortConfig, setSortConfig] = useState({ key: 'first_name', direction: 'ascending' });
+    const [isSearching, setIsSearching] = useState(false);
+    const [searchQuery, setSearchQuery] = useState({
+        key: '',
+        value: ''
+    });
 
-    const fetchUsers = useCallback(async (page) => {
+
+    // Fetch users
+    const fetchCompanies = useCallback(async (page, query = '') => {
         setLoading(true);
-        const response = await postData(END_POINT, {
-            page,
-            count: COUNT,
-            sort: [{ by: "first_name", type: "asc" }],
-            company_id: companyId
-        });
-        setUsers(response.Data.List);
-        setTotalPages(Math.ceil(response.Data.Total / COUNT));
-        setLoading(false);
-    }, [companyId]);
+        try {
+            const data = await postData(END_POINT, {
+                page,
+                count: COUNT,
+                sort: [{ by: "name", type: "asc" }],
+                search: query ? [{ by: query.key, value: query.value }] : [],
+                company_id: companyId
+            });
+
+            setUsers(data.Data.List);
+            setTotalPages(Math.ceil(data.Data.Total / COUNT));
+        } catch (error) {
+            console.error("Failed to fetch companies", error);
+        } finally {
+            setLoading(false);
+        }
+    }, []);
 
     useEffect(() => {
-        fetchUsers(currentPage);
-    }, [currentPage, fetchUsers]);
-
+        fetchCompanies(currentPage);
+    }, [currentPage, fetchCompanies]);
     const handleNext = () => {
         if (currentPage < totalPages) setCurrentPage(prev => prev + 1);
     };
@@ -54,14 +75,31 @@ const CompanyUsers = ({ backRoute }) => {
         if (currentPage > 1) setCurrentPage(prev => prev - 1);
     };
 
+    // Search logic
+    const handleSearch = useCallback(() => {
+        setIsSearching(true);
+        fetchCompanies(1, searchQuery);  // Call API with search query
+        setCurrentPage(1);  // Reset to the first page
+    }, [searchQuery, fetchCompanies]);
+
+    const handleClearSearch = useCallback(() => {
+        setSearchQuery('');  // Clear search query
+        setIsSearching(false);
+        fetchCompanies(1);  // Fetch all companies again
+        setSearchQuery({ key: '', value: '' });
+    }, [fetchCompanies]);
+
+    // Merge first name, middle name and last name
     const getFullName = (first_name, middle_name, last_name) => {
         return middle_name ? `${first_name} ${middle_name} ${last_name}` : `${first_name} ${last_name}`;
     };
 
+    // Get role label
     const getRoleLabel = (is_admin) => {
         return is_admin ? t('user_table.admin') : t('user_table.normal_user');
     };
 
+    // Sorting logic
     const sortedUsers = [...users].sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.direction === 'ascending' ? -1 : 1;
         if (a[sortConfig.key] > b[sortConfig.key]) return sortConfig.direction === 'ascending' ? 1 : -1;
@@ -75,6 +113,7 @@ const CompanyUsers = ({ backRoute }) => {
         }));
     };
 
+    // Add user logic
     const toggleModal = () => setIsOpen(prev => !prev);
 
     const handleEditUserClick = (user) => {
@@ -84,7 +123,7 @@ const CompanyUsers = ({ backRoute }) => {
 
     return (
         <ContainerWrapper>
-            <div className="bg-white relative shadow-md sm:rounded-lg overflow-hidden">
+            <div className="bg-white shadow-md sm:rounded-lg overflow-hidden">
                 <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                     <NavRoute backRoute={backRoute} origin="CÔNG TY" target="Người dùng" />
                     <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
@@ -95,6 +134,35 @@ const CompanyUsers = ({ backRoute }) => {
                             {t('user_table.add_user')}
                         </button>
                     </div>
+                </div>
+                <div className="pb-4 pl-4">
+                    <SearchByCategories
+                        categories={categories}
+                        onSearch={handleSearch}
+                        searchQuery={searchQuery}  // Pass searchQuery
+                        setSearchQuery={setSearchQuery}  // Pass setSearchQuery
+                    />
+                    {isSearching && (
+                        <div className="flex justify- mt-2">
+                            <button onClick={handleClearSearch} className="flex items-center text-red-300 hover:text-red-600 text-sm p-2">
+                                <svg
+                                    className="w-5 h-5 mr-2 bg-red-200 rounded-md"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    ></path>
+                                </svg>
+                                Clear search
+                            </button>
+                        </div>
+                    )}
                 </div>
 
                 <div className="overflow-x-auto">
@@ -158,8 +226,9 @@ const CompanyUsers = ({ backRoute }) => {
                                     <td className="px-4 py-3">
                                         {user.modified_time ? new Date(user.modified_time).toLocaleDateString() : t('user_table.not_yet_update')}
                                     </td>
-                                    <td className="px-4 py-3">
-                                        <div className={`h-4 w-4 rounded-md ${user.status ? 'bg-red-500' : 'bg-green-500'}`}></div>
+                                    <td className="flex px-4 py-3 items-center">
+                                        <div className={`h-3 w-3 rounded-md ${user.status ? 'bg-red-500' : 'bg-green-500'}`}></div>
+                                        <div className={`pl-4 ${user.status ? 'text-red-500' : 'text-green-500'}`}>{`${user.status ? 'Disable' : 'Active'}`}</div>
                                     </td>
                                     <td className="py-2 px-4 border-b relative">
                                         <ActionButton rowIndex={index} totalRows={users.length} onEdit={() => handleEditUserClick(user)} />

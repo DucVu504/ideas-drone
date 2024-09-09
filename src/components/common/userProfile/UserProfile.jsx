@@ -9,7 +9,7 @@ const UserProfile = () => {
         <div className="md:w-1/3 bg-white p-4 rounded-lg shadow-md">
           <div className="flex flex-col items-center">
             <Image
-              src="/images/common/default_avartar.jpg"
+              src="/images/common/default_avatar.jpg"
               alt="User Avatar"
               width={96}
               height={96}

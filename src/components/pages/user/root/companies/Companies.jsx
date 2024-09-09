@@ -4,17 +4,27 @@ import { useRouter } from 'next/navigation';
 import { useTranslation } from 'next-i18next';
 
 import AddCompanyForm from '@/components/common/addCompanyForm/AddCompanyForm';
+import EditCompanyForm from '@/components/common/editCompany/EditCompany';
 import ActionButton from '@/components/common/actionButton/ActionButton';
 import Pagination from '@/components/common/pagination/Pagination';
+import SearchByCategories from '@/components/common/searchByCategories/SearchByCategories';
 import ContainerWrapper from '@/components/pages/user/share/containerWrapper/ContainerWrapper';
 import slugify from '@/components/utils/Slugify';
 import { postData } from '@/components/utils/UserApi';
 
-const END_POINT = '/company/get-all';
+const END_POINT_GET_ALL = '/company/get-all';
+const END_POINT_GET = '/company/get';
 const COUNT = 10;
 
 const Companies = () => {
     const { t } = useTranslation("user_board");
+    const categories = {
+        "Name": 'name',
+        "City": 'city',
+        "Country": 'country',
+        "Update date": 'modified_time',
+        "Status": 'is_disabled'
+    };
     const router = useRouter();
 
     // State management
@@ -24,16 +34,21 @@ const Companies = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [sortConfig, setSortConfig] = useState({ key: 'name', direction: 'ascending' });
     const [isOpen, setIsOpen] = useState(false);
+    const [isSearching, setIsSearching] = useState(false);
+    const [searchQuery, setSearchQuery] = useState({
+        key: '',
+        value: ''
+    });
 
     // Fetch companies
-    const fetchCompanies = useCallback(async (page) => {
+    const fetchCompanies = useCallback(async (page, query = '') => {
         setLoading(true);
         try {
-            const data = await postData(END_POINT, {
+            const data = await postData(END_POINT_GET_ALL, {
                 page,
                 count: COUNT,
                 sort: [{ by: "name", type: "asc" }],
-                search: [{ by: "city", value: "" }]
+                search: query ? [{ by: query.key, value: query.value }] : []
             });
 
             setCompanies(data.Data.List);
@@ -49,7 +64,61 @@ const Companies = () => {
         fetchCompanies(currentPage);
     }, [currentPage, fetchCompanies]);
 
-    // Sorting
+    // Search logic
+    const handleSearch = useCallback(() => {
+        setIsSearching(true);
+        fetchCompanies(1, searchQuery);  // Call API with search query
+        setCurrentPage(1);  // Reset to the first page
+    }, [searchQuery, fetchCompanies]);
+
+    const handleClearSearch = useCallback(() => {
+        setSearchQuery('');  // Clear search query
+        setIsSearching(false);
+        fetchCompanies(1);  // Fetch all companies again
+        setSearchQuery({ key: '', value: '' });
+    }, [fetchCompanies]);
+
+    // Edit logic
+    const getCompanyInfo = async (company_id) => {
+        try {
+          const data = await postData(END_POINT_GET, { id: company_id });
+          const company = await data.Data;
+          return company;
+        } catch (error) {
+          console.error('Failed to fetch company info:', error);
+          return null;
+        }
+      };
+
+    const [isFormOpen, setIsFormOpen] = useState(false);
+    const [selectedCompany, setSelectedCompany] = useState(null);
+  
+    const openEditForm = async (company_id) => {
+        const company = await getCompanyInfo(company_id);
+        if (company) {
+            setSelectedCompany({
+        Name: company.name,
+        AddressLine1: company.address_line_1 || '',
+        AddressLine2: company.address_line_2 || '',
+        City: company.city,
+        State: company.state || '',
+        Country: company.country,
+        IsDisabled: company.is_disabled
+        });
+        }
+      setIsFormOpen(true);
+    };
+  
+    const closeEditForm = () => {
+      setIsFormOpen(false);
+      setSelectedCompany(null);
+    };
+  
+    const handleEditCompany = (updatedCompany) => {
+      // Cập nhật danh sách công ty hoặc trạng thái dựa trên cập nhật
+      console.log('Company updated:', updatedCompany);
+    };
+    // Sorting logic
     const sortedCompanies = useMemo(() => {
         const sorted = [...companies];
         sorted.sort((a, b) => {
@@ -71,7 +140,7 @@ const Companies = () => {
         }));
     }, []);
 
-    // Handlers
+    // Handlers pagination logic
     const handleNext = useCallback(() => {
         if (currentPage < totalPages) {
             setCurrentPage(prev => prev + 1);
@@ -83,37 +152,48 @@ const Companies = () => {
             setCurrentPage(prev => prev - 1);
         }
     }, [currentPage]);
+    
+    // Add company logic
+    const toggleModal = () => setIsOpen(prev => !prev);
 
+    // Handle company click
     const handleCompanyClick = useCallback((path, company_id) => {
         router.push(`${path}?company_id=${company_id}`);
     }, [router]);
 
-    const toggleModal = useCallback(() => {
-        setIsOpen(prev => !prev);
-    }, []);
-
-    const addCompany = useCallback((newCompany) => {
-        setCompanies(prev => [...prev, newCompany]);
-    }, []);
 
     return (
         <ContainerWrapper>
-
-
             <div className="bg-white  shadow-md sm:rounded-lg overflow-hidden">
                 <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                     <div className="w-full md:w-1/2">
-                        <form className="flex items-center">
-                            <label htmlFor="simple-search" className="sr-only">Search</label>
-                            <div className="relative w-full">
-                                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                    <svg aria-hidden="true" className="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                        <SearchByCategories
+                            categories={categories}
+                            onSearch={handleSearch}
+                            searchQuery={searchQuery}  // Pass searchQuery
+                            setSearchQuery={setSearchQuery}  // Pass setSearchQuery
+                        />
+                        {isSearching && (
+                            <div className="flex justify- mt-2">
+                                <button onClick={handleClearSearch} className="flex items-center text-red-300 hover:text-red-600 text-sm p-2">
+                                    <svg
+                                        className="w-5 h-5 mr-2 bg-red-200 rounded-md"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M6 18L18 6M6 6l12 12"
+                                        ></path>
                                     </svg>
-                                </div>
-                                <input type="text" id="simple-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2" placeholder="Search" required />
+                                    Clear search
+                                </button>
                             </div>
-                        </form>
+                        )}
                     </div>
                     <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                         <button type="button" onClick={toggleModal} className="flex items-center justify-center text-black bg-lime-300 hover:bg-lime-500 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2">
@@ -175,8 +255,9 @@ const Companies = () => {
                                     <td className="px-4 py-3">
                                         {company.modified_time ? new Date(company.modified_time).toLocaleDateString() : t('company_table.not_yet_update')}
                                     </td>
-                                    <td className="px-4 py-3">
-                                        <div className={`h-4 w-4 rounded-md ${company.is_disabled ? 'bg-red-500' : 'bg-green-500'}`}></div>
+                                    <td className="flex px-4 py-3 items-center">
+                                        <div className={`h-3 w-3 rounded-md ${company.status ? 'bg-red-500' : 'bg-green-500'}`}></div>
+                                        <div className={`pl-4 ${company.status ? 'text-red-500' : 'text-green-500'}`}>{`${company.status ? 'Disable' : 'Active'}`}</div>
                                     </td>
                                     <td className="px-6 py-3">
                                         <button
@@ -194,8 +275,7 @@ const Companies = () => {
                                     </td>
                                     <td className="px-6 py-3">
                                         <ActionButton
-                                            onEdit={() => handleCompanyClick(`/edit/${company.id}`, company.id)}
-                                            onDelete={() => handleCompanyClick(`/delete/${company.id}`, company.id)}
+                                            onEdit={() => openEditForm(company.id)}
                                         />
                                     </td>
                                 </tr>
@@ -211,7 +291,13 @@ const Companies = () => {
                 handlePrevious={handlePrevious}
                 handleNext={handleNext}
             />
-            <AddCompanyForm isOpen={isOpen} onClose={toggleModal} onAddCompany={addCompany} />
+            <AddCompanyForm isOpen={isOpen} onClose={toggleModal} onAddCompany={(newCompany) => setCompanies(prev => [...prev, newCompany])}/>
+            <EditCompanyForm
+                isOpen={isFormOpen}
+                onClose={closeEditForm}
+                onEditCompany={handleEditCompany}
+                companyData={selectedCompany}
+            />
         </ContainerWrapper>
     );
 };

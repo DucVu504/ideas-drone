@@ -1,10 +1,10 @@
 "use client"
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'next-i18next';
 
-import AddCompanyForm from '@/components/common/addCompanyForm/AddCompanyForm';
 import Pagination from '@/components/common/pagination/Pagination';
+import SearchByCategories from '@/components/common/searchByCategories/SearchByCategories';
 import Overview from '@/components/pages/user/root/dashboard/Overview';
 import ContainerWrapper from '@/components/pages/user/share/containerWrapper/ContainerWrapper';
 import { postData } from '@/components/utils/UserApi';
@@ -16,96 +16,134 @@ const COUNT = 10;
 
 const Companies = () => {
     const { t } = useTranslation("user_board");
-
-    const requestBody = (page) => ({
-        "page": page,
-        "count": COUNT,
-        "sort": [
-            {
-                "by": "name",
-                "type": "asc"
-            }
-        ],
-        "search": [
-            {
-                "by": "city",
-                "value": ""
-            }
-        ]
-    });
-
-
-    // Call API to get companies
-    // State to store fetched companies
-    const [companies, setCompanies] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    const [totalPages, setTotalPages] = useState(1);
-    const [currentPage, setCurrentPage] = useState(1);
-
-    const handleNext = () => {
-        if (currentPage < totalPages) {
-            setCurrentPage(currentPage + 1);
-        }
+    const categories = {
+        "Name": 'name',
+        "City": 'city',
+        "Country": 'country',
+        "Update date": 'modified_time',
+        "Status": 'is_disabled'
     };
-
-    const handlePrevious = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
-        }
-    };
-
     const router = useRouter();
 
-    const handleCompanyClick = (path, companyId) => {
-        router.push(`${path}?companyId=${companyId}`);
-    };
+    // State management
+    const [companies, setCompanies] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [totalPages, setTotalPages] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [sortConfig, setSortConfig] = useState({ key: 'name', direction: 'ascending' });
+    const [isOpen, setIsOpen] = useState(false);
+    const [isSearching, setIsSearching] = useState(false);
+    const [searchQuery, setSearchQuery] = useState({
+        key: '',
+        value: ''
+    });
 
-    const fetchCompanies = async (page) => {
-        const data = await postData(END_POINT, requestBody(page));
+    // Fetch companies
+    const fetchCompanies = useCallback(async (page, query = '') => {
+        setLoading(true);
+        console.log(query);
+        try {
+            const data = await postData(END_POINT, {
+                page,
+                count: COUNT,
+                sort: [{ by: "name", type: "asc" }],
+                search: query ? [{ by: query.key, value: query.value }] : []
+            });
 
-        setCompanies(data.Data.List);
-        setTotalPages(Math.ceil(data.Data.Total / COUNT));
-        setLoading(false);
-    };
-    // Fetch companies when the component mounts
+            setCompanies(data.Data.List);
+            setTotalPages(Math.ceil(data.Data.Total / COUNT));
+        } catch (error) {
+            console.error("Failed to fetch companies", error);
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
     useEffect(() => {
         fetchCompanies(currentPage);
+    }, [currentPage, fetchCompanies]);
+
+    // Search handler
+    const handleSearch = useCallback(() => {
+        setIsSearching(true);
+        fetchCompanies(1, searchQuery);  // Call API with search query
+        setCurrentPage(1);  // Reset to the first page
+    }, [searchQuery, fetchCompanies]);
+
+    // Clear search
+    const handleClearSearch = useCallback(() => {
+        setSearchQuery('');  // Clear search query
+        setIsSearching(false);
+        fetchCompanies(1);  // Fetch all companies again
+        setSearchQuery({ key: '', value: '' });
+    }, [fetchCompanies]);
+
+    // Sorting
+    const sortedCompanies = useMemo(() => {
+        const sorted = [...companies];
+        sorted.sort((a, b) => {
+            if (a[sortConfig.key] < b[sortConfig.key]) {
+                return sortConfig.direction === 'ascending' ? -1 : 1;
+            }
+            if (a[sortConfig.key] > b[sortConfig.key]) {
+                return sortConfig.direction === 'ascending' ? 1 : -1;
+            }
+            return 0;
+        });
+        return sorted;
+    }, [companies, sortConfig]);
+
+    const requestSort = useCallback((key) => {
+        setSortConfig(prev => ({
+            key,
+            direction: prev.key === key && prev.direction === 'ascending' ? 'descending' : 'ascending'
+        }));
+    }, []);
+
+    // Handlers
+    const handleNext = useCallback(() => {
+        if (currentPage < totalPages) {
+            setCurrentPage(prev => prev + 1);
+        }
+    }, [currentPage, totalPages]);
+
+    const handlePrevious = useCallback(() => {
+        if (currentPage > 1) {
+            setCurrentPage(prev => prev - 1);
+        }
     }, [currentPage]);
-
-
-    // Handle sorting
-    const [sortConfig, setSortConfig] = useState({ key: 'companyName', direction: 'ascending' });
-    const sortedCompanies = [...companies].sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? -1 : 1;
-        }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? 1 : -1;
-        }
-        return 0;
-    });
-    const requestSort = (key) => {
-        let direction = 'ascending';
-        if (sortConfig.key === key && sortConfig.direction === 'ascending') {
-            direction = 'descending';
-        }
-        setSortConfig({ key, direction });
-    };
-
-    // Control Add Company Modal
-    const [isOpen, setIsOpen] = useState(false);
-    const toggleModal = () => {
-        setIsOpen(!isOpen);
-    };
-
-    const addCompany = (newCompany) => {
-        setCompanies([...companies, newCompany]);
-    };
-
     return (
         <ContainerWrapper>
             <Overview />
+            <div className="w-full md:w-1/2 pb-4">
+                <SearchByCategories
+                    categories={categories}
+                    onSearch={handleSearch}
+                    searchQuery={searchQuery}  // Pass searchQuery
+                    setSearchQuery={setSearchQuery}  // Pass setSearchQuery
+                />
+                {isSearching && (
+                    <div className="flex justify- mt-2">
+                        <button onClick={handleClearSearch} className="flex items-center text-red-300 hover:text-red-600 text-sm p-2">
+                            <svg
+                                className="w-5 h-5 mr-2 bg-red-200 rounded-md"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M6 18L18 6M6 6l12 12"
+                                ></path>
+                            </svg>
+                            Clear search
+                        </button>
+                    </div>
+                )}
+            </div>
             <div className="bg-white shadow-md sm:rounded-lg overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm text-left text-gray-500">
@@ -179,7 +217,6 @@ const Companies = () => {
                 handlePrevious={handlePrevious}
                 handleNext={handleNext}
             />
-            <AddCompanyForm isOpen={isOpen} onClose={toggleModal} onAddCompany={addCompany} />
         </ContainerWrapper>
     );
 };

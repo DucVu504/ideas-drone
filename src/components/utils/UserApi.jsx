@@ -6,7 +6,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_USER_DATA_URL;
  * @param {object} [options={}] - Optional fetch options
  * @returns {Promise<any>} - The response data
  */
-async function getData(endpoint, options = {}) {
+async function getData(endpoint, data, options = {}) {
   const token = localStorage.getItem('token');
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
     method: 'GET',

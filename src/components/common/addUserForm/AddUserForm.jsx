@@ -3,19 +3,17 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 import { postData } from '@/components/utils/UserApi';
 
 const END_POINT = '/user/create';
 
 const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
-
-  const searchParams = useSearchParams()
-  const company_id = searchParams.get('company_id')
-  const [toastInfo, setToastInfo] = useState(["", ""]) // type and message
+  const searchParams = useSearchParams();
+  const company_id = searchParams.get('company_id');
 
   const [formData, setFormData] = useState({
     username: '',
@@ -28,7 +26,6 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
     is_admin: false,
     company_id: company_id,
   });
-
 
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -43,7 +40,6 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-
     if (value === 'admin') {
       setFormData({
         ...formData,
@@ -61,16 +57,16 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
     setShowPassword(!showPassword);
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== confirmPassword) {
-      alert('Mật khẩu và mật khẩu xác nhận không khớp.');
+      toast.error('Mật khẩu và mật khẩu xác nhận không khớp.');
       return;
     }
+
     const newUser = await postData(END_POINT, formData);
     if (newUser) {
-      setToastInfo(['success', 'Thêm người dùng thành công']);
+      toast.success('Thêm người dùng thành công');
       onAddUser(newUser["Data"]);
       setFormData({
         username: '',
@@ -84,15 +80,15 @@ const AddUserForm = ({ isOpen, onClose, onAddUser }) => {
         company_id: company_id,
       });
       onClose();
-      return
-    }
-    else {
-      setToastInfo(['fail', 'Thêm người dùng thất bại']);
+    } else {
+      toast.error('Thêm người dùng thất bại');
     }
   };
 
   return (
     <div>
+      <ToastContainer /> 
+
       {isOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
       )}

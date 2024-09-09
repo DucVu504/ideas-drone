@@ -6,9 +6,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import { postData } from '@/components/utils/UserApi';
 
-const END_POINT = '/company/create';
+const END_POINT = '/company/update';
 
-const AddCompanyForm = ({ isOpen, onClose, onAddCompany }) => {
+const EditCompanyForm = ({ isOpen, onClose, onEditCompany, companyData }) => {
   const [formData, setFormData] = useState({
     Name: '',
     AddressLine1: '',
@@ -22,10 +22,13 @@ const AddCompanyForm = ({ isOpen, onClose, onAddCompany }) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      if (companyData) {
+        setFormData(companyData); 
+      }
     } else {
       document.body.style.overflow = 'unset';
     }
-  }, [isOpen]);
+  }, [isOpen, companyData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,11 +37,11 @@ const AddCompanyForm = ({ isOpen, onClose, onAddCompany }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newCompany = await postData(END_POINT, formData);
+    const updatedCompany = await postData(END_POINT, formData);
 
-    if (newCompany) {
-      toast.success('Thêm công ty thành công');
-      onAddCompany(newCompany["Data"]);
+    if (updatedCompany) {
+      toast.success('Cập nhật công ty thành công');
+      onEditCompany(updatedCompany["Data"]);
       setFormData({
         Name: '',
         AddressLine1: '',
@@ -46,14 +49,13 @@ const AddCompanyForm = ({ isOpen, onClose, onAddCompany }) => {
         City: '',
         State: '',
         Country: '',
-        ZipCode: ''
+        ZipCode: '',
+        IsDisabled: false
       });
       onClose();
-      return
+    } else {
+      toast.error('Cập nhật công ty thất bại');
     }
-      else {
-        toast.error('Thêm công ty thất bại');
-      }
   };
 
   return (
@@ -68,7 +70,7 @@ const AddCompanyForm = ({ isOpen, onClose, onAddCompany }) => {
           <div className="relative p-6 bg-white rounded-lg shadow-lg">
             <div className="flex justify-between items-center pb-4 mb-4 border-b">
               <h3 className="text-lg font-semibold text-gray-900">
-                Thêm công ty
+                Chỉnh sửa công ty
               </h3>
               <button
                 type="button"
@@ -117,7 +119,6 @@ const AddCompanyForm = ({ isOpen, onClose, onAddCompany }) => {
                       placeholder="Xã/ Phường"
                       value={formData.AddressLine2}
                       onChange={handleChange}
-                      required
                     />
                     <input
                       type="text"
@@ -146,7 +147,7 @@ const AddCompanyForm = ({ isOpen, onClose, onAddCompany }) => {
                       <option value="Japan">Nhật Bản</option>
                       <option value="South Korea">Hàn Quốc</option>
                       <option value="United Kingdom">Vương Quốc Anh</option>
-                      {/* <!-- Thêm các quốc gia khác tại đây --> */}
+                      {/* Thêm các quốc gia khác tại đây */}
                     </select>
                   </div>
                 </div>
@@ -154,7 +155,7 @@ const AddCompanyForm = ({ isOpen, onClose, onAddCompany }) => {
                   <div className="flex items-center justify-center w-full">
                     <Image
                       src="/images/common/company.png"
-                      alt="User avatar"
+                      alt="Company image"
                       width={150}
                       height={150}
                     />
@@ -173,7 +174,7 @@ const AddCompanyForm = ({ isOpen, onClose, onAddCompany }) => {
                   type="submit"
                   className="text-gray-600 bg-lime-300 hover:bg-lime-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5"
                 >
-                  Thêm dự án
+                  Cập nhật công ty
                 </button>
               </div>
             </form>
@@ -184,9 +185,11 @@ const AddCompanyForm = ({ isOpen, onClose, onAddCompany }) => {
   );
 };
 
-AddCompanyForm.propTypes = {
+EditCompanyForm.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onEditCompany: PropTypes.func.isRequired,
+  companyData: PropTypes.object.isRequired
 };
 
-export default AddCompanyForm;
+export default EditCompanyForm;
